@@ -1,0 +1,29 @@
+.battery {
+	border: 4px solid black;
+	height: 30px;
+	width: 100px;
+	margin: 10px 0;
+	position: relative;
+}
+
+.battery:after{
+	content: "";
+	height: 10px;
+	width: 4px;
+	background-color: black;
+	position: absolute;
+	right: -8px;
+	top: 10px
+}
+
+.battery.charge-30{
+	background-image: linear-gradient(to right, red 30%, white 30%);
+}
+
+.battery.charge-60{
+	background-image: linear-gradient(to right, yellow 60%, white 60%);
+}
+
+.battery.charge-full{
+	background-color: green;
+}
