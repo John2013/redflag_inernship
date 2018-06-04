@@ -1,0 +1,11 @@
+sub, sup{
+	font-style: normal;
+}
+
+sub {
+	color: red;
+}
+
+sup {
+	color: blue;
+}
