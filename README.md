@@ -1,8 +1,10 @@
-# Стажировка в Red flag часть I
+# Стажировка в Red flag
 
 Задачи для стажировки в компанию Red Flag
 
-##Задачи
+##Часть I
+
+###Задачи
 
 1.  Напишите код HTML, чтобы получить результат, приведенный на рис http://htmlbook.ru/files/images/practical/03.png
 2.  Используя вложение тегов, сделайте список, приведенный на рис http://htmlbook.ru/files/images/practical/06.png
