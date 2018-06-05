@@ -384,6 +384,13 @@
        При наведении на любую колонку вокруг неё отображается тень 
        
        ![](http://htmlbook.ru/files/images/practical/47_2.png)
+       
+       http://htmlbook.ru/files/weather-sun.jpg
+       
+       http://htmlbook.ru/files/weather-snow.jpg
+       
+       http://htmlbook.ru/files/weather-blizzard.jpg
+       
    2.  Сделайте страницу, показанную на рис 
    
        ![](http://htmlbook.ru/files/images/practical/51.png)
