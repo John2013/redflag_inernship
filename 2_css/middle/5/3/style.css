@@ -1,7 +1,7 @@
 ul {
 	list-style-type: none;
 	border: 1px solid #000;
-	max-width: 200px;
+	width: 200px;
 	padding: 8px;
 	border-radius: 8px;
 	background: #f3ca3a;
