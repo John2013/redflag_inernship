@@ -3,5 +3,8 @@
 	height: 2em;
 	border-radius: 1em;
 	background-image: linear-gradient(to bottom, pink, white, pink);
-	border: 1px solid pink;
+	border: 1px solid white;
+	box-shadow:
+			0 0 0 1px pink,
+			0 0 10px -3px black;
 }
