@@ -1,0 +1,25 @@
+table{
+	border-collapse: collapse;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+th{
+	background-color: #999;
+	color: #ffffff;
+}
+
+td{
+	background-color: #7CDED5;
+}
+
+td:nth-of-type(2n) {
+	background-color: #FFFD7A;
+}
+
+td:nth-of-type(3) {
+	text-align: center;
+}
