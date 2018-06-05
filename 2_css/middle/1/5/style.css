@@ -1,0 +1,15 @@
+.progress-bar{
+	width: 400px;
+	height: 20px;
+	border-radius: 10px;
+	background-image: linear-gradient(to bottom, #3F3F3F, #979797);
+	border: 1px solid #333;
+	overflow: hidden;
+}
+
+.progress-bar__value{
+	height: 100%;
+	background-image: linear-gradient(to bottom, #55BDFD, #0691F3, #55BDFD);
+	border: 2px solid #008DF2;
+	box-shadow: 0 0 10px black;
+}
