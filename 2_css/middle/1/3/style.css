@@ -1,0 +1,33 @@
+.btn{
+	min-width: 100px;
+	height: 2em;
+	border-radius: 4px;
+	/*background-image: linear-gradient(to bottom, pink, white, pink);*/
+	border: 1px solid #666;
+	color: #3F3351;
+}
+
+.btn-1{
+	background-image: linear-gradient(to bottom, deepskyblue, white);
+}
+
+.btn-2{
+	background-image: linear-gradient(to bottom, #49EF63, #39B84D, #49EF63);
+}
+
+.btn-3{
+	background-image: linear-gradient(to bottom, white, deepskyblue);
+	color: white;
+}
+
+.btn-4{
+	background-image: linear-gradient(to bottom, #E8E8E9, #848484 50%, #413F3F 50%, #2E2D2D);
+	color: white;
+}
+
+.btn-5{
+	background-color: #DBDBDB;
+	border: 2px solid #9C9C9C;
+	border-right-color: #F1F1F1;
+	border-bottom-color: #F1F1F1;
+}
