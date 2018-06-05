@@ -1,0 +1,10 @@
+.square{
+	border-top: 1px solid black;
+	position: relative;
+	margin-left: .5em;
+}
+.square:before{
+	position: absolute;
+	content: '√';
+	left: -.5em;
+}
