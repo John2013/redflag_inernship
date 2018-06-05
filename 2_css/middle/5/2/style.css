@@ -1,0 +1,41 @@
+.rating {
+	background-color: #909497;
+	border-radius: 5px;
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+}
+
+.rating__value {
+	background-color: #A3C741;
+	padding: 10px 20px;
+	color: white;
+}
+
+.rating__controls {
+	padding: 8px 16px;
+}
+
+.rating__btn {
+	height: 20px;
+	width: 20px;
+	padding: 0;
+	border-radius: 3px;
+	color: white;
+	box-shadow: 0 0 3px black;
+	font-weight: bold;
+	border: none;
+}
+
+.rating__btn.minus {
+	background-color: #B63636;
+}
+
+.rating__btn.plus {
+	background-color: #9DC538;
+}
+
+.rating__user-value{
+	color: white;
+	margin: 0 20px;
+}
