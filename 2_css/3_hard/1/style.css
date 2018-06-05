@@ -1,0 +1,39 @@
+body {
+	background: repeating-linear-gradient(45deg, #fbcd96, #fbcd96 1px, #fff 1px, #fff 20px) fixed;
+	font-family: sans-serif;
+}
+
+article.card {
+	border-radius: 5px;
+	border: 2px solid #004C3B;
+	background-color: rgba(0, 76, 59, .5);
+	padding: 5px;
+}
+
+.card__inner {
+	border-radius: 5px;
+	border: 1px solid #666;
+	background-color: white;
+}
+
+.card__title {
+	background-image: linear-gradient(to bottom, #FFD800, #FFBA00);
+	padding: 10px;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.card__title:after {
+	content: '';
+	background-color: #FFBA00;
+	transform: rotate(45deg);
+	width: 20px;
+	height: 20px;
+	bottom: -10px;
+	left: 10px;
+	position: absolute;
+}
+
+.card__body {
+	padding: 10px;
+}
