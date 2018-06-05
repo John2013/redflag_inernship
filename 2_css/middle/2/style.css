@@ -1,0 +1,20 @@
+body{
+	margin: 0;
+}
+.black, .white{
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	border: 1px solid #ccc;
+}
+.black{
+	background-color: black;
+	top: 10px;
+	left: 10px;
+}
+
+.white{
+	background-color: white;
+	top: 30px;
+	left: 30px;
+}
