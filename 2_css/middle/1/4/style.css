@@ -1,0 +1,26 @@
+.slider {
+	position: relative;
+	display: inline-block;
+}
+
+.slider > .navs{
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.slider > .navs > .btn{
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	box-shadow: 0 0 0 3px white;
+	margin: 0 5px;
+	background-color: black;
+}
+
+.slider > .navs > .btn.active{
+	background-color: #C30203;
+	box-shadow: 0 0 8px 5px white;
+}
