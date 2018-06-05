@@ -1,0 +1,48 @@
+* {
+	box-sizing: border-box;
+}
+.scale {
+	width: 460px;
+	overflow: hidden;
+	margin: 25px auto;
+}
+.row {
+	width: 450px;
+	height: 50px;
+	background: #878F94;
+	transform: skew(-35deg);
+	margin-left: 5px;
+}
+.scale__blocks {
+	width: 60%;
+	height: 100%;
+	float: right;
+	text-align: center;
+}
+.scale__tittle {
+	float: left;
+	width: 40%;
+	height: 100%;
+	transform: skew(35deg);
+	color: #fff;
+	line-height: 50px;
+	font-size: 1.2em;
+	padding-left: 20px;
+}
+.cubic {
+	width: 25px;
+	height: 20px;
+	display: inline-block;
+	background: #D3D5D4;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+.green {
+	background: #51DBB3;
+}
+.yellow {
+	background: #DBD651;
+}
+.red {
+	background: #DB8F51;
+}
