@@ -1,0 +1,41 @@
+body {
+	font-family: sans-serif;
+}
+
+article.card {
+}
+
+.card__inner {
+}
+
+.card__title {
+	background-color: #C9E39C;
+	border-radius: 5px 5px 0 0;
+	box-shadow: 0 0 3px black;
+	padding: 10px;
+	position: relative;
+	display: inline-block;
+	width: auto;
+	z-index: 10;
+	max-width: 250px;
+	font-weight: 700;
+}
+
+.card__title:after {
+	content: '';
+	background-color: #C9E39C;
+	height: 3px;
+	bottom: -3px;
+	left: 0;
+	right: 0;
+	position: absolute;
+}
+
+.card__body {
+	background-color: #C9E39C;
+	border-radius:  0 5px 5px 5px;
+	box-shadow: 0 0 3px black;
+	padding: 10px;
+	max-width: 250px;
+	min-height: 80px;
+}
