@@ -588,12 +588,18 @@
 
     ![](http://htmlbook.ru/files/images/practical/social.jpg)
     
-    Иконки вокруг изображений являются ссылками, при наведении на них они меняют свой цвет (рис http://htmlbook.ru/files/images/practical/social-2.jpg).
+    Иконки вокруг изображений являются ссылками, при наведении на них они меняют свой цвет
+     
+    ![](http://htmlbook.ru/files/images/practical/social-2.jpg)
+    
     исходники:
     
     http://htmlbook.ru/files/person1.jpg
+    
     http://htmlbook.ru/files/person2.jpg
+    
     http://htmlbook.ru/files/person3.jpg
+    
     http://htmlbook.ru/files/social_icons.png
 10. Поле для игры в так-тикс имеет размер 5х5 клеток, в каждой клетке содержится круглая фишка
     
