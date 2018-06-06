@@ -1,0 +1,61 @@
+.person{
+	height: 160px;
+	width: 160px;
+	display: inline-block;
+	margin: 0 10px 15px;
+	border-radius: 100%;
+	border: 3px solid #ccc;
+	position: relative;
+}
+
+.person-1{
+	background-image: url(person1.jpg);
+}
+.person-2{
+	background-image: url(person2.jpg);
+}
+.person-3{
+	background-image: url(person3.jpg);
+}
+
+.link{
+	width: 30px;
+	height: 30px;
+	-ms-background-position-y: -30px;
+	background-position-y: -30px;
+	display: block;
+	position: absolute;
+	border-radius: 100%;
+	background-image: url(social_icons.png);
+}
+
+.link:hover{
+	-ms-background-position-y: 0;
+	background-position-y: 0;
+}
+
+.link-vk{
+	top: -5px;
+	left: 30px;
+	-ms-background-position-x: -60px;
+	background-position-x: -60px;
+}
+
+.link-tw{
+	top: 14px;
+	left: 2px;
+	-ms-background-position-x: -30px;
+	background-position-x: -30px;
+}
+
+.link-fb{
+	top: 47px;
+	left: -14px;
+}
+
+.link-email{
+	top: 145px;
+	left: 65px;
+	-ms-background-position-x: -90px;
+	background-position-x: -90px;
+}
