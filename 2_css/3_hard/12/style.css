@@ -1,0 +1,71 @@
+body {
+	font: 12px/1.5 Arial, Helvetica, sans-serif;
+	color: #333333;
+	background: #4E6379;
+}
+
+h2 {
+	color: #F56332;
+	font-size: 16px;
+	line-height: 16px;
+	margin: 18px 0 0;
+}
+
+article {
+	width: 605px;
+	margin: 10px auto;
+	padding: 10px 0;
+	background: #fff;
+	text-align: center;
+	border-radius: 5px;
+	box-shadow: 0 28px 40px rgba(0, 0, 0, 0.3);
+}
+
+article:after {
+	content: '';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+section {
+	width: 201px;
+	float: left;
+	border-right: 1px solid #ddd;
+}
+
+section:last-child {
+	border: none;
+}
+
+section > div {
+	height: 42px;
+	width: 61px;
+	margin: 0 auto;
+}
+
+.vpn {
+	background: url(http://htmlbook.ru/files/hosting.png) no-repeat 0 0;
+}
+
+.cloud {
+	background: url(http://htmlbook.ru/files/hosting.png) no-repeat 0 -42px;
+}
+
+.vds {
+	background: url(http://htmlbook.ru/files/hosting.png) no-repeat 0 -84px;
+}
+
+section p {
+	margin: 16px 0;
+}
+
+button {
+	background: #F56332;
+	color: #fff;
+	border: none;
+	font-size: 12px;
+	line-height: 24px;
+	padding: 0 10px;
+	border-radius: 2px;
+}
