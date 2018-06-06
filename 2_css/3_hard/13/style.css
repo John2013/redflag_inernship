@@ -1,0 +1,25 @@
+body {
+	background-color: #333333;
+}
+
+.equalizer {
+	height: 200px;
+}
+
+.equalizer .scale {
+	display: inline-flex;
+	align-items: flex-end;
+	width: 30px;
+	height: 100%;
+	padding-right: 10px;
+	z-index: 20;
+}
+
+.equalizer .scale .value {
+	width: 100%;
+	height: 100%;
+	background-image:
+			repeating-linear-gradient(to top, transparent, transparent 18px, #333333 18px, #333333 20px),
+			linear-gradient(to bottom, #FFCF57, #FF8D02);
+	z-index: 10;
+}
