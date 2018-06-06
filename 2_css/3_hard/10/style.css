@@ -1,0 +1,40 @@
+table{
+	border-collapse: collapse;
+	overflow: hidden;
+}
+
+td{
+	border: 1px solid black;
+	padding: 10px;
+	position: relative;
+}
+
+.circle{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: #0063EF;
+}
+
+tr:hover td{
+	background-color: #FFE581;
+}
+
+tr td:hover{
+	background-color: #FC0;
+}
+
+td:hover .circle{
+	background-color: #000;
+}
+
+td:hover::before {
+	content: ''; /* Добавляем псевдоколонку */
+	background: #FFE581; /* Цвет фона */
+	position: absolute; /* Абсолютное позиционирование */
+	height: 2000px; /* Высота колонки */
+	width: 100%; /* Ширина колонки */
+	left: 0; /* Положение от левого края */
+	top: -1000px; /* Положение от верхнего края */
+	z-index: -1; /* Располагаем ниже текста ячейки */
+}
