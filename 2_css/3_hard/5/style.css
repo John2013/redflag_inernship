@@ -1,0 +1,5 @@
+.border {
+	border: 10px solid white;
+	border-radius: 5px;
+	box-shadow: 0 0 2px black, 0 12px 50px -20px;
+}
