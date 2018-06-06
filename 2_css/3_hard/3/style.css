@@ -1,0 +1,33 @@
+body{
+	background-color: #333;
+
+}
+
+.pointer{
+	background-color: #88B7D5;
+	border: 3px solid #C2E1F5;
+	margin: 40px 5px;
+	text-align: center;
+	padding: 10px;
+	position: relative;
+}
+
+.pointer__title{
+	color: white;
+	z-index: 20;
+	position: relative;
+}
+
+.pointer:before{
+	content: '';
+	background-color: #88B7D5;
+	border-left: 3px solid #C2E1F5;
+	border-top: 3px solid #C2E1F5;
+	transform: rotate(45deg);
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: -19px;
+	left: calc(50% - 15px);
+	z-index: 10;
+}
