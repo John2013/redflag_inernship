@@ -1,0 +1,57 @@
+
+
+.menu__item{
+	display: inline-block;
+	position: relative;
+}
+
+.menu__item-title{
+	border-radius: 5px 5px 0 0;
+	padding: 5px;
+	position: relative;
+}
+
+.menu__item:hover .menu__item-title{
+	box-shadow: 0 0 10px -2px;
+	color: #000;
+	text-decoration: none;
+}
+
+.menu__item:hover .menu__item-title:after{
+	content: '';
+	position: absolute;
+	height: 7px;
+	left: 0;
+	right: 0;
+	bottom: -4px;
+	background-color: #fff;
+	z-index: 20;
+}
+
+.menu__item:not(:last-of-type) .menu__item-title{
+	margin-right: 20px;
+}
+
+.menu__submenu{
+	position: absolute;
+	top: calc(1rem + 7px);
+	display: none;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0 0 10px -2px;
+	padding: 5px;
+}
+
+.menu__item:hover .menu__submenu{
+	display: inline-block;
+}
+
+.menu__submenu-item{
+	display: block;
+}
+
+.menu__submenu-item:hover{
+	background-color: #37ABFF;
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+}
