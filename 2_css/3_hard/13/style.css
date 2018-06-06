@@ -22,4 +22,5 @@ body {
 			repeating-linear-gradient(to top, transparent, transparent 18px, #333333 18px, #333333 20px),
 			linear-gradient(to bottom, #FFCF57, #FF8D02);
 	z-index: 10;
+	border-radius: 10px 10px 0 0;
 }
