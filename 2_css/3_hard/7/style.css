@@ -1,0 +1,50 @@
+.feedback{
+	position: fixed;
+	left: -320px;
+	height: 110px;
+	bottom: 40px;
+	transition: left .3s ease;
+	display: inline-flex;
+	align-items: flex-start;
+}
+
+.feedback:hover{
+	left: 0;
+}
+
+.feedback__main{
+	height: 100%;
+	width: 300px;
+	display: inline-flex;
+	padding: 10px;
+	background-color: #333;
+}
+
+.feedback__avatar, .feedback__text{
+	display: inline-block;
+}
+
+.feedback__text{
+	padding: 0 10px;
+	color: white;
+}
+
+
+.feedback__tab{
+	height: 100%;
+	width: 20px;
+	padding: 10px 5px;
+	background-color: #FFBA00;
+	display: inline-block;
+	border-radius: 0 20px 20px 0;
+}
+
+.feedback__tab-title{
+	display: inline-block;
+	height: 100%;
+	width: 110px;
+	transform: rotate(270deg);
+	white-space: nowrap;
+}
+
+
