@@ -1,10 +1,9 @@
 const number = 321;
 
-const str = number.toString();
-let new_str = '';
-for(let char in str){
-	new_str = str[char] + new_str
-}
-new_str = +new_str;
+const digit_1 = Math.floor(number/100);
+const digit_2 = Math.floor((number%100)/10);
+const digit_3 = Math.floor((number%10));
 
-console.log(new_str);
+const reversed_number = +('' + digit_3 + digit_2 + digit_1);
+
+console.log(reversed_number);
