@@ -1,11 +1,11 @@
-let weeks_day_number = 4;
+const number = 3223;
 
-weeks_day_number = Math.abs(weeks_day_number) % 7;
+const digit_1 = Math.floor(number / 1000);
+const digit_2 = Math.floor((number % 1000) / 100);
+const digit_3 = Math.floor((number % 100) / 10);
+const digit_4 = Math.floor((number % 10));
 
-if(weeks_day_number === 0) console.log('Понедельник');
-else if(weeks_day_number === 1) console.log('Вторник');
-else if(weeks_day_number === 2) console.log('Среда');
-else if(weeks_day_number === 3) console.log('Четверг');
-else if(weeks_day_number === 4) console.log('Пятница');
-else if(weeks_day_number === 5) console.log('Суббота');
-else console.log('Воскресенье');
+if ((digit_1 === digit_4) && (digit_2 === digit_3)){
+	console.log('Полиндром')
+}
+else console.log('не полиндром');
