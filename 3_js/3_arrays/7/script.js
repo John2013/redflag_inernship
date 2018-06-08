@@ -16,11 +16,7 @@ console.log(
 			if (item > t){
 				return sum + item
 			}
-			else if(sum > t)
-				return sum;
-
-			else
-				return 0
+			return sum;
 		},
 		0
 	)
