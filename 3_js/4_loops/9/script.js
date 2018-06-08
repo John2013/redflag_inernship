@@ -1,15 +1,20 @@
 const app = document.getElementById('app');
-const n = 10;
+let number1 = +prompt('Введи натуральное число');
+let number2 = +prompt('Введи второе натуральное число');
 
-const get_range = (start, stop, step = 1) => Array(stop - start).fill(start).map((x, y) => x + y * step);
+const is_divider = (number, divider) => number % divider === 0;
 
-const get_random_int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+if (number1 > number2){
+	const tmp = number2;
+	number2 = number1;
+	number1 = tmp
+}
 
-const get_random_array =
-	(n, range_array) => Array(n).fill(0).map(() => range_array[get_random_int(0, range_array.length - 1)]);
+let checking_number = number1;
 
-const array = get_random_array(n, get_range(-20, 25));
+while (!(is_divider(number1, checking_number) && is_divider(number2, checking_number))){
 
-const min = Math.min(...array);
+	checking_number -= 1
+}
 
-app.innerText = `${JSON.stringify(array)}\nномер наименьшего числа: ${array.indexOf(min) + 1}`;
+app.innerText = `НОД(${number1},${number2}) = ${checking_number}`;
