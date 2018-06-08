@@ -1,23 +1,15 @@
 const app = document.getElementById('app');
+const number = +prompt('Введи натуральное число');
 
+let dividers_cnt = 0,
+	divider = number - 1;
 
-const button = document.getElementById('button');
+while (divider !== 1){
+	if(number % divider === 0)
+		dividers_cnt += 1;
+	divider -= 1
+}
 
+const is_simple = dividers_cnt === 0;
 
-button.addEventListener('click', () => {
-	const array = document.getElementById('array')
-		.value
-		.trim()
-		.split('\n')
-		.map((item)=>+item);
-
-	app.innerText = '' + array.reduce(
-		(sum, array_item, currentIndex) => {
-			if((currentIndex + 1) % 2 === 0){
-				return sum + array_item
-			}
-			return sum
-		},
-		0
-	);
-});
+app.innerText = `Число простое - ${is_simple}`;
