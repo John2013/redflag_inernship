@@ -1,20 +1,23 @@
 const app = document.getElementById('app');
-const n = 10;
+const number = +prompt('Введи натуральное число');
 
-const get_range = (start, stop, step = 1) => Array(stop - start).fill(start).map((x, y) => x + y * step);
+let simples_array = [2,],
+	checking_number = 3;
 
-const get_random_int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+while (simples_array.length < number){
+	let dividers_cnt = 0,
+		divider = checking_number - 1;
 
-const get_random_array =
-	(n, range_array) => Array(n).fill(0).map(() => range_array[get_random_int(0, range_array.length - 1)]);
-
-const array = get_random_array(n, get_range(-19, 26));
-
-const product = array.reduce((prod, item, index) => {
-	if((index + 1) % 2 === 1){
-		return prod * item
+	while (divider !== 1){
+		if(checking_number % divider === 0)
+			dividers_cnt += 1;
+		divider -= 1
 	}
-	return prod
-});
 
-app.innerText = JSON.stringify(array) + '\nпроизведение нечётных: ' + product;
+	if (dividers_cnt === 0) {
+		simples_array.push(checking_number)
+	}
+	checking_number += 1
+}
+
+app.innerText = `Простые числа - ${JSON.stringify(simples_array)}`;
