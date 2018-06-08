@@ -1,15 +1,10 @@
 const app = document.getElementById('app');
+const number = +prompt('Введи натуральное число');
 
+let divider = 2;
 
-const button = document.getElementById('button');
+while (number % divider !==0){
+	divider += 1
+}
 
-
-button.addEventListener('click', () => {
-	const array = document.getElementById('array')
-		.value
-		.trim()
-		.split('\n')
-		.map((item)=>+item);
-
-	app.innerText = '' + array.reduce((sum, array_item) => sum + array_item);
-});
+app.innerText = `наименьший нетривиальный делитель - ${divider}`;
