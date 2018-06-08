@@ -1,11 +1,9 @@
 const app = document.getElementById('app');
+const number = +prompt('Введи натуральное число');
 
+let divider = number - 1;
+while (number % divider !==0){
+	divider -= 1
+}
 
-const button = document.getElementById('button');
-
-
-button.addEventListener('click', () => {
-	const array = document.getElementById('array').value.trim().split('\n').map((item)=>+item);
-
-	app.innerText = '' + array.reduce((product, array_item) => product * array_item);
-});
+app.innerText = `наибольший нетривиальный делитель - ${divider}`;
