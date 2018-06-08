@@ -1,21 +1,18 @@
 const app = document.getElementById('app');
-const n = 10, t = 10;
+const number = +prompt('Введи натуральное число');
 
-const get_range = (start, stop, step = 1) => Array(stop - start).fill(start).map((x, y) => x + y * step);
+let dividers_arr = [1],
+	checking_number = 2;
 
-const get_random_int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-const get_random_array =
-	(n, range_array) => Array(n).fill(0).map(() => range_array[get_random_int(0, range_array.length - 1)]);
-
-const array = get_random_array(n, get_range(-56, 47));
-
-const product = array.reduce((prod, item, index) => {
-	if(((index + 1) % 2 === 0) && (item > t)){
-		if (prod === 0) return item;
-		return prod * item
+while (checking_number < number) {
+	if(number % checking_number === 0){
+		dividers_arr.push(checking_number)
 	}
-	return prod
-}, 0);
+	checking_number += 1
+}
 
-app.innerText = `${JSON.stringify(array)}\nпроизведение чётных больше ${t}: ${product}`;
+const sum = (array)=>array.reduce((sum_, item)=>sum_+item);
+
+const is_perfect = (sum(dividers_arr) === number);
+
+app.innerText = `Число совершенное - ${is_perfect}`;
