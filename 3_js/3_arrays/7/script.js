@@ -10,13 +10,18 @@ let result_array = Array(n).fill(0).map(()=>range[get_random_int(0, range.length
 
 
 
-console.log(result_array.reduce((sum = 0, item) => {
-	if (item > t){
-		return sum + item
-	}
-	else if(sum > t)
-		return sum;
+console.log(
+	result_array.reduce(
+		(sum = 0, item) => {
+			if (item > t){
+				return sum + item
+			}
+			else if(sum > t)
+				return sum;
 
-	else
-		return 0
-}, 0));
+			else
+				return 0
+		},
+		0
+	)
+);
