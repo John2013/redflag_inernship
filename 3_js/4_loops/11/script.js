@@ -1,5 +1,5 @@
 const app = document.getElementById('app');
-const array = [4, 0, 0, -13, 255, -0];
+const x = +prompt('Введи x');
+const n = +prompt('Введи n');
 
-
-app.innerText = `${JSON.stringify(array)}\nколичество чётных элементов: ${Math.floor(array.length/2)}`;
+app.innerHTML = `x<sup>2</sup> = ${x ** n}`;
