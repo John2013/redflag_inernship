@@ -8,12 +8,10 @@ const n = +prompt('Введи n');
 
 const simple_pow = (x, n=2) => {
 	let result = x;
-	if(n === 0){
-		return 1;
-	}
-	if(n === 1){
-		return x;
-	}
+
+	if(n === 0) return 1;
+	if(n === 1) return x;
+
 	for (let i = 1; i < n; i++){
 		result *= x;
 	}
