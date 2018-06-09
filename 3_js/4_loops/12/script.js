@@ -18,12 +18,9 @@ const simple_pow = (x, n=2) => {
 };
 
 const fast_pow = (x, n=2) => {
-	if(n === 0){
-		return 1;
-	}
-	if(n === 1){
-		return x;
-	}
+	if(n === 0) return 1;
+	if(n === 1) return x;
+
 	const n_bin = n.toString(2).split('').map((item)=>+item);
 	let result = simple_pow(x, n_bin[0]);
 	result *= result;
