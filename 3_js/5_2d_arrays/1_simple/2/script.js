@@ -1,18 +1,17 @@
 const app = getById('app');
 const button = getById('button');
 
-const getMaxByCol = (array) =>
-	array.reduce(
-		(maxArray, item) => {
+const swap2randomRows = (array) => {
+	if (array.length <= 1) return array;
+	const row1index = randInt(0, array.length);
+	let row2index;
+	do {
+		row2index = randInt(0, array.length)
+	} while (row2index === row1index);
 
-			item.forEach((value, index) =>
-				maxArray[index] = Math.max(maxArray[index], value));
+	return swapInArray(array, row1index, row2index)
+};
 
-			return maxArray
-
-		},
-		Array(array[0].length).fill(0)
-	);
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
@@ -21,9 +20,11 @@ button.addEventListener('click', () => {
 
 	const tableArray = getTable(array);
 
-	const maxByColArray = getMaxByCol(array);
+	const array2 = swap2randomRows(array);
 
-	app.innerHTML = `${tableArray}<br>максимум по колонкам: ${maxByColArray.join(', ')}`
+	const table2Array = getTable(array2);
+
+	app.innerHTML = `${ tableArray }<br>${ table2Array }`
 });
 
 
