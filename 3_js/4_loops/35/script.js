@@ -5,13 +5,14 @@ const getFibonacciItem = (n) => {
 	if(n === 1) return 0;
 	if(n === 2) return 1;
 
-	let f_minus_2 = -1;
-	let f_minus_1 = 0;
+	let f_minus_2 = 0;
+	let f_minus_1 = 1;
 	let f = 0;
-	for (let i = 3; i <= n; i += 1){
-		f_minus_2 += 1;
-		f_minus_1 += 1;
-		f = f_minus_2 + f_minus_1
+	for (let i = 2; i <= n; i += 1){
+		f = f_minus_2 + f_minus_1;
+
+		f_minus_2 = f_minus_1;
+		f_minus_1 = f;
 	}
 
 	return f
