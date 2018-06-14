@@ -16,7 +16,7 @@ const swap2randomRows = (array) => {
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 
-	const array = randInt2dArray(n, n, 0, 255);
+	const array = randIntMatrix(n, n, 0, 255);
 
 	const tableArray = getTable(array);
 
