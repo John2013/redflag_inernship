@@ -8,4 +8,5 @@ else if(weeks_day_number === 2) console.log('Среда');
 else if(weeks_day_number === 3) console.log('Четверг');
 else if(weeks_day_number === 4) console.log('Пятница');
 else if(weeks_day_number === 5) console.log('Суббота');
-else console.log('Воскресенье');
+else if(weeks_day_number === 6) console.log('Воскресенье');
+else console.log('Неизвестный день');
