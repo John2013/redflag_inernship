@@ -14,11 +14,11 @@
 // 	result_array.reduce(
 // 		(sum = 0, item) => {
 // 			if (item > t){
-// 				return sum + item
+// 				return sum * item
 // 			}
 // 			return sum;
 // 		},
-// 		0
+// 		1
 // 	)
 // );
 const t = 30;

@@ -26,4 +26,4 @@ const array = [
 	get_random_int(min, max)
 ];
 
-console.log(array);
+console.log(array.join(', '));

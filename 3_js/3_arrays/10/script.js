@@ -12,9 +12,9 @@ const array = [4, 0, 0, -13, 255];
 let cnt_zeros = 0;
 
 if (array[0] === 0) cnt_zeros += 1;
-if (array[1] === 1) cnt_zeros += 1;
-if (array[2] === 2) cnt_zeros += 1;
-if (array[3] === 3) cnt_zeros += 1;
-if (array[4] === 4) cnt_zeros += 1;
+if (array[1] === 0) cnt_zeros += 1;
+if (array[2] === 0) cnt_zeros += 1;
+if (array[3] === 0) cnt_zeros += 1;
+if (array[4] === 0) cnt_zeros += 1;
 
 console.log(cnt_zeros);

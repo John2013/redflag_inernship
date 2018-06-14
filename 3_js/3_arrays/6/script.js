@@ -12,11 +12,11 @@
 // 	result_array.reduce(
 // 		(sum, item) => {
 // 			if (item % 2 === 1) {
-// 				return sum + item
+// 				return sum * item
 // 			}
 // 			return sum
 // 		},
-// 		0
+// 		1
 // 	)
 // );
 const get_random_int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;

@@ -11,7 +11,7 @@ function get_factorial(n) {
 	return factorial
 }
 
-const eInX = (x, eps = 100) => {
+const eInX = (x, eps = 10000) => {
 	let sum = 1;
 
 	for (let i = 1; i <= eps; i += 1) {

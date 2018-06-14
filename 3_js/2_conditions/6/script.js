@@ -1,4 +1,4 @@
-const byte = Math.abs(129) % 128;
+const byte = Math.abs(0) % 128;
 
 const bin_byte = +byte.toString(2);
 
