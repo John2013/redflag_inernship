@@ -1,17 +1,20 @@
 const app = getById('app');
 const button = getById('button');
 
-const getMaxByCol = (array) =>
+const getMatrixSum = (array) =>
 	array.reduce(
-		(maxArray, item) => {
+		(sum, item) => sum + +item.reduce(
+			(sum, item) => sum + +item
+		)
+	);
 
-			item.forEach((value, index) =>
-				maxArray[index] = Math.max(maxArray[index], value));
-
-			return maxArray
-
-		},
-		Array(array[0].length).fill(0)
+const getMatrixProduct = (array) =>
+	array.reduce(
+		(prod, item) => prod * item.reduce(
+			(prod2, item2) => prod2 * item2,
+			1
+		),
+		1
 	);
 
 button.addEventListener('click', () => {
@@ -21,9 +24,7 @@ button.addEventListener('click', () => {
 
 	const tableArray = getTable(array);
 
-	const maxByColArray = getMaxByCol(array);
-
-	app.innerHTML = `${tableArray}<br>максимум по колонкам: ${maxByColArray.join(', ')}`
+	app.innerHTML = `${tableArray}<br>сумма: ${getMatrixSum(array)}, произведение: ${getMatrixProduct(array)}`
 });
 
 
