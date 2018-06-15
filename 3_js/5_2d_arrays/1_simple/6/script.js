@@ -8,13 +8,14 @@ const countOfEven2DigetsNumbers = (array) =>
 	array.matrixReduce(
 		(count, value) => {
 
-			const digitsArray = value.toString().split('').map((i) => +i);
-			const digitsSum = digitsArray.reduce((sum, value) => sum + value);
+			// const digitsArray = value.toString().split('').map((i) => +i);
+			// const digitsSum = digitsArray.reduce((sum, value) => sum + value);
+			//
+			// if (digitsArray.length === 2 && digitsSum % 2 === 0)
+			// 	return count + 1;
 
-			if (digitsArray.length === 2 && digitsSum % 2 === 0)
-				return count + 1;
 
-			return count
+			return count + value
 		},
 		0
 	);
