@@ -9,7 +9,10 @@ button.addEventListener('click', () => {
 
 	const tableArray = getTable(array);
 
-	app.innerHTML = `${tableArray}`
+	const firstRowSum = array[0].reduce((s, v)=>s+v);
+	const lastRowSum = array[array.length - 1].reduce((s, v)=>s+v);
+
+	app.innerHTML = `${tableArray}<br>Сумма первой строки - ${firstRowSum}; сумма последней строки - ${lastRowSum}`
 });
 
 
