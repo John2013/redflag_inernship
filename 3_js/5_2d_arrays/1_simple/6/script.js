@@ -5,17 +5,17 @@ const button = getById('button');
 // цифр кратная 2.
 
 const countOfEven2DigetsNumbers = (array) =>
-	array.matrixReduce(
-		(count, value) => {
+	matrixReduce(
+		(array, count, value) => {
 
-			// const digitsArray = value.toString().split('').map((i) => +i);
-			// const digitsSum = digitsArray.reduce((sum, value) => sum + value);
-			//
-			// if (digitsArray.length === 2 && digitsSum % 2 === 0)
-			// 	return count + 1;
+			const digitsArray = value.toString().split('').map((i) => +i);
+			const digitsSum = digitsArray.reduce((sum, value) => sum + value);
+
+			if (digitsArray.length === 2 && digitsSum % 2 === 0)
+				return count + 1;
 
 
-			return count + value
+			return count
 		},
 		0
 	);

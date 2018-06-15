@@ -10,6 +10,7 @@ const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArr
 
 /**
  * Вызывает заданную функцию для элементов матрицы и аккумулирует результаты функции
+ * @param matrix массив n x n
  * @param callbackFn(prevValue, currentValue, indexArray, matrix) функция, вызывающаяся для элементов диагонали
  * @param initialValue начальное значение, если не задано, то берётся элемент [0][0] матрицы, а цикл начинается со
  * второго элемента
