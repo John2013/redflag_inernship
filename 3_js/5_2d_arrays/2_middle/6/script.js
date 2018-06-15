@@ -1,6 +1,7 @@
 const app = getById('app');
 const button = getById('button');
 
+const getRowsSumsArray = (matrix) => matrix.map((row) => row.reduce((s, v) => s + v))
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
@@ -9,7 +10,7 @@ button.addEventListener('click', () => {
 
 	const tableArray = getTable(array);
 
-	app.innerHTML = `${tableArray}`
+	app.innerHTML = `${tableArray}<br>Суммы строк: ${getRowsSumsArray(array).join('; ')}`
 });
 
 
