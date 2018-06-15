@@ -14,7 +14,7 @@ const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArr
  * @param initialValue начальное значение, если не задано, то берётся элемент [0][0] матрицы, а цикл начинается со
  * второго элемента
  */
-Array.matrixReduce = (callbackFn, initialValue = null) => {
+Array.prototype.matrixReduce = (callbackFn, initialValue = null) => {
 	let jStartIndex = 0;
 	if (initialValue === null){
 		initialValue = this[0][0];
