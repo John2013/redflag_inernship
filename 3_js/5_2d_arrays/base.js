@@ -8,6 +8,30 @@ const randIntArray = (n, min, max) => Array(n).fill(0).map(() =>randInt(min, max
 
 const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArray(m, min, max));
 
+/**
+ * Вызывает заданную функцию для элементов матрицы и аккумулирует результаты функции
+ * @param callbackFn(prevValue, currentValue, indexArray, matrix) функция, вызывающаяся для элементов диагонали
+ * @param initialValue начальное значение, если не задано, то берётся элемент [0][0] матрицы, а цикл начинается со
+ * второго элемента
+ */
+Array.matrixReduce = (callbackFn, initialValue = null) => {
+	let jStartIndex = 0;
+	if (initialValue === null){
+		initialValue = this[0][0];
+		jStartIndex = 1;
+	}
+
+	let prevValue = initialValue;
+
+	for (let i = 0; i < this.length; i += 1) {
+		for (let j = jStartIndex; j < this[i].length; j += 1){
+			prevValue = callbackFn(prevValue, this[i][j], [i, j], this)
+		}
+	}
+
+	return prevValue
+};
+
 const swapInArray = (array, index1, index2) => {
 	const tmp = array[index2];
 	array[index2] = array[index1];
