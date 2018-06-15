@@ -7,7 +7,7 @@ const button = getById('button');
 const countOfEven2DigetsNumbers = (array) =>
 	matrixReduce(
 		array,
-		(array, count, value) => {
+		(count, value) => {
 
 			const digitsArray = value.toString().split('').map((i) => +i);
 			const digitsSum = digitsArray.reduce((sum, value) => sum + value);

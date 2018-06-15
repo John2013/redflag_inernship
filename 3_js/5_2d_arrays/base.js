@@ -28,6 +28,7 @@ const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 		for (let j = jStartIndex; j < matrix[i].length; j += 1){
 			prevValue = callbackFn(prevValue, matrix[i][j], [i, j], this)
 		}
+		jStartIndex = 0;
 	}
 
 	return prevValue
