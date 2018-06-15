@@ -6,6 +6,7 @@ const button = getById('button');
 
 const countOfEven2DigetsNumbers = (array) =>
 	matrixReduce(
+		array,
 		(array, count, value) => {
 
 			const digitsArray = value.toString().split('').map((i) => +i);
