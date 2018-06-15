@@ -26,13 +26,13 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null) => {
 };
 
 const getMatrixPositivesItemsCountOnDiagonal = (matrix) => {
-	const positivesCount = matrixDiagReduce(matrix, (count, value) => count + +(value > 0))
+	return matrixDiagReduce(matrix, (count, value) => count + +(value > 0), 0)
 };
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 
-	const matrix = randIntMatrix(n, n, 0, 255);
+	const matrix = randIntMatrix(n, n, -255, 255);
 
 	const tableArray = getTable(matrix);
 
