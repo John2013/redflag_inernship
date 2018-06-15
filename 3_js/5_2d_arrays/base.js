@@ -14,28 +14,23 @@ const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArr
  * @param initialValue начальное значение, если не задано, то берётся элемент [0][0] матрицы, а цикл начинается со
  * второго элемента
  */
-Object.defineProperty(Array.prototype, 'matrixReduce', {
+const matrixReduce = (matrix, callbackFn, initialValue = null) => {
+	let jStartIndex = 0;
+	if (initialValue === null){
+		initialValue = matrix[0][0];
+		jStartIndex = 1;
+	}
 
-	value: (callbackFn, initialValue = null) => {
-		let jStartIndex = 0;
-		if (initialValue === null){
-			initialValue = this[0][0];
-			jStartIndex = 1;
+	let prevValue = initialValue;
+
+	for (let i = 0; i < matrix.length; i += 1) {
+		for (let j = jStartIndex; j < matrix[i].length; j += 1){
+			prevValue = callbackFn(prevValue, matrix[i][j], [i, j], this)
 		}
+	}
 
-		let prevValue = initialValue;
-
-		for (let i = 0; i < this.length; i += 1) {
-			for (let j = jStartIndex; j < this[i].length; j += 1){
-				prevValue = callbackFn(prevValue, this[i][j], [i, j], this)
-			}
-		}
-
-		return prevValue
-	},
-	enumerable: false,
-
-});
+	return prevValue
+};
 
 const swapInArray = (array, index1, index2) => {
 	const tmp = array[index2];
