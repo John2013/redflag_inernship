@@ -38,11 +38,12 @@ const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 /**
  * Вызывает заданную функцию для элементов на главной диагонали матрицы и аккумулирует результаты функции
  * @param matrix двумерный массив n x n
- * @param callbackFn(prevValue, currentValue, index, matrix) функция, вызывающаяся для элементов диагонали
+ * @param callbackFn(prevValue, currentValue, indexes, matrix) функция, вызывающаяся для элементов диагонали
  * @param initialValue начальное значение, если не задано, то берётся первый элемент диагонали, а цикл начинается со
  * второго элемента
+ * @param isMainDiagonal boolean Главная или побочная диагональ
  */
-const matrixDiagReduce = (matrix, callbackFn, initialValue = null) => {
+const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagonal = true) => {
 
 	let startIndex = 0;
 	if (initialValue === null){
@@ -52,8 +53,14 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null) => {
 
 	let prevValue = initialValue;
 
+	let j;
 	for (let i = startIndex; i < matrix.length; i += 1) {
-		prevValue = callbackFn(prevValue, matrix[i][i], i, matrix)
+		if(isMainDiagonal){
+			j = i;
+		} else {
+			j = matrix.length - 1 - i
+		}
+		prevValue = callbackFn(prevValue, matrix[i][j], [i, j], matrix)
 	}
 
 	return prevValue
