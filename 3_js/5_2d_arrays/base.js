@@ -4,9 +4,31 @@ const getNumById = (id) => +getById(id).value;
 
 const randInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-const randIntArray = (n, min, max) => Array(n).fill(0).map(() =>randInt(min, max));
+const randIntArray = (n, min, max) => Array(n).fill(0).map(() => randInt(min, max));
 
 const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArray(m, min, max));
+
+
+const swap = (array, index1, index2) => {
+	const tmp = array[index2];
+	array[index2] = array[index1];
+	array[index1] = tmp;
+	return array
+};
+
+
+function rotateMatrix(matrix) {
+	const len = matrix.length;
+	for (let row = 0; row < len; row += 1)
+		for (let col = row + 1; col < len; col += 1) {
+			let tmp = matrix[row][col];
+			matrix[row][col] = matrix[col][row];
+			matrix[col][row] = tmp
+		}
+
+	return matrix
+}
+
 
 /**
  * Вызывает заданную функцию для элементов матрицы и аккумулирует результаты функции
@@ -17,7 +39,7 @@ const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArr
  */
 const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 	let jStartIndex = 0;
-	if (initialValue === null){
+	if (initialValue === null) {
 		initialValue = matrix[0][0];
 		jStartIndex = 1;
 	}
@@ -25,7 +47,7 @@ const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 	let prevValue = initialValue;
 
 	for (let i = 0; i < matrix.length; i += 1) {
-		for (let j = jStartIndex; j < matrix[i].length; j += 1){
+		for (let j = jStartIndex; j < matrix[i].length; j += 1) {
 			prevValue = callbackFn(prevValue, matrix[i][j], [i, j], this)
 		}
 		jStartIndex = 0;
@@ -46,7 +68,7 @@ const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagonal = true) => {
 
 	let startIndex = 0;
-	if (initialValue === null){
+	if (initialValue === null) {
 		initialValue = matrix[0][0];
 		startIndex = 1;
 	}
@@ -55,7 +77,7 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagona
 
 	let j;
 	for (let i = startIndex; i < matrix.length; i += 1) {
-		if(isMainDiagonal){
+		if (isMainDiagonal) {
 			j = i;
 		} else {
 			j = matrix.length - 1 - i
@@ -66,11 +88,43 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagona
 	return prevValue
 };
 
-const swapInArray = (array, index1, index2) => {
-	const tmp = array[index2];
-	array[index2] = array[index1];
-	array[index1] = tmp;
-	return array
+
+/**
+ * Вызывает заданную функцию для столбцов матрицы и аккумулирует результаты функции
+ * @param matrix двумерный массив
+ * @param callbackFn(prevValue, currentValue, index, rotatedMatrix) функция, вызывающаяся для элементов диагонали
+ * @param initialValue начальное значение, если не задано, то берётся первый элемент диагонали, а цикл начинается со
+ * второго элемента
+ */
+const matrixColsReduce = (matrix, callbackFn, initialValue = null) => {
+
+	const rotatedMatrix = rotateMatrix(matrix);
+
+	let startIndex = 0;
+	if (initialValue === null) {
+		initialValue = rotatedMatrix[0];
+		startIndex = 1;
+	}
+
+	let prevValue = initialValue;
+
+	for (let index = startIndex; index < rotatedMatrix.length; index += 1) {
+		prevValue = callbackFn(prevValue, rotatedMatrix[index], index, rotatedMatrix)
+	}
+
+	return prevValue
+};
+
+/**
+ * Вызывает заданную функцию для столбцов матрицы и аккумулирует результаты функции
+ * @param matrix двумерный массив
+ * @param callbackFn(currentValue, index, rotatedMatrix) функция, обрабатывающая элементы массива
+ */
+const matrixColsMap = (matrix, callbackFn) => {
+
+	const rotatedMatrix = rotateMatrix(matrix);
+
+	return rotatedMatrix.map(callbackFn)
 };
 
 

@@ -9,7 +9,7 @@ const swap2randomRows = (array) => {
 		row2index = randInt(0, array.length)
 	} while (row2index === row1index);
 
-	return swapInArray(array, row1index, row2index)
+	return swap(array, row1index, row2index)
 };
 
 
