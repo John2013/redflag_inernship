@@ -1,15 +1,17 @@
 const app = getById('app');
 const button = getById('button');
 
+const matrixSum = matrix => matrixReduce(matrix, (sum, value) => sum + value);
+
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 
-	const array = randIntMatrix(n, n, 0, 9);
+	const matrix = randIntMatrix(n, n, 0, 9);
 
-	const tableArray = getTable(array);
+	const tableArray = getTable(matrix);
 
-	app.innerHTML = `${tableArray}`
+	app.innerHTML = `${tableArray}<br>${matrixSum(matrix)}`
 });
 
 
