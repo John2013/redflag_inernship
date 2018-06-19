@@ -6,15 +6,25 @@ const randFloat = (min, max, fractionDigits = 5) => +(Math.random() * (max - min
 
 const randInt = (min, max) => Math.floor(randFloat(min, max));
 
+const randOfArray = array => array[randInt(0, array.length - 1)];
+
+const randChar = (chars='qwertyuiopasdfghjklzxcvbnm') => randOfArray(chars.split(''));
+
 const randIntArray = (n, min, max) => Array(n).fill(0).map(() => randInt(min, max));
 
 const randFloatArray = (n, min, max, fractionDigits = 5) => Array(n).fill(0).map(() =>
 	randFloat(min, max, fractionDigits));
 
+const randCharArray = (size, chars='qwertyuiopasdfghjklzxcvbnm') => Array(size).fill('').map(() => randChar(chars));
+
 const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArray(m, min, max));
 
 const randFloatMatrix = (n, m, min, max, fractionDigits = 5) => Array(n).fill([]).map(() =>
 	randFloatArray(m, min, max, fractionDigits));
+
+const randCharMatrix = (n, m, chars='qwertyuiopasdfghjklzxcvbnm') =>
+	Array(n).fill([]).map(() =>
+		randCharArray(m, chars));
 
 const swap = (array, index1, index2) => {
 	const tmp = array[index2];
@@ -61,6 +71,23 @@ const matrixReduce = (matrix, callbackFn, initialValue = null) => {
 	}
 
 	return prevValue
+};
+
+
+/**
+ * Вызывает заданную функцию для элементов матрицы и аккумулирует результаты функции
+ * @param matrix массив n x n
+ * @param callbackFn(prevValue, currentValue, indexArray, matrix) функция, вызывающаяся для элементов диагонали
+ */
+const matrixMap = (matrix, callbackFn) => {
+	let result = [];
+	for(let rowIndex in matrix){
+		for(let colIndex in matrix[rowIndex]){
+			result.push(callbackFn(matrix[rowIndex][colIndex],[rowIndex, colIndex], matrix))
+		}
+	}
+
+	return result
 };
 
 
@@ -163,3 +190,10 @@ const getItemsByCoordsStr = (matrix, indexes) =>
 const readList = (str) => str.trim().split('\n');
 
 const readNumList = (str) => readList(str).map((i) => +i);
+
+
+const countBy = (array) => {
+	let count = {};
+	array.forEach(val => count[val] = (count[val] || 0) + 1);
+	return count;
+};
