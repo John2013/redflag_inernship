@@ -2,11 +2,8 @@ const app = getById('app');
 const button = getById('button');
 
 
-const getCharsCountInMatrix = matrix => {
-	let charsArray = [].concat(...matrix);
+const getCharsCountInMatrix = matrix => countBy([].concat(...matrix));
 
-	return countBy(charsArray)
-};
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
