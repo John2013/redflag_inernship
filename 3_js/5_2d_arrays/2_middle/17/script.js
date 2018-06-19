@@ -1,15 +1,21 @@
 const app = getById('app');
 const button = getById('button');
 
+const getMinsOfCols = matrix =>
+	matrixColsMap(matrix, col => Math.min(...col));
+
 
 button.addEventListener('click', () => {
-	const n = getNumById('n');
+	const rowsCount = getNumById('n');
+	const colsCount = getNumById('m');
 
-	const array = randIntMatrix(n, n, 0, 9);
+	const matrix = randIntMatrix(rowsCount, colsCount, 0, 9);
 
-	const tableArray = getTable(array);
+	const tableArray = getTable(matrix);
 
-	app.innerHTML = `${tableArray}`
+	const mins = getMinsOfCols(matrix);
+
+	app.innerHTML = `${tableArray}<br>${mins.join('; ')} → ${Math.max(...mins)}`
 });
 
 
