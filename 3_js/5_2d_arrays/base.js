@@ -2,17 +2,19 @@ const getById = (id) => document.getElementById(id);
 
 const getNumById = (id) => +getById(id).value;
 
-const randFloat = (min, max) => (Math.random() * (max - min)) + min;
+const randFloat = (min, max, fractionDigits = 5) => +(Math.random() * (max - min)).toFixed(fractionDigits) + min;
 
 const randInt = (min, max) => Math.floor(randFloat(min, max));
 
 const randIntArray = (n, min, max) => Array(n).fill(0).map(() => randInt(min, max));
 
-const randFloatArray = (n, min, max) => Array(n).fill(0).map(() => randFloat(min, max));
+const randFloatArray = (n, min, max, fractionDigits = 5) => Array(n).fill(0).map(() =>
+	randFloat(min, max, fractionDigits));
 
 const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArray(m, min, max));
 
-const randFloatMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randFloatArray(m, min, max));
+const randFloatMatrix = (n, m, min, max, fractionDigits = 5) => Array(n).fill([]).map(() =>
+	randFloatArray(m, min, max, fractionDigits));
 
 const swap = (array, index1, index2) => {
 	const tmp = array[index2];
