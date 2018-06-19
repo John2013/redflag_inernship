@@ -118,13 +118,13 @@ const matrixColsReduce = (matrix, callbackFn, initialValue = null) => {
 /**
  * Вызывает заданную функцию для столбцов матрицы и аккумулирует результаты функции
  * @param matrix двумерный массив
- * @param callbackFn(currentValue, index, rotatedMatrix) функция, обрабатывающая элементы массива
+ * @param callbackFn(array, indexOfArray, rotatedMatrix) функция, обрабатывающая элементы массива
  */
 const matrixColsMap = (matrix, callbackFn) => {
 
 	const rotatedMatrix = rotateMatrix(matrix);
 
-	return rotatedMatrix.map(callbackFn)
+	return rotatedMatrix.map((col, indexOfCol, rotatedMatrix) => callbackFn(col, indexOfCol, rotatedMatrix))
 };
 
 
