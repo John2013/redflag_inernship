@@ -7,14 +7,6 @@ const middleArithmetic = array => sum(array) / array.length;
 
 const getMiddlesArray = matrix => matrix.map(array => middleArithmetic(array));
 
-const getList = array => {
-	let list = '<ul>';
-
-	array.forEach(value => list += `<li>${value}</li>`);
-
-	return list + '</ul>'
-};
-
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 	const m = getNumById('m');

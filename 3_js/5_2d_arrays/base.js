@@ -140,8 +140,19 @@ const getTable = (array) => {
 	return table + '</table>';
 };
 
+const getList = array => {
+	let list = '<ul>';
+
+	array.forEach(value => list += `<li>${value}</li>`);
+
+	return list + '</ul>'
+};
+
+
 const getItemsByCoordsStr = (matrix, indexes) =>
 	indexes.map((ids)=>`${matrix[ids[0]][ids[1]]}[${ids[0]}][${ids[1]}]`).join('; ');
+
+
 
 const readList = (str) => str.trim().split('\n');
 
