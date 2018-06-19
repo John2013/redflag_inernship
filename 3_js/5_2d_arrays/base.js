@@ -2,12 +2,17 @@ const getById = (id) => document.getElementById(id);
 
 const getNumById = (id) => +getById(id).value;
 
-const randInt = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+const randFloat = (min, max) => (Math.random() * (max - min)) + min;
+
+const randInt = (min, max) => Math.floor(randFloat(min, max));
 
 const randIntArray = (n, min, max) => Array(n).fill(0).map(() => randInt(min, max));
 
+const randFloatArray = (n, min, max) => Array(n).fill(0).map(() => randFloat(min, max));
+
 const randIntMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randIntArray(m, min, max));
 
+const randFloatMatrix = (n, m, min, max) => Array(n).fill([]).map(() => randFloatArray(m, min, max));
 
 const swap = (array, index1, index2) => {
 	const tmp = array[index2];
@@ -150,8 +155,7 @@ const getList = array => {
 
 
 const getItemsByCoordsStr = (matrix, indexes) =>
-	indexes.map((ids)=>`${matrix[ids[0]][ids[1]]}[${ids[0]}][${ids[1]}]`).join('; ');
-
+	indexes.map((ids) => `${matrix[ids[0]][ids[1]]}[${ids[0]}][${ids[1]}]`).join('; ');
 
 
 const readList = (str) => str.trim().split('\n');
