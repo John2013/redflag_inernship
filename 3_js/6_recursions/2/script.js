@@ -1,10 +1,29 @@
 const app = getById('app');
 const button = getById('button');
 
+const range = (a, b) => {
+	if (typeof a !== 'object')
+		return range([a], b);
+
+	if (a[a.length - 1] === b)
+		return a;
+
+	let newValue;
+
+	if (a[a.length - 1] < b)
+		newValue = a[a.length - 1] + 1;
+
+	else
+		newValue = a[a.length - 1] - 1;
+
+	return range(a.push[newValue], b)
+};
+
 
 button.addEventListener('click', () => {
 
-	const n = getNumById('n');
+	const a = getNumById('a');
+	const b = getNumById('b');
 
-	app.innerHTML = ``
+	app.innerHTML = `${range(a, b)}`
 });
