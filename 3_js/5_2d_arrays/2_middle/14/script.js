@@ -4,12 +4,11 @@ const button = getById('button');
 const sum = array => array.reduce((sum, value) => sum + value);
 
 const changeLastOnSum = matrix => {
-	let newMatrix = matrix.slice();
-	for (let i = 1; i < newMatrix.length; i += 1){
-		newMatrix[i].pop();
-		newMatrix[i].push(sum(newMatrix[i - 1]))
+	for (let i = 1; i < matrix.length; i += 1){
+		matrix[i].pop();
+		matrix[i].push(sum(matrix[i - 1]))
 	}
-	return newMatrix
+	return matrix
 };
 
 
