@@ -1,7 +1,7 @@
 const app = getById('app');
 const button = getById('button');
 
-const getRowsSumsArray = (matrix) => matrix.map((row) => row.reduce((s, v) => s + v))
+const getRowsSumsArray = (matrix) => matrix.map((row) => row.reduce((s, v) => s + v));
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
