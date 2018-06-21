@@ -4,6 +4,13 @@ const getNumById = (id) => +getById(id).value;
 
 const randFloat = (min, max, fractionDigits = 5) => +(Math.random() * (max - min)).toFixed(fractionDigits) + min;
 
+
+/**
+ * Возвращает случайное целое число между min (включительно) и max (не включая max)
+ * @param min {number}
+ * @param max {number}
+ * @returns {number}
+ */
 const randInt = (min, max) => Math.floor(randFloat(min, max));
 
 const randOfArray = array => array[randInt(0, array.length - 1)];

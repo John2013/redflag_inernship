@@ -12,7 +12,7 @@ const negativeDiagCount = (matrix, isMainDiag = true) =>
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 
-	const array = randIntMatrix(n, n, -1, 1);
+	const array = randIntMatrix(n, n, -1, 2);
 
 	const tableArray = getTable(array);
 
