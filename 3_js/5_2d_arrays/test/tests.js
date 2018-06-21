@@ -30,5 +30,15 @@ QUnit.test('matrixDiagReduce()', assert => {
 		matrixDiagReduce(matrixEven,(sum, value)=> sum + value, null, true, true),
 		8,
 		'обе диагонали, чёт'
+	);
+	assert.equal(
+		matrixDiagReduce(matrix,(sum, value)=> sum + value, null, true),
+		3,
+		'Главная диагональ'
+	);
+	assert.equal(
+		matrixDiagReduce(matrix,(sum, value)=> sum + value, null, false),
+		3,
+		'Побочная диагональ'
 	)
 });
