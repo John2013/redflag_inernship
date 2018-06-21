@@ -5,7 +5,7 @@ const sum = array => array.reduce((sum, item) => sum + item);
 
 const middleArithmetic = array => sum(array) / array.length;
 
-const getMiddlesArray = matrix => matrix.map(array => middleArithmetic(array));
+const getMiddlesArray = matrix => matrix.map(row => middleArithmetic(row));
 
 button.addEventListener('click', () => {
 	const n = getNumById('n');
