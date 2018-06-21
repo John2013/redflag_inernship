@@ -2,9 +2,22 @@ const app = getById('app');
 const button = getById('button');
 
 
-button.addEventListener('click', () => {
+const isPowerOf2 = n => {
+	if (n === 2)
+		return true;
 
+	if (n < 2)
+		return false;
+
+	return isPowerOf2(n / 2);
+};
+
+
+const bool2str = bool => bool ? 'YES' : 'NO';
+
+
+button.addEventListener('click', () => {
 	const n = getNumById('n');
 
-	app.innerHTML = ``
+	app.innerHTML = `${bool2str(isPowerOf2(n))}`
 });
