@@ -118,11 +118,9 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagona
 
 	let prevValue = initialValue;
 
-	if(isBoth)
-		isMainDiagonal = true;
 	let j;
 	for (let i = startIndex; i < matrix.length; i += 1) {
-		if (isMainDiagonal) {
+		if (isMainDiagonal || isBoth) {
 			j = i;
 		} else {
 			j = matrix.length - 1 - i
@@ -131,7 +129,8 @@ const matrixDiagReduce = (matrix, callbackFn, initialValue = null, isMainDiagona
 	}
 
 	if(isBoth){
-		for (let i = startIndex; i < matrix.length; i += 1) {
+
+		for (let i = 0; i < matrix.length; i += 1) {
 			j = matrix.length - 1 - i;
 			if (isCenter(j, matrix.length)) continue;
 			prevValue = callbackFn(prevValue, matrix[i][j], [i, j], matrix)
