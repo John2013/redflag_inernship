@@ -10,13 +10,15 @@ const range = (a, b) => {
 
 	let newValue;
 
-	if (a[a.length - 1] < b)
+	if (a[a.length - 1] < b){
 		newValue = a[a.length - 1] + 1;
-
-	else
+	}
+	else {
 		newValue = a[a.length - 1] - 1;
+	}
+	a.push(newValue);
 
-	return range(a.push[newValue], b)
+	return range(a, b)
 };
 
 
