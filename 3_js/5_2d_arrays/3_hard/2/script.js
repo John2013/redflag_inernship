@@ -2,7 +2,7 @@ const app = getById('app');
 const button = getById('button');
 
 const multiplyNon0MatrixDiagItems = matrix =>
-	matrixDiagReduce(matrix, (product, value) => product * (value || 1), null, true, true);
+	matrixDiagReduce(matrix, (product, value) => product * (value || 1), 1, true, true);
 
 
 button.addEventListener('click', () => {
