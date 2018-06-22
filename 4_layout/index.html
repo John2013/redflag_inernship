@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Стоимость окон</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="calculator">
+        <div class="calculator__header">
+            <h2 class="calculator__title">Рассчитайте стоимость вашего окна</h2>
+        </div>
+        <div class="calculator__body">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="width">Размер окна, мм</label>
+                        <input type="number" class="form-control" id="width" title="ширина" placeholder="ширина"
+                               min="800" max="1200" step="100">
+
+                        <span class="text-secondary">x</span>
+
+                        <input type="number" class="form-control" id="height" title="высота" placeholder="высота"
+                               min="1000" max="1500" step="100">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Производитель</label>
+
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
