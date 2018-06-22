@@ -13,9 +13,6 @@ const isPowerOf2 = n => {
 };
 
 
-const bool2str = bool => bool ? 'YES' : 'NO';
-
-
 button.addEventListener('click', () => {
 	const n = getNumById('n');
 
