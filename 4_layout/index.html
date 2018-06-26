@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fonts/stylesheet.css">
     <link rel="stylesheet" href="style.css">
     <title>Стоимость окон</title>
 </head>
@@ -17,27 +18,119 @@
         <div class="calculator__header">
             <h2 class="calculator__title">Рассчитайте стоимость вашего окна</h2>
         </div>
-        <div class="calculator__body">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
+        <div class="calculator__body form">
+            <div class="row form__section">
+                <div class="col col-md-6 col-lg">
+                    <div class="form-group form__size">
                         <label for="width">Размер окна, мм</label>
-                        <input type="number" class="form-control" id="width" title="ширина" placeholder="ширина"
-                               min="800" max="1200" step="100">
+                        <div class="form-inline">
+                            <input type="number" class="form-control col" id="width" title="ширина" placeholder="ширина"
+                                   min="800" max="1200" step="100">
 
-                        <span class="text-secondary">x</span>
+                            <span class="text-secondary form-size__separator">x</span>
 
-                        <input type="number" class="form-control" id="height" title="высота" placeholder="высота"
-                               min="1000" max="1500" step="100">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="">Производитель</label>
+                            <input type="number" class="form-control col" id="height" title="высота" placeholder="высота"
+                                   min="1000" max="1500" step="100">
+                        </div>
 
                     </div>
                 </div>
-                <div class="col"></div>
+                <div class="col col-md-6 col-lg-auto">
+                    <div class="form-group form-firm">
+                        <label>Производитель</label>
+                        <div class="form-firm__list">
+                            <input class="firm-btn" type="radio" name="firm" id="kbe" checked>
+                            <label for="kbe"><img src="imgs/kbe.png" alt=""></label>
+
+                            <input class="firm-btn" type="radio" name="firm" id="rehau">
+                            <label for="rehau"><img src="imgs/rehau.png" alt=""></label>
+
+                            <input class="firm-btn" type="radio" name="firm" id="montblanc">
+                            <label for="montblanc"><img src="imgs/montblanc.png" alt=""></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-12 col-lg">
+                    <div class="form-group form-profile">
+                        <label for="profile">Тип профиля</label>
+                        <select class="form-control" id="profile">
+                            <option value="KBE Engine">KBE Engine</option>
+                            <option value="KBE Expert">KBE Expert</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form__section">
+                <label>Количество секций</label>
+                <div class="form-sections">
+                    <div class="sections__count">
+                        <div class="section section1">
+                            <input type="radio" name="count" id="count-1" checked>
+                            <label for="count-1"><img src="imgs/0.png" alt=""></label>
+                            <div class="sections__item-types">
+                                <select id="sc1n1" class="form-control">
+                                    <option value="0">глухая</option>
+                                    <option value="1">поворотная</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="section section2">
+                            <input type="radio" name="count" id="count-2">
+                            <label for="count-2"><img src="imgs/1.png" alt=""></label>
+                            <div class="sections__item-types">
+                                <select id="sc2n1" class="form-control">
+                                    <option value="0">глухая</option>
+                                    <option value="1">поворотная</option>
+                                </select>
+                                <select id="sc2n2" class="form-control">
+                                    <option value="0">глухая</option>
+                                    <option value="1">поворотная</option>
+                                    <option value="2">поворотно-откидная</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="section section3">
+                            <input type="radio" name="count" id="count-3">
+                            <label for="count-3"><img src="imgs/2.png" alt=""></label>
+                            <div class="sections__item-types"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="sections__count-types row">
+
+
+                    </div>
+                </div>
+                <div class="text-right">
+                    <a class="sections__other-type" href="javascript:void(0)">Нужен другой тип окна</a>
+                </div>
+            </div>
+            <div class="row calculator__footer justify-content-between align-items-end">
+                <div class="col-md-auto">
+                    <div class="calculator__price row align-items-center">
+                        <div class="col-auto">
+                            <span class="price__value"><span id="price-value">23 900</span> руб</span>
+                        </div>
+                        <div class="col price__description">
+                                Стоимость вашего окна с учётом монтажных работ
+                        </div>
+                    </div>
+                    <div class="calculator__moscow-price row align-items-baseline">
+                        <div class="col-auto">
+                            <span class="moscow-price__value"><span id="moscow-mid-price-value">26 900</span> руб</span>
+                        </div>
+
+                        <div class="col moscow-price__description">
+                            Средняя цена по Москве
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md text-right">
+                    <button class="btn buy-btn">Заказать точный размер</button>
+                </div>
             </div>
         </div>
     </div>

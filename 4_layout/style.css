@@ -1,0 +1,266 @@
+:root{
+	--main-theme: #00bd6f;
+	--text-light: #fff;
+	--text-dark: #2d2d2d;
+	--font-default: "DIN Pro", sans-serif
+}
+
+::selection {
+	background: var(--main-theme);
+	color: var(--text-light)
+}
+
+body {
+	font-size: 18px;
+	font-family: var(--font-default);
+}
+
+
+img {
+	/*max-width: 100%;*/
+}
+
+.calculator{
+	margin: 4rem 0;
+	box-shadow: 0 5px 13px rgba(0, 0, 0, .15);
+	border-radius: 8px;
+	border: 1px solid #ebebeb;
+	background-color: #ffffff;
+	overflow: hidden;
+}
+
+.calculator__header{
+	background-color: var(--main-theme);
+	padding: 45px 56px 36px;
+}
+
+.calculator__title{
+	color: var(--text-light);
+	font-size: 2rem;
+	font-weight: 900;
+	margin: 0;
+}
+
+.calculator__body{
+	padding: 1rem 0;
+}
+
+.form__section{
+	padding: 20px 60px;
+	border-bottom: 1px solid #ebebeb;
+}
+
+.calculator label{
+	color: var(--text-dark);
+	font-weight: 500;
+}
+
+.form-size__separator{
+	margin: 0 14px;
+	color: #c8c8c8;
+	font-size: 20px;
+}
+
+
+input[type=radio]{
+	display: none;
+}
+
+input[type=radio]+label{
+	border-radius: 3px;
+	border: 1px solid #ededed;
+	margin: 0;
+}
+
+input:checked[type=radio]+label{
+	border: 2px solid #f26c4f;
+}
+
+input:not(:checked)[type=radio]+label{
+	margin: 1px;
+}
+
+.calculator .form-control:focus{
+	border: 2px solid #f26c4f;
+	box-shadow: none;
+}
+
+.calculator .form-control:not(select):not(:focus){
+	margin: 1px;
+}
+
+.form-firm input[type=radio]+label{
+	margin: 0 5px;
+}
+
+
+.form-firm__list{
+	display: flex;
+	align-items: center;
+	margin: 0 -5px;
+}
+
+/*.form-firm{*/
+	/*min-width: 327px;*/
+/*}*/
+
+.firm-btn+label{
+	width: 106px;
+	height: 47px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sections__count{
+	flex-wrap: nowrap;
+	display: flex;
+	/*align-items: center;*/
+	margin: 0 -30px;
+}
+
+@media all and (max-width: 991px) {
+	.sections__count{
+		flex-wrap: wrap;
+	}
+}
+
+.section{
+	margin: 0 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+.section1{
+	width: 14%;
+}
+
+
+.section2{
+	width: 27.8%;
+}
+
+
+.section3{
+	width: 41.5%;
+}
+
+@media all and (max-width: 991px) {
+	.section{
+		margin-bottom: 20px;
+	}
+
+	.section1{
+		width: 26.8%;
+	}
+
+
+	.section2{
+		width: 53.5%;
+	}
+
+
+	.section3{
+		width: 100%;
+	}
+}
+
+@media all and (max-width: 767px) {
+	.section1{
+		width: 24.9%;
+	}
+
+	.section2{
+		width: 48.21%;
+	}
+}
+
+@media all and (max-width: 539px) {
+	.section1{
+		width: 149px;
+	}
+
+	.section2{
+		width: 198px;
+	}
+
+	.section3{
+		width: 461px;
+	}
+}
+
+.sections__count label{
+	/*height: 200px;*/
+	padding: 7px;
+	max-height: 100%;
+}
+
+.sections__count label > img{
+	width: 100%;
+}
+
+.sections__item-types{
+	display: inline-flex;
+	margin: 20px 3px 0;
+	height: 38px;
+}
+
+.sections__item-types select{
+	margin: 0 6px;
+}
+
+.calculator__footer{
+	padding: 30px 56px 2rem;
+}
+
+.calculator__price{
+	color: var(--main-theme)
+}
+
+.price__value{
+	font-weight: 900;
+	font-size: 50px;
+}
+
+.price__description{
+	font-size: 14px;
+	max-width: 191px;
+	padding-left: 0;
+}
+
+.calculator__moscow-price{
+	color: #8e8e8e;
+}
+
+.moscow-price__value{
+	font-size: 28px;
+	font-weight: 900;
+}
+
+.moscow-price__description{
+	font-size: 14px;
+	padding-left: 0;
+}
+
+.buy-btn{
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	border: 1px solid #f76d34;
+	background: #ff7a39 linear-gradient(to top, #ed5b2e 0%, #ff7a39 100%);
+
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	color: var(--text-light);
+	font-size: 20px;
+	font-weight: 600;
+	padding: 1rem 2rem;
+	margin-top: 1rem;
+}
+
+.sections__other-type{
+	color: #f26c4f;
+	font-size: 14px;
+}
+
+.sections__other-type:hover{
+	color: #ff7a39;
+}
