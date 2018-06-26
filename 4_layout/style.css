@@ -61,6 +61,17 @@ img {
 	font-size: 20px;
 }
 
+.form__size .form-inline{
+	flex-wrap: nowrap;
+}
+
+.form__size .form-inline input{
+	min-width: 100px;
+}
+
+.form-profile select{
+	min-width: 150px;
+}
 
 input[type=radio]{
 	display: none;
@@ -98,6 +109,12 @@ input:not(:checked)[type=radio]+label{
 	display: flex;
 	align-items: center;
 	margin: 0 -5px;
+}
+
+@media all and (max-width: 450px){
+	.form-firm__list{
+		flex-wrap: wrap;
+	}
 }
 
 /*.form-firm{*/
