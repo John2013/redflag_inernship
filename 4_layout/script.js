@@ -1,3 +1,12 @@
+const intFormat = int => {
+	let charArray = Math.round(int).toString().split('');
+	for (let i = charArray.length - 3; i >= 0; i -= 3) {
+		charArray[i] = ' ' + charArray[i]
+	}
+
+	return charArray.join('')
+};
+
 const getSettings = calculator => {
 	if (calculator === undefined)
 		calculator = $("#calculator");
@@ -13,7 +22,7 @@ const getSettings = calculator => {
 			.find('.dropdown-toggle')
 			.map((_, element) => +$(element).data('value'));
 
-		for(item of sectionsTypesJQArray){
+		for (item of sectionsTypesJQArray) {
 			sectionsTypesArray.push(item)
 		}
 
@@ -43,27 +52,27 @@ const getPrice = (calculator, settings, data) => {
 
 	let widthPriceList = [];
 	let heightList = [], widthList = [];
-	for (let height in heightWidthTable){
-		if (settings.height <= +height){
+	for (let height in heightWidthTable) {
+		if (settings.height <= +height) {
 			widthPriceList = heightWidthTable[height];
 			break;
 		}
 		heightList.push(+height)
 	}
-	if (widthPriceList.length === 0){
+	if (widthPriceList.length === 0) {
 		widthPriceList = heightWidthTable[Math.min(...heightList).toString()]
 	}
 
 	let price = null;
 
-	for (let width in widthPriceList){
-		if (settings.width <= +width){
+	for (let width in widthPriceList) {
+		if (settings.width <= +width) {
 			price = widthPriceList[width];
 			break
 		}
 		widthList.push(+width)
 	}
-	if(price === null){
+	if (price === null) {
 		price = widthPriceList[Math.min(...widthList).toString()]
 	}
 
@@ -76,13 +85,13 @@ const getPrice = (calculator, settings, data) => {
 };
 
 const setPrice = (calculator, price, data) => {
-	const priceStr = numeral(price).format('0 0');
+	const priceStr = intFormat(price);
 
 	const priceSpan = $(calculator.find('#price-value')),
 		mskPriceSpan = $(calculator.find('#moscow-mid-price-value'));
 
 	const mskPrice = price * data.otherPricesMultiplier,
-		mskPriceStr = numeral(mskPrice).format('0 0');
+		mskPriceStr = intFormat(mskPrice);
 
 	priceSpan.text(priceStr);
 	mskPriceSpan.text(mskPriceStr)
@@ -122,7 +131,7 @@ const setProfileTypes = (calculator, typesArray, data) => {
 
 	dropdownMenu.html(optionsList);
 
-	dropdownMenu.find('.dropdown-item').click({"calculator":calculator, "data": data}, onDropdownChange);
+	dropdownMenu.find('.dropdown-item').click({"calculator": calculator, "data": data}, onDropdownChange);
 };
 
 const onFirmChange = e => {
@@ -182,12 +191,17 @@ $(document).ready(() => {
 	$(calculator.find('input[name=firm]:not(:checked)')).change({"calculator": calculator, "data": data}, onFirmChange);
 
 	// ставим минимум максимум у размеров
-	$(calculator.find('input[name=count]:not(:checked)')).change({"calculator": calculator, "data": data}, onCountChange);
+	$(calculator.find('input[name=count]:not(:checked)')).change({
+		"calculator": calculator,
+		"data": data
+	}, onCountChange);
 
 	// // деактивируем типы секций
 	// $(calculator.find('.sections__item-types .dropdown-item')).click({"calculator": calculator, "data": data}, onSectionTypeChange);
 
 	// обновляем цену на изменение инпутов
-	$(calculator.find('input')).on('change', ()=>{updatePrice(calculator,data)});
+	$(calculator.find('input')).on('change', () => {
+		updatePrice(calculator, data)
+	});
 
 });
