@@ -71,6 +71,10 @@ const data = {
 	"windows": [
 	{
 		"sectionsCount": 1,
+		"minWidth":800,
+		"maxWidth":1200,
+		"minHeight":1000,
+		"maxHeight":1500,
 		"variants": [
 			{
 				"id": 0,
@@ -103,6 +107,10 @@ const data = {
 	},
 	{
 		"sectionsCount": 2,
+		"minWidth":1100,
+		"maxWidth":1600,
+		"minHeight":1100,
+		"maxHeight":1600,
 		"variants": [
 			{
 				"id": 2,
@@ -155,6 +163,10 @@ const data = {
 	},
 	{
 		"sectionsCount": 3,
+		"minWidth":1700,
+		"maxWidth":2200,
+		"minHeight":1500,
+		"maxHeight":1800,
 		"variants": [
 			{
 				"id": 5,

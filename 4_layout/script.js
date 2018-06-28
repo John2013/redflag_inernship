@@ -130,20 +130,40 @@ const onFirmChange = e => {
 
 	const profilesTypes = data.profileTypes.filter(profileType => profileType.firmId === firmId);
 	setProfileTypes(e.data.calculator, profilesTypes, e.data.data);
-
-
 };
+
+const onCountChange = e => {
+	const count = +$(e.data.calculator.find('input[name=count]:checked')).val();
+	setSizeLimits(e.data.calculator, count, e.data.data)
+};
+
+const setSizeLimits = (calculator, sectionsCount, data) => {
+	const sectionsItem = data.windows.filter(item => item.sectionsCount === sectionsCount)[0];
+	const minWidth = sectionsItem.minWidth;
+	const maxWidth = sectionsItem.maxWidth;
+	const minHeight = sectionsItem.minHeight;
+	const maxHeight = sectionsItem.maxHeight;
+
+	calculator.find('#width').attr('min', minWidth).attr('max', maxWidth);
+	calculator.find('#height').attr('min', minHeight).attr('max', maxHeight);
+};
+
+
 
 $(document).ready(() => {
 
 	const calculator = $("#calculator");
 
+	// для дропдаунов
 	$(calculator.find('.dropdown-item')).click({"calculator": calculator, "data": data}, onDropdownChange);
 
+	// метяем типы профилей на смену производителя
 	$(calculator.find('input[name=firm]:not(:checked)')).change({"calculator": calculator, "data": data}, onFirmChange);
 
-	updatePrice(calculator,data);
+	// ставим минимум максимум у размеров
+	$(calculator.find('input[name=count]:not(:checked)')).change({"calculator": calculator, "data": data}, onCountChange);
 
+	// обновляем цену на изменение инпутов
 	$(calculator.find('input')).on('change', ()=>{updatePrice(calculator,data)});
 
 });
