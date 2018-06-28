@@ -14,7 +14,7 @@
 <body>
 
 <div class="container">
-    <div class="calculator">
+    <div class="calculator" id="calculator">
         <div class="calculator__header">
             <h2 class="calculator__title">Рассчитайте стоимость вашего окна</h2>
         </div>
@@ -39,13 +39,13 @@
                     <div class="form-group form-firm">
                         <label>Производитель</label>
                         <div class="form-firm__list">
-                            <input class="firm-btn" type="radio" name="firm" id="kbe" checked>
+                            <input class="firm-btn" type="radio" name="firm" id="kbe" value="0" checked>
                             <label for="kbe"><img src="imgs/kbe.png" alt=""></label>
 
-                            <input class="firm-btn" type="radio" name="firm" id="rehau">
+                            <input class="firm-btn" type="radio" name="firm" id="rehau" value="1">
                             <label for="rehau"><img src="imgs/rehau.png" alt=""></label>
 
-                            <input class="firm-btn" type="radio" name="firm" id="montblanc">
+                            <input class="firm-btn" type="radio" name="firm" id="montblanc" value="2">
                             <label for="montblanc"><img src="imgs/montblanc.png" alt=""></label>
                         </div>
                     </div>
@@ -53,10 +53,17 @@
                 <div class="col col-md-12 col-lg">
                     <div class="form-group form-profile">
                         <label for="profile">Тип профиля</label>
-                        <select class="form-control" id="profile">
-                            <option value="KBE Engine">KBE Engine</option>
-                            <option value="KBE Expert">KBE Expert</option>
-                        </select>
+
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="profile"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="0">
+                                Тип профиля
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="profile">
+                                <a class="dropdown-item" href="javascript:void(0)" data-value="0">KBE Engine</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-value="1">KBE Expert</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,34 +72,71 @@
                 <div class="form-sections">
                     <div class="sections__count">
                         <div class="section section1">
-                            <input type="radio" name="count" id="count-1" checked>
+                            <input type="radio" name="count" id="count-1" value="1" checked>
                             <label for="count-1"><img src="imgs/0.png" alt=""></label>
                             <div class="sections__item-types">
-                                <select id="sc1n1" class="form-control">
-                                    <option value="0">глухая</option>
-                                    <option value="1">поворотная</option>
-                                </select>
+                                <!--<select id="sc1n1" class="form-control">-->
+                                    <!--<option value="0">глухая</option>-->
+                                    <!--<option value="1">поворотная</option>-->
+                                <!--</select>-->
+
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="sc1n1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            data-value="0">
+                                        Тип секции
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="sc1n1">
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="0">глухая</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="1">поворотная</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="section section2">
-                            <input type="radio" name="count" id="count-2">
+                            <input type="radio" name="count" id="count-2" value="2">
                             <label for="count-2"><img src="imgs/1.png" alt=""></label>
                             <div class="sections__item-types">
-                                <select id="sc2n1" class="form-control">
-                                    <option value="0">глухая</option>
-                                    <option value="1">поворотная</option>
-                                </select>
-                                <select id="sc2n2" class="form-control">
-                                    <option value="0">глухая</option>
-                                    <option value="1">поворотная</option>
-                                    <option value="2">поворотно-откидная</option>
-                                </select>
+                                <!--<select id="sc2n1" class="form-control">-->
+                                    <!--<option value="0">глухая</option>-->
+                                    <!--<option value="1">поворотная</option>-->
+                                <!--</select>-->
+
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="sc2n1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            data-value="0">
+                                        Тип секции
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="sc2n1">
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="0">глухая</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="1">поворотная</a>
+                                    </div>
+                                </div>
+                                <!--<select id="sc2n2" class="form-control">-->
+                                    <!--<option value="0">глухая</option>-->
+                                    <!--<option value="1">поворотная</option>-->
+                                    <!--<option value="2">поворотно-откидная</option>-->
+                                <!--</select>-->
+
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button" id="sc2n2"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            data-value="0">
+                                        Тип секции
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="sc2n2">
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="0">глухая</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="1">поворотная</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" data-value="2">поворотно-откидная</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="section section3">
-                            <input type="radio" name="count" id="count-3">
+                            <input type="radio" name="count" id="count-3" value="3">
                             <label for="count-3"><img src="imgs/2.png" alt=""></label>
                             <div class="sections__item-types"></div>
                         </div>
@@ -136,9 +180,11 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.1/numeral.min.js"></script>
+<script src="data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

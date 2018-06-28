@@ -281,3 +281,73 @@ input:not(:checked)[type=radio]+label{
 .sections__other-type:hover{
 	color: #ff7a39;
 }
+
+.dropdown {
+	width: 100%;
+}
+
+.btn.dropdown-toggle{
+	background-color: white;
+	border-radius: 3px;
+	border: 1px solid #c8c8c8;
+	position: relative;
+	width: 100%;
+	text-align: left;
+	padding-right: 52px;
+}
+
+.btn.btn-sm.dropdown-toggle{
+	padding-right: 42px;
+}
+
+.btn.dropdown-toggle:not(:focus){
+	margin: 1px;
+}
+
+.btn.dropdown-toggle:focus{
+	box-shadow: none;
+	border: 2px solid #f26c4f;
+}
+
+.btn.dropdown-toggle::before {
+	position: absolute;
+	top:0;
+	bottom: 0;
+	right: 0;
+	left: calc(100% - 40px);
+	border-left: 1px solid #c8c8c8;
+	content: "";
+	background-color: white;
+}
+
+.btn.dropdown-toggle::after {
+	position: absolute;
+	display: inline-block;
+	top: 11px;
+	right: 14px;
+	width: 10px;
+	height: 10px;
+	transform: rotate(-45deg);
+	content: "";
+	border-top: none;
+	border-right: none;
+	border-bottom: 1px solid #c8c8c8;
+	border-left: 1px solid #c8c8c8;
+}
+
+
+.btn.btn-sm.dropdown-toggle::before{
+	left: calc(100% - 30px);
+}
+
+.btn.btn-sm.dropdown-toggle::after{
+	top: 11px;
+	right: 12px;
+	width: 5px;
+	height: 5px;
+}
+
+.dropdown .dropdown-menu > a.dropdown-item:hover{
+	background-color: var(--main-theme);
+	color: var(--text-light);
+}
