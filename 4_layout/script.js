@@ -1,4 +1,6 @@
-$.getJSON('data.json', function (data) {main(data)});
+$.getJSON('data.json', function (data) {
+	main(data)
+});
 
 const intFormat = int => {
 	let charArray = Math.round(int).toString().split('');
@@ -46,23 +48,32 @@ const getSettings = calculator => {
 
 const getPrice = (calculator, settings, data) => {
 	let heightWidthTable;
-	try{
-		heightWidthTable = data
-			.windows
-			.filter(item => item.sectionsCount === +settings.sectionsCount)[0]
-			.variants
-			.filter((variant) => variant.types.join(';') === settings.sectionsTypesArray.join(';'))[0]
-			.heightWidth;
-	}
-	catch (TypeError) {
-		let secondOption = 0;
-		const options = settings.sectionsTypesArray;
-		if(options[0] === 1 && options[1] === 0)
-			secondOption = 2;
 
-		$(calculator.find(`.dropdown-menu[aria-labelledby=sc2n2] > .dropdown-item[data-value=${secondOption}]`)).click();
-		return null
+	const options = settings.sectionsTypesArray;
+	let newOption = null;
+	if (settings.sectionsCount === 2 && options[0] === 1 && options[1] !== 2) {
+		newOption = 2;
 	}
+	else if (settings.sectionsCount === 2 && options[0] === 0 && options[1] === 2) {
+		newOption = 0;
+	}
+	if (newOption !== null) {
+		settings.sectionsTypesArray[1] = newOption;
+
+		setDropdownToggle(
+			'sc2n2',
+			newOption,
+			data.sectionsTypes.filter(type => type.id === newOption)[0].name
+		);
+	}
+
+
+	heightWidthTable = data
+		.windows
+		.filter(item => item.sectionsCount === +settings.sectionsCount)[0]
+		.variants
+		.filter((variant) => variant.types.join(';') === settings.sectionsTypesArray.join(';'))[0]
+		.heightWidth;
 
 
 	let widthPriceList = [];
@@ -120,12 +131,18 @@ const updatePrice = (calculator, data) => {
 	setPrice(calculator, price, data)
 };
 
+const setDropdownToggle = (buttonId, optionId, optionText) => {
+	const button = $('#' + buttonId);
+	button
+		.data('value', optionId)
+		.text(optionText);
+};
+
 const onDropdownChange = e => {
 	const item = $(e.target);
-	const button = $('#' + item.parent('.dropdown-menu').attr('aria-labelledby'));
-	button
-		.data('value', item.data('value'))
-		.text(item.text());
+	const buttonId = item.parent('.dropdown-menu').attr('aria-labelledby');
+
+	setDropdownToggle(buttonId, item.data('value'), item.text());
 
 	updatePrice(e.data.calculator, e.data.data);
 };
