@@ -1,3 +1,6 @@
+
+$.getJSON('data.json', function (data) {main(data)});
+
 const intFormat = int => {
 	let charArray = Math.round(int).toString().split('');
 	for (let i = charArray.length - 3; i >= 0; i -= 3) {
@@ -43,12 +46,25 @@ const getSettings = calculator => {
 };
 
 const getPrice = (calculator, settings, data) => {
-	let heightWidthTable = data
-		.windows
-		.filter(item => item.sectionsCount === +settings.sectionsCount)[0]
-		.variants
-		.filter((variant) => variant.types.join(';') === settings.sectionsTypesArray.join(';'))[0]
-		.heightWidth;
+	let heightWidthTable;
+	try{
+		heightWidthTable = data
+			.windows
+			.filter(item => item.sectionsCount === +settings.sectionsCount)[0]
+			.variants
+			.filter((variant) => variant.types.join(';') === settings.sectionsTypesArray.join(';'))[0]
+			.heightWidth;
+	}
+	catch (TypeError) {
+		let secondOption = 0;
+		const options = settings.sectionsTypesArray;
+		if(options[0] === 1 && options[1] === 0)
+			secondOption = 2;
+
+		$(calculator.find(`.dropdown-menu[aria-labelledby=sc2n2] > .dropdown-item[data-value=${secondOption}]`)).click();
+		return null
+	}
+
 
 	let widthPriceList = [];
 	let heightList = [], widthList = [];
@@ -137,7 +153,7 @@ const setProfileTypes = (calculator, typesArray, data) => {
 const onFirmChange = e => {
 	const firmId = +$(e.target).val();
 
-	const profilesTypes = data.profileTypes.filter(profileType => profileType.firmId === firmId);
+	const profilesTypes = e.data.data.profileTypes.filter(profileType => profileType.firmId === firmId);
 	setProfileTypes(e.data.calculator, profilesTypes, e.data.data);
 };
 
@@ -180,7 +196,8 @@ const setSizeLimits = (calculator, sectionsCount, data) => {
 // 	debugger
 // };
 
-$(document).ready(() => {
+const main = (data) => {
+	console.log(data);
 
 	const calculator = $("#calculator");
 
@@ -204,4 +221,4 @@ $(document).ready(() => {
 		updatePrice(calculator, data)
 	});
 
-});
+};
