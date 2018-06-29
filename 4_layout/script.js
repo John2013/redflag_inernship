@@ -1,4 +1,3 @@
-
 $.getJSON('data.json', function (data) {main(data)});
 
 const intFormat = int => {
@@ -173,32 +172,7 @@ const setSizeLimits = (calculator, sectionsCount, data) => {
 	calculator.find('#height').attr('min', minHeight).attr('max', maxHeight);
 };
 
-// const onSectionTypeChange = e => {
-//
-// 	const button = $(e.target).parents('.dropdown-menu').prev('.dropdown-toggle');
-// 	const [value, number] = [button.data('value'), button.data('number')];
-// 	const count = +button.parents('.sections__item-types').prevAll('input[name=count]').val();
-// 	if (count < 2)
-// 		return null;
-//
-// 	const variantsJQArray = e.data.data
-// 		.windows
-// 		.filter(item => item.sectionsCount === count)[0]
-// 		.variants
-// 		.filter(variant => variant.types[number] === value)
-// 		.map(variant=>variant.types);
-//
-// 	let variants = [];
-// 	for (let variant of variantsJQArray){
-// 		variants.push(variant)
-// 	}
-//
-// 	debugger
-// };
-
 const main = (data) => {
-	console.log(data);
-
 	const calculator = $("#calculator");
 
 	// для дропдаунов
@@ -212,9 +186,6 @@ const main = (data) => {
 		"calculator": calculator,
 		"data": data
 	}, onCountChange);
-
-	// // деактивируем типы секций
-	// $(calculator.find('.sections__item-types .dropdown-item')).click({"calculator": calculator, "data": data}, onSectionTypeChange);
 
 	// обновляем цену на изменение инпутов
 	$(calculator.find('input')).on('change', () => {
