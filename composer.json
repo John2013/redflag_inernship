@@ -1,0 +1,15 @@
+{
+  "name": "john2013/redflag_internship",
+  "description": "",
+  "minimum-stability": "dev",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Evgeniy Timofeyev",
+      "email": "nawasington@ya.ru"
+    }
+  ],
+  "require": {
+    "michelf/php-markdown": "1.8.0"
+  }
+}
