@@ -3,7 +3,7 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 
-setlocale (LC_ALL, "ru_RU");
+setlocale (LC_ALL, "russian");
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
