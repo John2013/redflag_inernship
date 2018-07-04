@@ -260,7 +260,7 @@ $arr = [
 			$array[] = $innerArray;
 		}
 		?>
-		<p><?= var_export($array) ?></p>
+		<pre><?= var_export($array) ?></pre>
 	</li>
 </ol>
 
