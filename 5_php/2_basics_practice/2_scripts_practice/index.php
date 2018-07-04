@@ -62,7 +62,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			}
 		}
 		
-		$date_str = $_REQUEST['date'] ?: date('Y-m-d');
+		$date_str = htmlspecialchars($_REQUEST['date']) ?: date('Y-m-d');
 		$date_int = strtotime($date_str);
 		$weeks_day = getdate($date_int)['wday'];
 		$str_weeks_day = weeks_day_to_string($weeks_day);
