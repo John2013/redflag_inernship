@@ -3,6 +3,7 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 
+setlocale (LC_ALL, "ru_RU.UTF-8");
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 				default: return false;
 			}
 		}
-		
+
 		$date_str = htmlspecialchars($_REQUEST['date']) ?: date('Y-m-d');
 		$date_int = strtotime($date_str);
 		$weeks_day = getdate($date_int)['wday'];
@@ -75,8 +76,8 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= $str_weeks_day ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>По заходу на страницу выведите текущую дату в формате '12 мая 2015 года, воскресенье'.</p>
+		<p><?= date('d F Y года, l') ?></p>
 	</li>
 	<li>
 		<p></p>
