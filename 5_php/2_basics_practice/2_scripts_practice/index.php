@@ -3,7 +3,7 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 
-setlocale (LC_ALL, "ru_RU.UTF-8");
+setlocale (LC_ALL, "ru_RU");
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +80,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= date('d F Y года, l') ?></p>
 	</li>
 	<li>
-		<p></p>
+		<p>Дан инпут и кнопка. В этот инпут вводится дата рождения в формате '01.12.1990'. По нажатию на кнопку выведите на экран сколько дней осталось до дня рождения пользователя.</p>
 		<p></p>
 	</li>
 	<li>
