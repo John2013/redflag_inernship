@@ -89,7 +89,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p>Дан инпут и кнопка. В этот инпут вводится дата рождения в формате '01.12.1990'. По нажатию на кнопку выведите
 			на экран сколько дней осталось до дня рождения пользователя.</p>
 		<?
-		$date_str = htmlspecialchars($_REQUEST['date3']) ?: date('Y-m-d');
+		$date_str = htmlspecialchars($_REQUEST['birth_year']) ?: date('Y-m-d');
 		$date_int = strtotime($date_str);
 		?>
 		<form action="#birth_year" method="post">
@@ -100,18 +100,18 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<?
 		$birth_date = getdate($date_int);
 		$next_birthday = mktime(
-			0,
-			0,
-			0,
+			null,
+			null,
+			null,
 			$birth_date["mon"],
 			$birth_date["mday"],
 			(int)date('Y')
 		);
 		if ($next_birthday < time()) {
 			$next_birthday = mktime(
-				0,
-				0,
-				0,
+				null,
+				null,
+				null,
 				$birth_date["mon"],
 				$birth_date["mday"],
 				(int)date('Y') + 1
@@ -121,8 +121,26 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= days_to_time($next_birthday) ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>По заходу на страницу выведите сколько дней осталось до ближайшей масленницы (последнее воскресенье
+			весны).</p>
+		<?
+		function days_to_maslennitsa($current_date = null)
+		{
+			if (!$current_date)
+				$current_date = time();
+
+			$may_last_day = mktime(0, 0, 0, 5, 31, date("Y"));
+			if ($may_last_day < $current_date)
+				$may_last_day = mktime(0, 0, 0, 5, 31, date("Y") + 1);
+
+			while (getdate($may_last_day)['wday'] !== 0)
+				$may_last_day -= 86400;
+
+			return days_to_time($may_last_day);
+		}
+
+		?>
+		<p><?= days_to_maslennitsa() ?></p>
 	</li>
 	<li>
 		<p></p>
