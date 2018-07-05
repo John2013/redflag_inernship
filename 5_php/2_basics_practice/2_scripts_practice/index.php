@@ -302,9 +302,18 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$chars_counts = counter($chars);
 		$chars_percents = get_percent_array($chars_counts, count($chars));
 		?>
-
-		<pre><?= var_export($chars_percents) ?></pre>
-		<p></p>
+		<table>
+			<?
+			foreach ($chars_percents as $char => $percent){
+				?>
+				<tr>
+					<td><?= $char ?></td>
+					<td><?= $percent ?>%</td>
+				</tr>
+				<?
+			}
+			?>
+		</table>
 	</li>
 	<li>
 		<p></p>
