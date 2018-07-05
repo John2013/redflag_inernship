@@ -129,12 +129,17 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			if (!$current_date)
 				$current_date = time();
 
-			$may_last_day = mktime(0, 0, 0, 5, 31, date("Y"));
+			$may = 5;
+			$mays_days_count = 31;
+
+			$may_last_day = mktime(0, 0, 0, $may, $mays_days_count, date("Y"));
 			if ($may_last_day < $current_date)
-				$may_last_day = mktime(0, 0, 0, 5, 31, date("Y") + 1);
+				$may_last_day = mktime(0, 0, 0, $may, $mays_days_count, date("Y") + 1);
+
+			$day = 86400;
 
 			while (getdate($may_last_day)['wday'] !== 0)
-				$may_last_day -= 86400;
+				$may_last_day -= $day;
 
 			return days_to_time($may_last_day);
 		}
@@ -143,8 +148,28 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= days_to_maslennitsa() ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан инпут и кнопка. В этот инпут вводится дата рождения в формате '31.12'. По нажатию на кнопку выведите знак
+			зодиака пользователя.</p>
+		<?
+		$birth_date_str = $_REQUEST['date7'] ?: date('d.m');
+		?>
+		<form action="#date7" method="post">
+			<label for="date7">дата рождения в формате '31.12'</label>
+			<input type="text" id="date7" name="date7" value="<?= $birth_date_str ?>">
+			<input type="submit">
+		</form>
+		<?
+		function get_zodiacal_sign($day, $month){
+			$signs = ["Козерог", "Водолей", "Рыбы", "Овен", "Телец", "Близнецы", "Рак", "Лев", "Девы", "Весы",
+				"Скорпион", "Стрелец"];
+			$signs_start = [1 => 21, 2 => 20, 3 => 20, 4 => 20, 5 => 20, 6 => 20, 7 => 21, 8 => 22, 9 => 23, 10 => 23,
+				11 => 23, 12 => 23];
+			return $day < $signs_start[$month + 1] ? $signs[$month - 1] : $signs[$month % 12];
+		}
+		$birth_day = (int)substr($birth_date_str, 0, 2);
+		$birth_month = (int)substr($birth_date_str, 3, 2);
+		?>
+		<p><?= get_zodiacal_sign($birth_day, $birth_month) ?></p>
 	</li>
 	<li>
 		<p></p>
