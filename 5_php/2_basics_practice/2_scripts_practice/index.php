@@ -302,22 +302,39 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$chars_counts = counter($chars);
 		$chars_percents = get_percent_array($chars_counts, count($chars));
 		?>
-		<table>
-			<?
-			foreach ($chars_percents as $char => $percent){
-				?>
-				<tr>
-					<td><?= $char ?></td>
-					<td><?= $percent ?>%</td>
-				</tr>
-				<?
+		<table><?
+			foreach ($chars_percents as $char => $percent) {
+				echo "<tr><td>$char</td><td>$percent%</td></tr>";
 			}
-			?>
-		</table>
+			?></table>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан массив слов, инпут и кнопка. В инпут вводится набор букв. По нажатию на кнопку выведите на экран те
+			слова, которые содержат в себе все введенные буквы.</p>
+		<?
+		$chars_str = htmlspecialchars($_REQUEST['chars']) ?: '';
+		?>
+		<form action="#chars">
+			<label for="chars"></label>
+			<input type="text" id="chars" name="chars" value="<?= $chars_str ?>">
+			<input type="submit">
+		</form>
+		<?
+		$words = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet,', 'consectetur', 'adipisicing', 'elit.', 'Inventore',
+			'itaque,', 'neque?', 'Distinctio', 'doloremque', 'libero', 'magni', 'minus', 'molestiae', 'nostrum',
+			'obcaecati', 'quae!'];
+		$chars = str_split($chars_str);
+		define('CHARS', $chars);
+		$filtered_words = array_filter($words, function ($word){
+			$word_chars = str_split($word);
+			foreach (CHARS as $char){
+				if(in_array($char, $word_chars))
+					return true;
+			}
+			return false;
+		})
+		?>
+		<p><?= implode(', ', $filtered_words) ?></p>
 	</li>
 	<li>
 		<p></p>
