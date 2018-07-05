@@ -267,7 +267,9 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$words_count = str_word_count($text, null, 'йцукенгшщзхъфывапролджэячсмитьбю');
 		$chars = str_split($text);
 		$chars_count = count($chars);
-		$chars_not_space_count = count(array_filter($chars,function($char){return $char != ' ';}));
+		$chars_not_space_count = count(array_filter($chars, function ($char) {
+			return $char != ' ';
+		}));
 		?>
 		<table>
 			<tr>
@@ -285,7 +287,23 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		</table>
 	</li>
 	<li>
-		<p></p>
+		<p>Дан текстареа и кнопка. В текстареа вводится текст. По нажатию на кнопку нужно посчитать процентное
+			содержание каждого символа в тексте.</p>
+		<?
+		$text11 = htmlspecialchars(trim($_REQUEST['text11'])) ?: '';
+		?>
+		<form action="#text11" method="post">
+			<label for="text11">Текст</label>
+			<textarea name="text11" id="text11" cols="30" rows="10"><?= $text11 ?></textarea>
+			<input type="submit">
+		</form>
+		<?
+		$chars = str_split($text11);
+		$chars_counts = counter($chars);
+		$chars_percents = get_percent_array($chars_counts, count($chars));
+		?>
+
+		<pre><?= var_export($chars_percents) ?></pre>
 		<p></p>
 	</li>
 	<li>
