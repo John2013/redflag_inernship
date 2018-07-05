@@ -159,13 +159,18 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			<input type="submit">
 		</form>
 		<?
-		function get_zodiacal_sign($day, $month)
+		function get_zodiacal_number($day, $month)
 		{
-			$signs = ["Козерог", "Водолей", "Рыбы", "Овен", "Телец", "Близнецы", "Рак", "Лев", "Девы", "Весы",
-				"Скорпион", "Стрелец"];
 			$signs_start = [1 => 21, 2 => 20, 3 => 20, 4 => 20, 5 => 20, 6 => 20, 7 => 21, 8 => 22, 9 => 23, 10 => 23,
 				11 => 23, 12 => 23];
-			return $day < $signs_start[$month + 1] ? $signs[$month - 1] : $signs[$month % 12];
+			return (($day < $signs_start[$month + 1] ? $month - 1 : $month % 12) + 9) % 12;
+		}
+		function get_zodiacal_sign($day, $month)
+		{
+			$zodiacal_number = get_zodiacal_number($day, $month);
+			$signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы",
+				"Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы" ];
+			return $signs[$zodiacal_number];
 		}
 
 		$birth_day = (int)substr($birth_date_str, 0, 2);
@@ -224,8 +229,27 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= $current_holiday ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Сделайте скрипт-гороскоп. Внутри него хранится массив гороскопов на несколько дней вперед для каждого знака
+			зодиака. По заходу на страницу спросите у пользователя дату рождения, определите его знак зодиака и выведите
+			предсказание для этого знака зодиака на текущий день.</p>
+		<?
+		$birth_date_str = htmlspecialchars($_REQUEST['date9']) ?: date('d.m');
+		$horoskop_url = 'http://hyrax.ru/week/week.rss';
+		$rss = Feed::loadRss($horoskop_url);
+		?>
+		<form action="#date9" method="post">
+			<label for="date9">дата рождения в формате '31.12'</label>
+			<input type="text" id="date9" name="date9" value="<?= $birth_date_str ?>">
+			<input type="submit">
+		</form>
+		<?
+		$birth_day = (int)substr($birth_date_str, 0, 2);
+		$birth_month = (int)substr($birth_date_str, 3, 2);
+		$zodiacal_number = get_zodiacal_number($birth_day, $birth_month);
+		$horoscope = $rss->item[$zodiacal_number];
+		?>
+		<h4><?= $horoscope->title ?></h4>
+		<p><?= $horoscope->description  ?></p>
 	</li>
 	<li>
 		<p></p>

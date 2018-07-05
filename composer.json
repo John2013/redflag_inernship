@@ -11,7 +11,9 @@
   ],
   "require": {
     "michelf/php-markdown": "1.8.0",
-    "rmccue/requests": "v1.7.0"
+    "rmccue/requests": "v1.7.0",
+    "lstrojny/functional-php": "1.8.0",
+    "dg/rss-php": "v1.3"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
