@@ -165,11 +165,12 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 				11 => 23, 12 => 23];
 			return (($day < $signs_start[$month + 1] ? $month - 1 : $month % 12) + 9) % 12;
 		}
+
 		function get_zodiacal_sign($day, $month)
 		{
 			$zodiacal_number = get_zodiacal_number($day, $month);
 			$signs = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы",
-				"Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы" ];
+				"Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"];
 			return $signs[$zodiacal_number];
 		}
 
@@ -249,11 +250,39 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$horoscope = $rss->item[$zodiacal_number];
 		?>
 		<h4><?= $horoscope->title ?></h4>
-		<p><?= $horoscope->description  ?></p>
+		<p><?= $horoscope->description ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан текстареа и кнопка. В текстареа вводится текст. По нажатию на кнопку выведите количество слов в тексте,
+			количество символов в тексте, количество символов за вычетом пробелов.</p>
+		<?
+		$text = htmlspecialchars(trim($_REQUEST['text'])) ?: '';
+		?>
+		<form action="#text" method="post">
+			<label for="text">Текст</label>
+			<textarea name="text" id="text" cols="30" rows="10"><?= $text ?></textarea>
+			<input type="submit">
+		</form>
+		<?
+		$words_count = str_word_count($text, null, 'йцукенгшщзхъфывапролджэячсмитьбю');
+		$chars = str_split($text);
+		$chars_count = count($chars);
+		$chars_not_space_count = count(array_filter($chars,function($char){return $char != ' ';}));
+		?>
+		<table>
+			<tr>
+				<td>количество слов</td>
+				<td><?= $words_count ?></td>
+			</tr>
+			<tr>
+				<td>количество символов</td>
+				<td><?= $chars_count ?></td>
+			</tr>
+			<tr>
+				<td>количество символов за вычетом пробелов</td>
+				<td><?= $chars_not_space_count ?></td>
+			</tr>
+		</table>
 	</li>
 	<li>
 		<p></p>
