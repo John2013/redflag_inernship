@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "michelf/php-markdown": "1.8.0"
+    "michelf/php-markdown": "1.8.0",
+    "rmccue/requests": "v1.7.0"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"

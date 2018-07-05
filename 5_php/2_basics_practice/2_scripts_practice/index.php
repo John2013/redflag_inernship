@@ -151,7 +151,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p>Дан инпут и кнопка. В этот инпут вводится дата рождения в формате '31.12'. По нажатию на кнопку выведите знак
 			зодиака пользователя.</p>
 		<?
-		$birth_date_str = $_REQUEST['date7'] ?: date('d.m');
+		$birth_date_str = htmlspecialchars($_REQUEST['date7']) ?: date('d.m');
 		?>
 		<form action="#date7" method="post">
 			<label for="date7">дата рождения в формате '31.12'</label>
@@ -159,21 +159,69 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			<input type="submit">
 		</form>
 		<?
-		function get_zodiacal_sign($day, $month){
+		function get_zodiacal_sign($day, $month)
+		{
 			$signs = ["Козерог", "Водолей", "Рыбы", "Овен", "Телец", "Близнецы", "Рак", "Лев", "Девы", "Весы",
 				"Скорпион", "Стрелец"];
 			$signs_start = [1 => 21, 2 => 20, 3 => 20, 4 => 20, 5 => 20, 6 => 20, 7 => 21, 8 => 22, 9 => 23, 10 => 23,
 				11 => 23, 12 => 23];
 			return $day < $signs_start[$month + 1] ? $signs[$month - 1] : $signs[$month % 12];
 		}
+
 		$birth_day = (int)substr($birth_date_str, 0, 2);
 		$birth_month = (int)substr($birth_date_str, 3, 2);
 		?>
 		<p><?= get_zodiacal_sign($birth_day, $birth_month) ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан массив праздников. По заходу на страницу, если сегодня праздник, то поздравьте пользователя с этим
+			праздником.</p>
+		<?
+
+		$holidays = [
+			["day" => 1, 'month' => 1, 'name' => 'Новый год'],
+			["day" => 7, 'month' => 1, 'name' => 'Рождество Христово'],
+			["day" => 14, 'month' => 1, 'name' => 'Старый Новый год '],
+
+			["day" => 8, 'month' => 2, 'name' => 'День бармена'],
+			["day" => 14, 'month' => 2, 'name' => 'День Святого Валентина (День всех влюбленных)'],
+
+			["day" => 8, 'month' => 3, 'name' => 'Международный женский день'],
+
+			["day" => 1, 'month' => 4, 'name' => 'День смеха'],
+			["day" => 4, 'month' => 4, 'name' => 'Пасха'],
+
+			["day" => 1, 'month' => 5, 'name' => 'Праздник труда'],
+			["day" => 9, 'month' => 5, 'name' => 'День воинской славы России — День Победы советского народа в Великой '
+				. 'Отечественной войне 1941—1945 годов (1945) '],
+
+			["day" => 1, 'month' => 6, 'name' => 'Международный день защиты детей'],
+			["day" => 12, 'month' => 6, 'name' => 'День независимости России'],
+			["day" => 22, 'month' => 6, 'name' => 'День памяти и скорби (начало ВОВ)'],
+
+			["day" => 7, 'month' => 7, 'name' => 'Иван Купала'],
+			["day" => 30, 'month' => 7, 'name' => 'День системного администратора'],
+
+			["day" => 2, 'month' => 8, 'name' => 'День воздушно-десантных войск (День ВДВ) '],
+
+			["day" => 1, 'month' => 9, 'name' => 'День знаний'],
+
+			["day" => 4, 'month' => 10, 'name' => 'День Космических войск, День гражданской обороны МЧС России'],
+
+			["day" => 6, 'month' => 11, 'name' => 'Всемирный день мужчин'],
+
+			["day" => 12, 'month' => 12, 'name' => 'День Конституции Российской Федерации'],
+		];
+
+		define('CUR_DATE', getdate());
+		//		define('CUR_DATE', getdate(mktime(0,0,0,1,1,2018)));
+
+		$current_holiday_array = array_filter($holidays, function ($item) {
+			return $item['day'] == CUR_DATE['mday'] && $item['month'] == CUR_DATE['mon'];
+		})[0];
+		$current_holiday = $current_holiday_array ? $current_holiday_array['name'] : "Сегодня нет праздника"
+		?>
+		<p><?= $current_holiday ?></p>
 	</li>
 	<li>
 		<p></p>
