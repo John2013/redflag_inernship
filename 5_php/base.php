@@ -99,7 +99,7 @@ class MyTransliterator{
 		unset($alphabet['э']);
 		unset($alphabet['ы']);
 		$alphabet = array_flip($alphabet);
-		$chars = str_split($string);
+		$chars = mb_str_to_array($string);
 		$skip = 0;
 		$translited = '';
 		foreach ($chars as $index => $char){
