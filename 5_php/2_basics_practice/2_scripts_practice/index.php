@@ -2,6 +2,7 @@
 require '../../base.php';
 
 use Michelf\MarkdownExtra;
+use Behat\Transliterator\Transliterator;
 
 setlocale(LC_ALL, 'ru_RU.UTF-8', 'ru_RU', 'rus', 'russian');
 ?><!DOCTYPE html>
@@ -366,11 +367,21 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		?>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан инпут и кнопка. В этот инпут вводится строка на русском языке. По нажатию на кнопку выведите на экран
+			транслит этой строки.</p>
+		<?
+		$text14 = htmlspecialchars(trim($_REQUEST['text14'])) ?: '';
+		?>
+		<form action="#text14" method="post">
+			<label for="text14">Текст</label>
+			<textarea name="text14" id="text14" cols="30" rows="10"><?= $text14 ?></textarea>
+			<input type="submit">
+		</form>
+		<p><?= Transliterator::transliterate($text14, ' ') ?></p>
 	</li>
 	<li>
-		<p></p>
+		<p>Дан инпут, 2 радиокнопочки и кнопка. В инпут вводится строка, а с помощью радиокнопочек выбирается - нужно
+			преобразовать эту строку в транслит или из транслита обратно.</p>
 		<p></p>
 	</li>
 	<li>
