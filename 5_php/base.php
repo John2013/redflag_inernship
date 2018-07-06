@@ -35,6 +35,18 @@ function get_percent_array($counter, $all_count, $numbers_after_dot = 2)
 	);
 }
 
+function mb_str_to_array($string, $encoding = 'UTF-8')
+{
+	$strlen = mb_strlen($string);
+	$array = [];
+	while ($strlen) {
+		$array[] = mb_substr($string, 0, 1, $encoding);
+		$string = mb_substr($string, 1, $strlen, $encoding);
+		$strlen = mb_strlen($string, $encoding);
+	}
+	return $array;
+}
+
 class MyTransliterator{
 	const ALPHABET = [
 		'а' => 'a',
@@ -73,8 +85,7 @@ class MyTransliterator{
 	];
 
 	public static function transliterate($string){
-		$chars = mb_split('//u', $string);
-		var_dump($chars);
+		$chars = mb_str_to_array($string);
 		$translited = '';
 		foreach ($chars as $index => $char){
 			$translited .= self::ALPHABET[$char] ?: $char ;
