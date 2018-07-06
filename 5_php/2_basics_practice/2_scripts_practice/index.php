@@ -3,7 +3,7 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 
-setlocale(LC_ALL, 'ru_RU.UTF-8');
+setlocale(LC_ALL, 'ru_RU.UTF-8', 'ru_RU', 'rus', 'russian');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -325,10 +325,10 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			'obcaecati', 'quae!'];
 		$chars = str_split($chars_str);
 		define('CHARS', $chars);
-		$filtered_words = array_filter($words, function ($word){
+		$filtered_words = array_filter($words, function ($word) {
 			$word_chars = str_split($word);
-			foreach (CHARS as $char){
-				if(in_array($char, $word_chars))
+			foreach (CHARS as $char) {
+				if (in_array($char, $word_chars))
 					return true;
 			}
 			return false;
@@ -337,8 +337,33 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= implode(', ', $filtered_words) ?></p>
 	</li>
 	<li>
-		<p></p>
-		<p></p>
+		<p>Дан текстареа и кнопка. В текстареа через пробел вводятся слова. По нажатию на кнопку выведите слова в таком
+			виде: сначала заголовок 'слова на букву а' и под ним все слова, которые начинаются на 'а', потом заголовок
+			'слова на букву б' и все слова на 'б' и так далее. Буквы должны идти в алфавитном порядке. Брать следует
+			только те буквы, на которые начинаются наши слова. То есть: если нет слов, к примеру, на букву 'в' - такого
+			заголовка тоже не будет.</p>
+		<?
+		$text13 = htmlspecialchars(trim($_REQUEST['text13'])) ?: '';
+		?>
+		<form action="#text13" method="post">
+			<label for="text13">Текст</label>
+			<textarea name="text13" id="text13" cols="30" rows="10"><?= $text13 ?></textarea>
+			<input type="submit">
+		</form>
+		<?
+		$words = mb_split("\s", $text13);
+		$words_dict = [];
+		foreach ($words as $word)
+			$words_dict[mb_substr($word, 0, 1)][] = mb_strtolower($word);
+
+		foreach ($words_dict as $letter => $letter_words) {
+			$words_dict[$letter] = array_unique($words_dict[$letter]);
+			?><h3><?= $letter ?></h3><?
+			foreach ($words_dict[$letter] as $word) {
+				?><p><?= $word ?></p><?
+			}
+		}
+		?>
 	</li>
 	<li>
 		<p></p>
