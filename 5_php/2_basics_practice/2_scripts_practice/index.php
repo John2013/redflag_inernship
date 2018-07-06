@@ -2,7 +2,7 @@
 require '../../base.php';
 
 use Michelf\MarkdownExtra;
-use Behat\Transliterator\Transliterator;
+use Symfony\Component\Cache\Simple\FilesystemCache;
 
 setlocale(LC_ALL, 'ru_RU.UTF-8', 'ru_RU', 'rus', 'russian');
 ?><!DOCTYPE html>
@@ -236,8 +236,15 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			предсказание для этого знака зодиака на текущий день.</p>
 		<?
 		$birth_date_str = htmlspecialchars($_REQUEST['date9']) ?: date('d.m');
-		$horoskop_url = 'http://hyrax.ru/week/week.rss';
-		$rss = Feed::loadRss($horoskop_url);
+		$cache = new FilesystemCache();
+		$horoscope_url = 'http://hyrax.ru/week/week.rss';
+		if ($cache->has('horoscope.items')) {
+			$horoscope_array = $cache->get('horoscope.items');
+			echo 'from cache';
+		} else {
+			$horoscope_array = Feed::loadRss($horoscope_url)->toArray();
+			$cache->set('horoscope.items', $horoscope_array, 86400);
+		}
 		?>
 		<form action="#date9" method="post">
 			<label for="date9">дата рождения в формате '31.12'</label>
@@ -248,10 +255,10 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$birth_day = (int)substr($birth_date_str, 0, 2);
 		$birth_month = (int)substr($birth_date_str, 3, 2);
 		$zodiacal_number = get_zodiacal_number($birth_day, $birth_month);
-		$horoscope = $rss->item[$zodiacal_number];
+		$horoscope = $horoscope_array['item'][$zodiacal_number];
 		?>
-		<h4><?= $horoscope->title ?></h4>
-		<p><?= $horoscope->description ?></p>
+		<h4><?= $horoscope['title'] ?></h4>
+		<p><?= $horoscope['description'] ?></p>
 	</li>
 	<li>
 		<p>Дан текстареа и кнопка. В текстареа вводится текст. По нажатию на кнопку выведите количество слов в тексте,
@@ -377,11 +384,12 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			<textarea name="text14" id="text14" cols="30" rows="10"><?= $text14 ?></textarea>
 			<input type="submit">
 		</form>
-		<p><?= Transliterator::transliterate($text14, ' ') ?></p>
+		<p><?= MyTransliterator::transliterate($text14) ?></p>
 	</li>
 	<li>
 		<p>Дан инпут, 2 радиокнопочки и кнопка. В инпут вводится строка, а с помощью радиокнопочек выбирается - нужно
 			преобразовать эту строку в транслит или из транслита обратно.</p>
+
 		<p></p>
 	</li>
 	<li>
