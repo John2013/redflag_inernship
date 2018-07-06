@@ -402,8 +402,33 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 	<li>
 		<p>Дан инпут, 2 радиокнопочки и кнопка. В инпут вводится строка, а с помощью радиокнопочек выбирается - нужно
 			преобразовать эту строку в транслит или из транслита обратно.</p>
-
-		<p></p>
+		<?
+		$text15 = htmlspecialchars(trim($_REQUEST['text15'])) ?: '';
+		$translit_type = (int)htmlspecialchars($_REQUEST['translit_type']) ?? 0;
+		?>
+		<form action="#text15" method="post">
+			<div>
+				<label for="text15">Текст</label>
+				<textarea name="text15" id="text15" cols="30" rows="10"><?= $text15 ?></textarea>
+			</div>
+			<div>
+				<input type="radio" name="translit_type" value="0" id="translit"
+				       <? if($translit_type == 0){ ?>checked<? } ?>>
+				<label for="translit">Транслит</label>
+			</div>
+			<div>
+				<input type="radio" name="translit_type" value="1" id="translit-back"
+				       <? if($translit_type == 1){ ?>checked<? } ?>>
+				<label for="translit-back">Обратный транслит</label>
+			</div>
+			<input type="submit">
+		</form>
+		<?
+		$result = ($translit_type == 0)
+			? MyTransliterator::transliterate($text15)
+			: MyTransliterator::transliterate_back($text15);
+		?>
+		<p><?= $result ?></p>
 	</li>
 	<li>
 		<p></p>
