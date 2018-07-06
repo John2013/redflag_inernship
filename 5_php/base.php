@@ -47,7 +47,8 @@ function mb_str_to_array($string, $encoding = 'UTF-8')
 	return $array;
 }
 
-class MyTransliterator{
+class MyTransliterator
+{
 	const ALPHABET = [
 		'а' => 'a',
 		'б' => 'b',
@@ -84,16 +85,18 @@ class MyTransliterator{
 		'я' => 'ya',
 	];
 
-	public static function transliterate($string){
+	public static function transliterate($string)
+	{
 		$chars = mb_str_to_array($string);
 		$translited = '';
-		foreach ($chars as $index => $char){
-			$translited .= self::ALPHABET[$char] ?: $char ;
+		foreach ($chars as $index => $char) {
+			$translited .= self::ALPHABET[$char] ?: $char;
 		}
 		return $translited;
 	}
 
-	public static function transliterate_back($string){
+	public static function transliterate_back($string)
+	{
 		$alphabet = self::ALPHABET;
 		unset($alphabet['ъ']);
 		unset($alphabet['э']);
@@ -102,39 +105,78 @@ class MyTransliterator{
 		$chars = mb_str_to_array($string);
 		$skip = 0;
 		$translited = '';
-		foreach ($chars as $index => $char){
-			if($char == 'c' && $chars[$index + 1] == 'h'){
+		foreach ($chars as $index => $char) {
+			if ($char == 'c' && $chars[$index + 1] == 'h') {
 				$skip = 2;
 				$translited .= 'ч';
 			}
-			if($char == 's' && $chars[$index + 1] == 'h' && $chars[$index + 2] != 'c' && $chars[$index + 3] != 'h'){
+			if ($char == 's' && $chars[$index + 1] == 'h' && $chars[$index + 2] != 'c' && $chars[$index + 3] != 'h') {
 				$skip = 2;
 				$translited .= 'ш';
 			}
-			if($char == 's' && $chars[$index + 1] == 'h' && $chars[$index + 2] == 'c' && $chars[$index + 3] == 'h'){
+			if ($char == 's' && $chars[$index + 1] == 'h' && $chars[$index + 2] == 'c' && $chars[$index + 3] == 'h') {
 				$skip = 4;
 				$translited .= 'щ';
 			}
-			if($char == 'y' && $chars[$index + 1] == 'o'){
+			if ($char == 'y' && $chars[$index + 1] == 'o') {
 				$skip = 2;
 				$translited .= 'ё';
 			}
-			if($char == 'y' && $chars[$index + 1] == 'u'){
+			if ($char == 'y' && $chars[$index + 1] == 'u') {
 				$skip = 2;
 				$translited .= 'ю';
 			}
-			if($char == 'y' && $chars[$index + 1] == 'a'){
+			if ($char == 'y' && $chars[$index + 1] == 'a') {
 				$skip = 2;
 				$translited .= 'я';
 			}
-			if($skip > 0){
+			if ($skip > 0) {
 				$skip -= 1;
 				continue;
 			}
-			if(isset($alphabet[$char]))
+			if (isset($alphabet[$char]))
 				$translited .= $alphabet[$char];
 			else $translited .= $char;
 		}
 		return $translited;
+	}
+}
+
+class Question
+{
+	public $text;
+	private $variants = [];
+	private $truth_number = 0;
+
+	/**
+	 * Question constructor.
+	 * @param string $text
+	 * @param string[] $variants list of answers
+	 * @param int $truth_number number of truth answer from 0
+	 */
+	function __construct($text = '', $variants, $truth_number = 0)
+	{
+		$this->text = $text;
+		$this->variants = $variants;
+		$this->truth_number = $truth_number;
+	}
+
+	function __toString()
+	{
+		return $this->text;
+	}
+
+	function get_variants()
+	{
+		return $this->variants;
+	}
+
+	function get_variant($variant_number)
+	{
+		return [
+			'number' => $variant_number,
+			'text' => $this->variants[$variant_number],
+			'truth' => $this->truth_number == $variant_number
+		];
 	}
 }

@@ -413,12 +413,12 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			</div>
 			<div>
 				<input type="radio" name="translit_type" value="0" id="translit"
-				       <? if($translit_type == 0){ ?>checked<? } ?>>
+				       <? if ($translit_type == 0){ ?>checked<? } ?>>
 				<label for="translit">Транслит</label>
 			</div>
 			<div>
 				<input type="radio" name="translit_type" value="1" id="translit-back"
-				       <? if($translit_type == 1){ ?>checked<? } ?>>
+				       <? if ($translit_type == 1){ ?>checked<? } ?>>
 				<label for="translit-back">Обратный транслит</label>
 			</div>
 			<input type="submit">
@@ -431,7 +431,57 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= $result ?></p>
 	</li>
 	<li>
-		<p></p>
+		<p id="questions">Дан массив с вопросами и правильными ответами. Реализуйте тест: выведите на экран все вопросы,
+			под каждым инпут. Пользователь читает вопрос, пишет свой ответ в инпут. Когда вопросы заканчиваются - он
+			жмет на кнопку, страница обновляется и вместо инпутов под вопросами появляется сообщение вида: 'ваш ответ:
+			... верно!' или 'ваш ответ: ... неверно! Правильный ответ: ...'. Правильно отвеченные вопросы должны гореть
+			зеленым цветом, а неправильно - красным.</p>
+		<style>
+			.true{
+				background-color: darkgreen;
+			}
+			.false{
+				background-color: darkred;
+			}
+			.true, .false{
+				color: white;
+			}
+		</style>
+		<?
+		$questions = [
+			new Question('2 + 2 * 2', ['6', '8'], 0),
+			new Question('2 ** 10', ['20', '1024', '200'], 1),
+			new Question('0.3 - 0.1', ['.2', '.19999999999999998'], 1)
+		];
+		$answers = [];
+		if (isset($_REQUEST['submit16'])) {
+			foreach ($_REQUEST['q'] as $q_number => $q_variant) {
+				$answers[$q_number] = $questions[$q_number]->get_variant((int)$q_variant);
+			}
+		}
+		?>
+		<form action="#questions"><?
+			foreach ($questions as $q_number => $question) {
+				if(isset($answers[$q_number]))
+					$class = $answers[$q_number]['truth'] ? 'true' : 'false';
+				else
+					$class = ''
+				?>
+				<p class="<?= $class ?>"><?= $question ?></p>
+				<?
+				foreach ($question->get_variants() as $v_number => $variant) {
+					?>
+					<div>
+						<input type="radio" name="q[<?= $q_number ?>]" id="q_<?= $q_number ?>_<?= $v_number ?>"
+						       value="<?= $v_number ?>"<? if($answers[$q_number]['number'] == $v_number) {?> checked<?} ?>>
+						<label for="q_<?= $q_number ?>_<?= $v_number ?>"><?= $variant ?></label>
+					</div>
+					<?
+				}
+			}
+			?>
+			<input type="submit" name="submit16">
+		</form>
 		<p></p>
 	</li>
 	<li>
