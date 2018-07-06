@@ -238,12 +238,25 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		$birth_date_str = htmlspecialchars($_REQUEST['date9']) ?: date('d.m');
 		$cache = new FilesystemCache();
 		$horoscope_url = 'http://hyrax.ru/week/week.rss';
+		$cache_key = 'horoscope.week';
 		if ($cache->has('horoscope.items')) {
-			$horoscope_array = $cache->get('horoscope.items');
+			try {
+				$horoscope_array = $cache->get($cache_key);
+			} catch (\Psr\SimpleCache\InvalidArgumentException $e) {
+				echo "InvalidArgument";
+			}
 			echo 'from cache';
 		} else {
-			$horoscope_array = Feed::loadRss($horoscope_url)->toArray();
-			$cache->set('horoscope.items', $horoscope_array, 86400);
+			try {
+				$horoscope_array = Feed::loadRss($horoscope_url)->toArray();
+			} catch (FeedException $e) {
+				echo 'FeedException';
+			}
+			try {
+				$cache->set($cache_key, $horoscope_array, 86400);
+			} catch (\Psr\SimpleCache\InvalidArgumentException $e) {
+				echo "InvalidArgument";
+			}
 		}
 		?>
 		<form action="#date9" method="post">
