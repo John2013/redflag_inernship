@@ -1,6 +1,12 @@
 <?
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+function pprint($mixed) {
+	echo "<pre>";
+	var_dump($mixed);
+	echo "</pre>";
+}
+
 function days_to_time($time, $cur_time = null)
 {
 	if (!$cur_time) {
@@ -169,6 +175,11 @@ class Question
 	function get_variants()
 	{
 		return $this->variants;
+	}
+
+	function string_variant_is_true($string)
+	{
+		return $this->variants[$this->truth_number] == $string;
 	}
 
 	function get_variant($variant_number)

@@ -431,19 +431,21 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		<p><?= $result ?></p>
 	</li>
 	<li>
-		<p id="questions">Дан массив с вопросами и правильными ответами. Реализуйте тест: выведите на экран все вопросы,
+		<p id="questions16">Дан массив с вопросами и правильными ответами. Реализуйте тест: выведите на экран все вопросы,
 			под каждым инпут. Пользователь читает вопрос, пишет свой ответ в инпут. Когда вопросы заканчиваются - он
 			жмет на кнопку, страница обновляется и вместо инпутов под вопросами появляется сообщение вида: 'ваш ответ:
 			... верно!' или 'ваш ответ: ... неверно! Правильный ответ: ...'. Правильно отвеченные вопросы должны гореть
 			зеленым цветом, а неправильно - красным.</p>
 		<style>
-			.true{
+			.true {
 				background-color: darkgreen;
 			}
-			.false{
+
+			.false {
 				background-color: darkred;
 			}
-			.true, .false{
+
+			.true, .false {
 				color: white;
 			}
 		</style>
@@ -453,17 +455,49 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 			new Question('2 ** 10', ['20', '1024', '200'], 1),
 			new Question('0.3 - 0.1', ['.2', '.19999999999999998'], 1)
 		];
-		$answers = [];
+		$answers_truth16 = [];
+		$answers_text16 = [];
 		if (isset($_REQUEST['submit16'])) {
-			foreach ($_REQUEST['q'] as $q_number => $q_variant) {
-				$answers[$q_number] = $questions[$q_number]->get_variant((int)$q_variant);
+			foreach ($_REQUEST['q16'] as $q_number => $q_variant) {
+				$answers_text16[$q_number] = $q_variant;
+				$answers_truth16[$q_number] = $questions[$q_number]->string_variant_is_true($q_variant);
+
 			}
 		}
 		?>
-		<form action="#questions"><?
+		<form action="#questions16" method="post"><?
 			foreach ($questions as $q_number => $question) {
-				if(isset($answers[$q_number]))
-					$class = $answers[$q_number]['truth'] ? 'true' : 'false';
+				if (isset($answers_truth16[$q_number]))
+					$class = $answers_truth16[$q_number] ? 'true' : 'false';
+				else
+					$class = '';
+				?>
+				<div>
+					<label class="<?= $class ?>" for="q_<?= $q_number ?>"><?= $question ?></label>
+					<input type="text" id="q_<?= $q_number ?>" name="q16[<?= $q_number ?>]"
+					       value="<?= $answers_text16[$q_number] ?>">
+				</div>
+				<?
+			}
+			?>
+			<input type="submit" name="submit16">
+		</form>
+	</li>
+	<li id="questions17">
+		<p>Модифицируем предыдущую задачу: пусть теперь тест показывает варианты ответов и радиокнопочки. Пользователь
+			должен выбрать один и вариантов.</p>
+		<?
+		$answers17 = [];
+		if (isset($_REQUEST['submit17'])) {
+			foreach ($_REQUEST['q'] as $q_number => $q_variant) {
+				$answers17[$q_number] = $questions[$q_number]->get_variant((int)$q_variant);
+			}
+		}
+		?>
+		<form action="#questions17" method="post"><?
+			foreach ($questions as $q_number => $question) {
+				if (isset($answers17[$q_number]))
+					$class = $answers17[$q_number]['truth'] ? 'true' : 'false';
 				else
 					$class = ''
 				?>
@@ -473,19 +507,16 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 					?>
 					<div>
 						<input type="radio" name="q[<?= $q_number ?>]" id="q_<?= $q_number ?>_<?= $v_number ?>"
-						       value="<?= $v_number ?>"<? if($answers[$q_number]['number'] == $v_number) {?> checked<?} ?>>
+						       value="<?= $v_number ?>"
+							<? if ($answers17[$q_number]['number'] == $v_number) { ?> checked<? } ?>>
 						<label for="q_<?= $q_number ?>_<?= $v_number ?>"><?= $variant ?></label>
 					</div>
 					<?
 				}
 			}
 			?>
-			<input type="submit" name="submit16">
+			<input type="submit" name="submit17">
 		</form>
-		<p></p>
-	</li>
-	<li>
-		<p></p>
 		<p></p>
 	</li>
 	<li>
