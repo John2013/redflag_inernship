@@ -1,7 +1,8 @@
 <?
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-function pprint($mixed) {
+function pprint($mixed)
+{
 	echo "<pre>";
 	var_dump($mixed);
 	echo "</pre>";
@@ -151,7 +152,7 @@ class MyTransliterator
 class Question
 {
 	public $text;
-	private $variants = [];
+	protected $variants = [];
 	private $truth_number = 0;
 
 	/**
@@ -188,6 +189,43 @@ class Question
 			'number' => $variant_number,
 			'text' => $this->variants[$variant_number],
 			'truth' => $this->truth_number == $variant_number
+		];
+	}
+}
+
+class MultipleAnswerQuestion extends Question
+{
+	private $truth_numbers = [];
+
+	/**
+	 * MultipleAnswerQuestion constructor.
+	 * @param string $text
+	 * @param string[] $variants list of answers
+	 * @param int[] $truth_numbers numbers of truth answer from 0
+	 */
+	function __construct($text = '', $variants, $truth_numbers = [0])
+	{
+		parent::__construct($text = '', $variants);
+
+		$this->truth_numbers = $truth_numbers;
+	}
+
+	function variants_is_true($variants_numbers)
+	{
+		foreach ($variants_numbers as $v_number) {
+			if (in_array($v_number, $this->truth_numbers))
+				return true;
+		}
+
+		return false;
+	}
+
+	function get_variant($variant_number)
+	{
+		return [
+			'number' => $variant_number,
+			'text' => $this->variants[$variant_number],
+			'truth' => in_array($variant_number, $this->truth_numbers)
 		];
 	}
 }

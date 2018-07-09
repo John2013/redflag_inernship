@@ -274,7 +274,7 @@ $arr = [
 		<?
 		function my_ucfirst($str)
 		{
-			$str[0] = strtoupper($str[0]);
+			$str[0] = mb_strtoupper($str[0]);
 			return $str;
 		}
 
