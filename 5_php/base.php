@@ -1,6 +1,9 @@
 <?
 require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
+$dbconn = pg_connect("host=localhost dbname=evgen user=pgusr password=qOr4uLN8yR")
+or die('Could not connect: ' . pg_last_error());
+
 function pprint($mixed)
 {
 	echo "<pre>";
@@ -228,4 +231,24 @@ class MultipleAnswerQuestion extends Question
 			'truth' => in_array($variant_number, $this->truth_numbers)
 		];
 	}
+}
+
+function get_html_tr($row){
+	$html = "<tr>";
+	foreach ($row as $value){
+		$html .= "<td>$value</td>";
+	}
+	return  $html . "</tr>";
+}
+
+function get_html_table($array, $filter_str = ''): string {
+	$html = "<table>$filter_str<tr>";
+	foreach ($array[0] as $col_name => $value){
+		$html .= "<th>$col_name</th>";
+	}
+	$html .= "</tr>";
+	foreach ($array as $row){
+		$html .= get_html_tr($row);
+	}
+	return $html . "</table>";
 }
