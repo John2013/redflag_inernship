@@ -22,7 +22,7 @@ if($_REQUEST['add']){
 }
 
 /** @var GuestNote[] $notes */
-$notes = GuestNote::load()
+$notes = GuestNote::load();
 ?>
 <div id="wrapper">
 	<h1>Гостевая книга</h1>

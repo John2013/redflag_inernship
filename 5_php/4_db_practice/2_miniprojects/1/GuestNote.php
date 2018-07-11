@@ -67,7 +67,7 @@ RETURNING id";
 
 	static function load($id=null)
 	{
-		if (isset($id)){
+		if ($id !== null){
 			$assoc_array = pg_select(DBCONN, self::TABLE_NAME, ['id' => $id])[0];
 
 			return new self($assoc_array['name'], $assoc_array['text'], $assoc_array['created_at'], $assoc_array['id']);
@@ -75,7 +75,7 @@ RETURNING id";
 		else{
 			$query = "SELECT * FROM " . self::TABLE_NAME;
 			$rs = pg_query(DBCONN, $query);
-			$assoc_array = pg_fetch_all($rs, PGSQL_ASSOC);
+			$assoc_array = pg_fetch_all($rs);
 			$objects = [];
 			foreach ($assoc_array as $row){
 				$objects[] = new self($row['name'], $row['text'], $row['created_at'], $row['id']);
