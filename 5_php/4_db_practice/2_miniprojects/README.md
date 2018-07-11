@@ -6,6 +6,8 @@
 
 [образец](http://theory.phphtml.net/exercises/php/practice/miniproekty-php-dlya-novichkov/1/1/index.html)
 
+[решение](1/index.php)
+
 ## Урок 2
 Реализуйте гостевую книгу с пагинацией, как показано в следующем образце:
 
