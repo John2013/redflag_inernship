@@ -1,6 +1,6 @@
 <?
 require '../../../base.php';
-require 'GuestNote.php';
+require '../GuestNote.php';
 ?>
 <!DOCTYPE html>
 <html lang="ru">
