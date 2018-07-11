@@ -44,8 +44,12 @@ class GuestNote
 
 	function create()
 	{
-		$assoc_array = $this->get_assoc();
-		return pg_insert(DBCONN, self::TABLE_NAME, $assoc_array);
+		$query = "INSERT INTO guests_notes(name,text,created_at) 
+VALUES ({$this->guest_name},{$this->text},{$this->time}) 
+RETURNING id";
+		$rs = pg_query(DBCONN, $query);
+		$this->id = pg_fetch_array($rs)[0];
+		return $this->id;
 	}
 
 	function update()
