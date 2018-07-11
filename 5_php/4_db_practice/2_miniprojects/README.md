@@ -13,6 +13,8 @@
 
 [образец](http://theory.phphtml.net/exercises/php/practice/miniproekty-php-dlya-novichkov/1/2/index.html)
 
+[решение](2/index.php)
+
 ## Урок 3
 Реализуйте записную книгу, как показано ниже.
 
