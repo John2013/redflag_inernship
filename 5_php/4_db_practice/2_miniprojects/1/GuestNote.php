@@ -45,7 +45,7 @@ class GuestNote
 	function create()
 	{
 		$query = "INSERT INTO guests_notes(name,text,created_at) 
-VALUES ({$this->guest_name},{$this->text},{$this->time}) 
+VALUES ('{$this->guest_name}','{$this->text}',{$this->time}) 
 RETURNING id";
 		$rs = pg_query(DBCONN, $query);
 		$this->id = pg_fetch_array($rs)[0];

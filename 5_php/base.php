@@ -13,6 +13,15 @@ function pprint($mixed)
 	echo "</pre>";
 }
 
+function map_htmlspecialchars($item)
+{
+	return htmlspecialchars($item);
+}
+function map_filter($item)
+{
+	return $item ? htmlspecialchars($item) : null;
+}
+
 function days_to_time($time, $cur_time = null)
 {
 	if (!$cur_time) {

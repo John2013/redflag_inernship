@@ -3,15 +3,6 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 
-function map_htmlspecialchars($item)
-{
-	return htmlspecialchars($item);
-}
-function map_filter($item)
-{
-	return $item ? htmlspecialchars($item) : null;
-}
-
 function table_get_by_id($table_array, $id)
 {
 	foreach ($table_array as $row)
