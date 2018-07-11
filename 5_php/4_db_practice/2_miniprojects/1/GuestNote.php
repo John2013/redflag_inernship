@@ -12,17 +12,14 @@ class GuestNote
 	public $guest_name;
 	public $text;
 	public $time;
-	private $dbconn;
 	const TABLE_NAME = 'guests_notes';
 
-	function __construct($guest_name, $text, $time = null, $id = null, $dbconn)
+	function __construct($guest_name, $text, $time = null, $id = null)
 	{
 		$this->guest_name = $guest_name;
 		$this->text = $text;
 		$this->time = $time ?: time();
 		$this->id = $id;
-
-		$this->dbconn = $dbconn;
 	}
 
 	function __toString()
@@ -48,7 +45,7 @@ class GuestNote
 	function create()
 	{
 		$assoc_array = $this->get_assoc();
-		return pg_insert($this->dbconn, self::TABLE_NAME, $assoc_array);
+		return pg_insert(DBCONN, self::TABLE_NAME, $assoc_array);
 	}
 
 	function update()
@@ -56,7 +53,7 @@ class GuestNote
 		$data = $this->get_assoc();
 		$condition = ['id' => $this->id];
 
-		return pg_update($this->dbconn, self::TABLE_NAME, $data, $condition);
+		return pg_update(DBCONN, self::TABLE_NAME, $data, $condition);
 	}
 
 	function save()
@@ -64,22 +61,20 @@ class GuestNote
 		return isset($this->id) ? $this->update() : $this->create();
 	}
 
-	static function load($id=null, $dbconn)
+	static function load($id=null)
 	{
 		if (isset($id)){
-			$assoc_array = pg_select($dbconn, self::TABLE_NAME, ['id' => $id])[0];
+			$assoc_array = pg_select(DBCONN, self::TABLE_NAME, ['id' => $id])[0];
 
-			return new self($assoc_array['name'], $assoc_array['text'], $assoc_array['created_at'], $assoc_array['id'],
-				$dbconn);
+			return new self($assoc_array['name'], $assoc_array['text'], $assoc_array['created_at'], $assoc_array['id']);
 		}
 		else{
-			$table_name = self::TABLE_NAME;
-			$query = "SELECT * FROM $table_name";
-			$rs = pg_query($dbconn, $query);
-			$assoc_array = pg_fetch_all($rs);
+			$query = "SELECT * FROM " . self::TABLE_NAME;
+			$rs = pg_query(DBCONN, $query);
+			$assoc_array = pg_fetch_all($rs, PGSQL_ASSOC);
 			$objects = [];
 			foreach ($assoc_array as $row){
-				$objects[] = new self($row['name'], $row['text'], $row['created_at'], $row['id'], $dbconn);
+				$objects[] = new self($row['name'], $row['text'], $row['created_at'], $row['id']);
 			}
 			return $objects;
 		}

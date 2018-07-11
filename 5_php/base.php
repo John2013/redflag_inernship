@@ -4,6 +4,8 @@ require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 $dbconn = pg_connect("host=localhost dbname=evgen user=pgusr password=qOr4uLN8yR")
 or die('Could not connect: ' . pg_last_error());
 
+define('DBCONN', $dbconn);
+
 function pprint($mixed)
 {
 	echo "<pre>";
