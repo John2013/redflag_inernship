@@ -65,7 +65,7 @@ RETURNING id";
 		return isset($this->id) ? $this->update() : $this->create();
 	}
 
-	static function load($id=null)
+	static function load($id=null, $page=null, $page_size=3)
 	{
 		if ($id !== null){
 			$assoc_array = pg_select(DBCONN, self::TABLE_NAME, ['id' => $id])[0];
@@ -74,6 +74,9 @@ RETURNING id";
 		}
 		else{
 			$query = "SELECT * FROM " . self::TABLE_NAME;
+			if(isset($page)){
+				$query .= " LIMIT " . $page_size . " OFFSET " . $page * $page_size;
+			}
 			$rs = pg_query(DBCONN, $query);
 			$assoc_array = pg_fetch_all($rs);
 			$objects = [];
@@ -83,5 +86,11 @@ RETURNING id";
 			return $objects;
 		}
 
+	}
+
+	static function get_count(){
+		$query = "SELECT COUNT(id) FROM " . self::TABLE_NAME;
+		$rs = pg_query(DBCONN, $query);
+		return pg_fetch_array($rs)[0];
 	}
 }
