@@ -29,7 +29,7 @@ class GuestNote
 
 	function get_time()
 	{
-		return date('', $this->time);
+		return date('d.m.Y H:i:s', $this->time);
 	}
 
 	function get_assoc()
