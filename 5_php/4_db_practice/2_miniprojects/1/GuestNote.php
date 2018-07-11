@@ -1,0 +1,88 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: evgeny
+ * Date: 11.07.2018
+ * Time: 11:04
+ */
+
+class GuestNote
+{
+	public $id;
+	public $guest_name;
+	public $text;
+	public $time;
+	private $dbconn;
+	const TABLE_NAME = 'guests_notes';
+
+	function __construct($guest_name, $text, $time = null, $id = null, $dbconn)
+	{
+		$this->guest_name = $guest_name;
+		$this->text = $text;
+		$this->time = $time ?: time();
+		$this->id = $id;
+
+		$this->dbconn = $dbconn;
+	}
+
+	function __toString()
+	{
+		return $this->text;
+	}
+
+	function get_time()
+	{
+		return date('', $this->time);
+	}
+
+	function get_assoc()
+	{
+		return [
+			'id' => $this->id,
+			'created_at' => $this->time,
+			'text' => $this->text,
+			'name' => $this->guest_name
+		];
+	}
+
+	function create()
+	{
+		$assoc_array = $this->get_assoc();
+		return pg_insert($this->dbconn, self::TABLE_NAME, $assoc_array);
+	}
+
+	function update()
+	{
+		$data = $this->get_assoc();
+		$condition = ['id' => $this->id];
+
+		return pg_update($this->dbconn, self::TABLE_NAME, $data, $condition);
+	}
+
+	function save()
+	{
+		return isset($this->id) ? $this->update() : $this->create();
+	}
+
+	static function load($id=null, $dbconn)
+	{
+		if (isset($id)){
+			$assoc_array = pg_select($dbconn, self::TABLE_NAME, ['id' => $id])[0];
+
+			return new self($assoc_array['name'], $assoc_array['text'], $assoc_array['created_at'], $assoc_array['id'],
+				$dbconn);
+		}
+		else{
+			$table_name = self::TABLE_NAME;
+			$query = "SELECT * FROM $table_name";
+			$rs = pg_query($dbconn, $query);
+			$assoc_array = pg_fetch_all($rs);
+			$objects = [];
+			foreach ($assoc_array as $row){
+				$objects[] = new self($row['name'], $row['text'], $row['created_at'], $row['id'], $dbconn);
+			}
+			return $objects;
+		}
+
+	}
+}

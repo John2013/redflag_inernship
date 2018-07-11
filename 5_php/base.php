@@ -34,15 +34,20 @@ function counter($array)
 
 function get_percent_array($counter, $all_count, $numbers_after_dot = 2)
 {
-	define('ALL_COUNT', $all_count);
-	define('NUMBER_AFTER_DOT', $numbers_after_dot);
+//	define('ALL_COUNT', $all_count);
+//	define('NUMBER_AFTER_DOT', $numbers_after_dot);
+//	return array_map(
+//		function ($count) {
+//			return round($count / ALL_COUNT * 100, NUMBER_AFTER_DOT);
+//		},
+//		$counter
+//	);
 
-	return array_map(
-		function ($count) {
-			return round($count / ALL_COUNT * 100, NUMBER_AFTER_DOT);
-		},
-		$counter
-	);
+	$percent_array = [];
+	foreach ($counter as $count){
+		$percent_array[] = round($count / $all_count * 100, $numbers_after_dot);
+	}
+	return $percent_array;
 }
 
 function mb_str_to_array($string, $encoding = 'UTF-8')

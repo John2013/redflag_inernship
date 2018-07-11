@@ -173,9 +173,12 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		}
 		$filter_row = "<tr>
 <td></td>
-<td><input type='text' name='filter[name]' form='filter_form' value='{$filter['name']}' onkeypress='return filter_keypress(event)'></td>
-<td><input type='number' name='filter[age]' form='filter_form' value='{$filter['age']}' onkeypress='return filter_keypress(event)'></td>
-<td><input type='number' name='filter[salary]' form='filter_form' value='{$filter['salary']}' step='100' onkeypress='return filter_keypress(event)'></td>
+<td><input type='text' name='filter[name]' form='filter_form' value='{$filter['name']}' 
+onkeypress='return filter_keypress(event)'></td>
+<td><input type='number' name='filter[age]' form='filter_form' value='{$filter['age']}' 
+onkeypress='return filter_keypress(event)'></td>
+<td><input type='number' name='filter[salary]' form='filter_form' value='{$filter['salary']}' step='100' 
+onkeypress='return filter_keypress(event)'></td>
 </tr>";
 
 		$table_array5 = $filter
