@@ -13,7 +13,8 @@
     "michelf/php-markdown": "1.8.0",
     "rmccue/requests": "v1.7.0",
     "dg/rss-php": "v1.3",
-    "symfony/cache": "v3.4.12"
+    "symfony/cache": "v3.4.12",
+    "jenssegers/date": "v3.4.0"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"

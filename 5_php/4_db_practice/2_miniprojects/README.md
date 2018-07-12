@@ -43,6 +43,8 @@
 
 [образец](http://theory.phphtml.net/exercises/php/practice/miniproekty-php-dlya-novichkov/3/1/index.html)
 
+[решение](4/)
+
 ## Урок 5
 Реализуйте форум, как показано ниже.
 

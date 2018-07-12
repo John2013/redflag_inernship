@@ -3,8 +3,10 @@ require '../../base.php';
 
 use Michelf\MarkdownExtra;
 use Symfony\Component\Cache\Simple\FilesystemCache;
+use Jenssegers\Date\Date;
 
-setlocale(LC_ALL, 'ru_RU.UTF-8', 'ru_RU', 'rus', 'russian');
+setlocale(LC_ALL, 'ru_RU.utf8');
+Date::setLocale('ru');
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +86,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 	</li>
 	<li>
 		<p>По заходу на страницу выведите текущую дату в формате '12 мая 2015 года, воскресенье'.</p>
-		<p><?= date('d F Y года, l') ?></p>
+		<p><?= Date::now()->format('d F Y года, l') ?></p>
 	</li>
 	<li>
 		<p>Дан инпут и кнопка. В этот инпут вводится дата рождения в формате '01.12.1990'. По нажатию на кнопку выведите
