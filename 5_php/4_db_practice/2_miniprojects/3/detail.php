@@ -16,6 +16,9 @@ $note = Note::load((int)$_REQUEST['id']);
 <body>
 <div id="wrapper">
 	<h1><?= $note->title ?></h1>
+	<p class="nav">
+		<a href="index.php">на главную</a>
+	</p>
 	<div>
 		<p class="date"><?= $note->get_date() ?></p>
 		<?= MarkdownExtra::defaultTransform($note->text) ?>

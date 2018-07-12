@@ -9,6 +9,9 @@
 <body>
 <div id="wrapper">
 	<h1>Новая запись</h1>
+	<p class="nav">
+		<a href="index.php">на главную</a>
+	</p>
 	<div>
 		<form action="index.php" method="POST">
 			<p><input class="form-control" placeholder="Название записи" name="add[title]"></p>
