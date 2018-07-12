@@ -18,9 +18,12 @@
 ## Урок 3
 Реализуйте записную книгу, как показано ниже.
 
+[решение](3/)
+
 ### Образец главной страницы:
 
 [образец](http://theory.phphtml.net/exercises/php/practice/miniproekty-php-dlya-novichkov/2/1/index.html)
+
 
 ### Образец страницы просмотра одной записи:
 

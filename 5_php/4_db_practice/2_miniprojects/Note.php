@@ -6,7 +6,7 @@
  * Time: 11:04
  */
 
-class GuestNote
+class Note
 {
 	public $id;
 	public $title;
@@ -27,9 +27,19 @@ class GuestNote
 		return $this->text;
 	}
 
-	function get_time()
+	function get_time($format = 'd.m.Y H:i:s')
 	{
-		return date('d.m.Y H:i:s', $this->time);
+		return date($format, $this->time);
+	}
+
+	function get_date($format = 'd.m.Y')
+	{
+		return date($format, $this->time);
+	}
+
+	function get_short_text($chars_count = 500)
+	{
+		return substr($this->text, 0, $chars_count) . '...';
 	}
 
 	function get_assoc()
@@ -45,7 +55,7 @@ class GuestNote
 	function create()
 	{
 		$table_name = self::TABLE_NAME;
-		$query = "INSERT INTO $table_name(name,text,created_at) 
+		$query = "INSERT INTO $table_name(title,text,created_at) 
 VALUES ('{$this->title}','{$this->text}',{$this->time}) 
 RETURNING id";
 		$rs = pg_query(DBCONN, $query);
@@ -66,22 +76,21 @@ RETURNING id";
 		return isset($this->id) ? $this->update() : $this->create();
 	}
 
-	static function load($id=null, $page=null, $page_size=3)
+	static function load($id = null, $page = null, $page_size = 3)
 	{
-		if ($id !== null){
+		if ($id !== null) {
 			$assoc_array = pg_select(DBCONN, self::TABLE_NAME, ['id' => $id])[0];
 
 			return new self($assoc_array['title'], $assoc_array['text'], $assoc_array['created_at'], $assoc_array['id']);
-		}
-		else{
-			$query = "SELECT * FROM " . self::TABLE_NAME;
-			if(isset($page)){
+		} else {
+			$query = "SELECT * FROM " . self::TABLE_NAME . " ORDER BY created_at DESC";
+			if (isset($page)) {
 				$query .= " LIMIT " . $page_size . " OFFSET " . $page * $page_size;
 			}
 			$rs = pg_query(DBCONN, $query);
 			$assoc_array = pg_fetch_all($rs);
 			$objects = [];
-			foreach ($assoc_array as $row){
+			foreach ($assoc_array as $row) {
 				$objects[] = new self($row['title'], $row['text'], $row['created_at'], $row['id']);
 			}
 			return $objects;
@@ -89,7 +98,8 @@ RETURNING id";
 
 	}
 
-	static function get_count(){
+	static function get_count()
+	{
 		$query = "SELECT COUNT(id) FROM " . self::TABLE_NAME;
 		$rs = pg_query(DBCONN, $query);
 		return pg_fetch_array($rs)[0];
