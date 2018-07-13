@@ -48,6 +48,8 @@
 ## Урок 5
 Реализуйте форум, как показано ниже.
 
+[решение](5/)
+
 ### Образец главной страницы:
 
 [образец](http://theory.phphtml.net/exercises/php/practice/miniproekty-php-dlya-novichkov/4/1/index.html)
