@@ -102,7 +102,7 @@ RETURNING id";
 	}
 
 	static function get_by_topic_id($topic_id, $page = null, $page_size = 3){
-		$query = "SELECT * FROM " . self::TABLE_NAME . "WHERE topic_id = " . self::PARENT_TABLE_NAME . ".id";
+		$query = "SELECT * FROM " . self::TABLE_NAME . " WHERE topic_id = $topic_id";
 		if (isset($page)) {
 			$query .= " LIMIT " . $page_size . " OFFSET " . $page * $page_size;
 		}

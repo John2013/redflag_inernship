@@ -1,6 +1,9 @@
 <?
 function get_pagination($active_page = 0, $page_size=3, $items_count = 1){
 	$pages_count = ceil($items_count / $page_size);
+	if ($items_count < 1)
+		return "";
+
 	ob_start();
 	?>
 	<nav>

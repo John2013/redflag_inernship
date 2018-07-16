@@ -44,7 +44,7 @@ $topics_count = Topic::get_count();
 		?>
 		<div class="note">
 			<p class="topic">
-				<a href="topic.php?topic=<?= $topic->id ?>"><?= $topic->title ?></a>
+				<a href="topic.php?id=<?= $topic->id ?>"><?= $topic->title ?></a>
 			</p>
 			<p>
 				<span class="subheader">Создана:</span>

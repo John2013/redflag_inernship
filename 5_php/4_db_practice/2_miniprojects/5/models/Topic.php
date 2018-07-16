@@ -71,12 +71,13 @@ RETURNING id";
 		if ($id !== null) {
 			$table_name = self::TABLE_NAME;
 			$child_table_name = self::CHILD_TABLE_NAME;
-			$query = "SELECT $table_name.*, COUNT($child_table_name.id) as 'answers_count' 
-FROM $table_name, $child_table_name
-WHERE $table_name.id = $child_table_name.topic_id AND  $table_name.id = $id";
+			$query = "SELECT $table_name.*, COUNT($child_table_name.id) as answers_count
+FROM $table_name
+LEFT JOIN $child_table_name ON $table_name.id = $child_table_name.topic_id
+WHERE $table_name.id = $id
+GROUP BY $table_name.id";
 			$rs = pg_query(DBCONN, $query);
 			$assoc_array = pg_fetch_all($rs)[0];
-
 			return new self(
 				$assoc_array['author'],
 				$assoc_array['title'],
@@ -115,14 +116,26 @@ ORDER BY topics.created_at DESC";
 
 	}
 
-	function get_answers()
+	/**
+	 * @param null|int $page
+	 * @param int $page_size
+	 * @return TopicsAnswer[]
+	 */
+	function get_answers($page = null, $page_size = 3)
 	{
-		return TopicsAnswer::get_by_topic_id($this->id);
+		return TopicsAnswer::get_by_topic_id($this->id, $page, $page_size);
 	}
 
 	static function get_count()
 	{
 		$query = "SELECT COUNT(id) FROM " . self::TABLE_NAME;
+		$rs = pg_query(DBCONN, $query);
+		return pg_fetch_array($rs)[0];
+	}
+
+	static function get_first_id()
+	{
+		$query = "SELECT id FROM " . self::TABLE_NAME . " LIMIT 1";
 		$rs = pg_query(DBCONN, $query);
 		return pg_fetch_array($rs)[0];
 	}
