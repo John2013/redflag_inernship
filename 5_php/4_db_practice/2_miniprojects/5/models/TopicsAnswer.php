@@ -24,7 +24,7 @@ class TopicsAnswer
 
 	function __toString()
 	{
-		return $this->text;
+		return (string)$this->text;
 	}
 
 	function get_date($format = 'd.m.Y H:i:s')
@@ -113,8 +113,8 @@ RETURNING id";
 		foreach ($assoc_array as $row) {
 			$objects[] = new self(
 				$row['author'],
-				$row['title'],
-				$row['description'],
+				$row['text'],
+				$row['topic_id'],
 				$row['id'],
 				$row['created_at']
 			);
@@ -123,7 +123,7 @@ RETURNING id";
 	}
 
 	static function get_count($topic_id){
-		$query = "SELECT COUNT(id) FROM " . self::TABLE_NAME . "WHERE topic_id = $topic_id";
+		$query = "SELECT COUNT(id) FROM " . self::TABLE_NAME . " WHERE topic_id = $topic_id";
 		$rs = pg_query(DBCONN, $query);
 		return pg_fetch_array($rs)[0];
 	}

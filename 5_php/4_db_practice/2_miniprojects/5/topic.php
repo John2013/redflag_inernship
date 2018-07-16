@@ -10,8 +10,18 @@ $page = $_REQUEST['page'] ? (int)$_REQUEST['page'] : 0;
 $page_size = 3;
 
 $topic_id = $_REQUEST['id'] ?: Topic::get_first_id();
+
+if ($_REQUEST['add']) {
+	$add_array = array_map("map_htmlspecialchars", $_REQUEST['add']);
+	$new_answer = new TopicsAnswer($add_array['author'], $add_array['text'], $topic_id);
+	$answer_added = $new_answer->save();
+}
+
 $topic = Topic::load($topic_id);
 $title = "Тема №" . ($topic->id + 1);
+
+$add_array = [];
+$answer_added = null;
 
 $answers = $topic->get_answers($page, $page_size);
 $answers_count = TopicsAnswer::get_count($topic->id);
@@ -62,17 +72,25 @@ $answers_count = TopicsAnswer::get_count($topic->id);
 	}
 	?>
 
-
 	<div>
 		<?= get_pagination($page, $page_size, $answers_count) ?>
 	</div>
-	<div class="info alert alert-info">
-		Запись успешно сохранена!
-	</div>
+	<?
+	if ($answer_added !== null && $answer_added !== false){
+		?>
+		<div class="info alert alert-info">
+			Запись успешно сохранена!
+		</div>
+		<?
+	}
+	?>
+
 	<div id="form">
 		<form action="#form" method="POST">
-			<p><input class="form-control" placeholder="Ваше имя"></p>
-			<p><textarea class="form-control" placeholder="Ваше сообщение"></textarea></p>
+			<p><input class="form-control" name="add[author]" value="<?= $add_array['author'] ?>"
+			          placeholder="Ваше имя"></p>
+			<p><textarea class="form-control" name="add[text]"
+			             placeholder="Ваше сообщение"><?= $add_array['text'] ?></textarea></p>
 			<p><input type="submit" class="btn btn-info btn-block" value="Сохранить"></p>
 		</form>
 	</div>
