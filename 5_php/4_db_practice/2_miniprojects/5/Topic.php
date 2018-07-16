@@ -20,7 +20,7 @@ class Topic
 		$this->author = $author;
 		$this->title = $title;
 		$this->description = $description;
-		$this->answers_count = $answers_count ?: TopicsAnswer::get_count($this->id);
+		$this->answers_count = (int)($answers_count ?: TopicsAnswer::get_count($this->id));
 	}
 
 	function __toString()
@@ -88,9 +88,11 @@ WHERE $table_name.id = $childs_table_name.topic_id AND  $table_name.id = $id";
 		} else {
 			$table_name = self::TABLE_NAME;
 			$childs_table_name = self::CHILD_TABLE_NAME;
-			$query = "SELECT $table_name.*, COUNT($childs_table_name.id) as 'answers_count' 
-FROM $table_name, $childs_table_name
-WHERE $table_name.id = $childs_table_name.topic_id";
+			$query = "SELECT $table_name.*, COUNT($childs_table_name.id) as answers_count 
+FROM $table_name
+LEFT JOIN $childs_table_name  on $table_name.id = $childs_table_name.topic_id
+GROUP BY $table_name.id
+ORDER BY topics.created_at DESC";
 			if (isset($page)) {
 				$query .= " LIMIT " . $page_size . " OFFSET " . $page * $page_size;
 			}
