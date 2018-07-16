@@ -1,7 +1,7 @@
 <?
 require "../../../base.php";
-require "TopicsAnswer.php";
-require "Topic.php";
+require "models/TopicsAnswer.php";
+require "models/Topic.php";
 require "../pagination.php";
 
 
