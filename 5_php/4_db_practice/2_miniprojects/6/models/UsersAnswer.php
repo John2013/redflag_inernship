@@ -80,7 +80,7 @@ RETURNING id";
   v.text,
   count(a.id)::int AS count
 FROM $variants_table v
-LEFT JOIN $this_table a on  v.id = a.variant_id
+LEFT JOIN $this_table a on v.id = a.variant_id
 WHERE v.question_id = $question_id
 GROUP BY v.id";
 

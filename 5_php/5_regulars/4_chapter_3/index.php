@@ -1,5 +1,5 @@
 <?
-require "../base.php";
+require "../../base.php";
 
 use Michelf\MarkdownExtra;
 
