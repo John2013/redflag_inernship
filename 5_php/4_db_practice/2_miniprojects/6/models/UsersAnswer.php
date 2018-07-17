@@ -13,7 +13,9 @@ class UsersAnswer
 		$question_id,
 		$answer_id;
 
-	const TABLE_NAME = 'users_answers';
+	const
+		TABLE_NAME = 'users_answers',
+		QUESTIONS_TABLE = 'question_variants';
 
 	function __construct($question_id, $answer_id, $id = null)
 	{
@@ -72,18 +74,28 @@ RETURNING id";
 	static function get_count_array($question_id)
 	{
 		$this_table = self::TABLE_NAME;
-		$variants_table = QuestionsVariant::TABLE_NAME;
+		$variants_table = self::QUESTIONS_TABLE;
 		$query = "SELECT
   v.id AS variant_id,
   v.text,
   count(a.id)::int AS count
 FROM $variants_table v
-LEFT JOIN $this_table a on v.question_id = a.question_id
+LEFT JOIN $this_table a on  v.id = a.variant_id
 WHERE v.question_id = $question_id
 GROUP BY v.id";
 
 
 		$rs = pg_query(DBCONN, $query);
-		return pg_fetch_all($rs);
+		$answers = pg_fetch_all($rs);
+		$answers_count = array_reduce($answers, function ($count, $answer) {
+			return $count + $answer['count'];
+		});
+		if ($answers_count == 0)
+			return $answers;
+
+		foreach ($answers as $key => $answer) {
+			$answers[$key]['percent'] = round($answer['count'] / $answers_count * 100);
+		}
+		return $answers;
 	}
 }

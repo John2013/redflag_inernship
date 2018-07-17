@@ -22,7 +22,7 @@ $variants = $question->get_variants();
 	<div class="info alert alert-info">
 		<?= $question ?>
 	</div>
-	<form action="check.php" method="POST">
+	<form action="answer.php" method="POST">
 		<input type="hidden" name="answer[q_id]" value="<?= $question_id ?>">
 		<div class="note">
 			<?
