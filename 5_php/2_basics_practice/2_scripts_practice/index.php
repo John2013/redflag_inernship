@@ -454,9 +454,9 @@ echo MarkdownExtra::defaultTransform(file_get_contents('./README.md'));
 		</style>
 		<?
 		$questions = [
-			new Question('2 + 2 * 2', ['6', '8'], 0),
-			new Question('2 ** 10', ['20', '1024', '200'], 1),
-			new Question('0.3 - 0.1', ['.2', '.19999999999999998'], 1)
+			new QuestionBase('2 + 2 * 2', ['6', '8'], 0),
+			new QuestionBase('2 ** 10', ['20', '1024', '200'], 1),
+			new QuestionBase('0.3 - 0.1', ['.2', '.19999999999999998'], 1)
 		];
 		$answers_truth16 = [];
 		$answers_text16 = [];

@@ -168,7 +168,7 @@ class MyTransliterator
 	}
 }
 
-class Question
+class QuestionBase
 {
 	public $text;
 	protected $variants = [];
@@ -212,7 +212,7 @@ class Question
 	}
 }
 
-class MultipleAnswerQuestion extends Question
+class MultipleAnswerQuestion extends QuestionBase
 {
 	private $truth_numbers = [];
 
