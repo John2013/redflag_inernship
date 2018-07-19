@@ -14,7 +14,8 @@
     "rmccue/requests": "v1.7.0",
     "dg/rss-php": "v1.3",
     "symfony/cache": "v3.4.12",
-    "jenssegers/date": "v3.4.0"
+    "jenssegers/date": "v3.4.0",
+    "ramsey/uuid": "3.7.3"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
