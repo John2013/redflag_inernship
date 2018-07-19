@@ -41,7 +41,7 @@ $current_wday = isset($_REQUEST['wday']) ? (int)$_REQUEST['wday'] : (int)date('N
 		<p class="date"><span>Сегодня:</span> <?= Date('d F Y года') ?></p>
 	</div>
 	<div id="form">
-		<form action="#form" method="POST">
+		<form action="#form" method="post">
 			<input type="hidden" name="update[wday]" value="<?= $current_wday ?>">
 			<p>
 				<textarea class="form-control" name="update[tasks]" placeholder="Ваш отзыв"><?= $days[$current_wday] ?></textarea>

@@ -6,7 +6,6 @@ if($_REQUEST['add']){
 	$add_array = array_map("map_htmlspecialchars", $_REQUEST['add']);
 	$new_note = new Note($add_array['title'], $add_array['text']);
 	$res = $new_note->save();
-	pprint($res);
 }
 
 if($_REQUEST['change']){

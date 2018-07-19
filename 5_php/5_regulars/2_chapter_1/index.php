@@ -191,6 +191,7 @@ echo MarkdownExtra::defaultTransform(file_get_contents('README.md'));
 
 			$result = preg_replace($re, '!', $str);
 
+			pprint($re);
 			pprint($result);
 			?>
 		</li>
