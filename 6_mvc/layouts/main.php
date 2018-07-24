@@ -1,3 +1,10 @@
+<?
+/**
+ * @var string $main_menu
+ * @var string $title
+ * @var string $content
+ */
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +22,7 @@
 </head>
 <body>
 <div class="">
-	<?= /** @var string $main_menu */ $main_menu ?>
+	<?= $main_menu ?>
 </div>
 <div class="container">
 	<?= $content ?>

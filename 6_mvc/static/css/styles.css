@@ -4,7 +4,7 @@
 	text-overflow: ellipsis;
 }
 
-.movie__description{
+.movie__description {
 	height: 168px;
 	overflow: hidden;
 	display: -webkit-box;

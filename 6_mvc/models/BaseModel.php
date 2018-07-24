@@ -99,6 +99,8 @@ class BaseModel
 
 	static function load_by_condition($condition){
 		$assoc_rows = pg_select(DBCONN, static::TABLE_NAME, $condition);
+		if(!$assoc_rows)
+			return [];
 		/** @var static[] $objects */
 		$objects = [];
 		foreach ($assoc_rows as $row){

@@ -21,11 +21,13 @@ class MainController extends BaseController
 		$movie = Movie::load($movie_id);
 		$sessions = $movie->get_sessions();
 		$sessions_dates = [];
+		$main_menu = main_menu();
 		foreach ($sessions as $session){
 			$date = strtotime(date('d.m.Y 0:00:00', $session->time));
 			$sessions_dates[$date][] = $session;
 		}
 
-		return $this->render("sessions", "Сеансы", ['movie' => $movie, 'sessions_dates' => $sessions_dates]);
+		return $this->render("sessions", "сеансы",
+			['movie' => $movie, 'sessions_dates' => $sessions_dates, 'main_menu' => $main_menu]);
 	}
 }
