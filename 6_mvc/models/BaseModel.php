@@ -37,7 +37,7 @@ class BaseModel
 			if (substr($key, 0, 1) == '_')
 				continue;
 
-			$this->$key = $assoc_array['key'];
+			$this->$key = $assoc_array[$key];
 		}
 	}
 

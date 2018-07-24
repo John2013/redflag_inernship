@@ -1,0 +1,17 @@
+.movie__title{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.movie__description{
+	height: 168px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 7;
+	-webkit-box-orient: vertical;
+}
+
+img.movie__img{
+	height: 360px;
+}

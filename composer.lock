@@ -725,12 +725,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "f4764d0c19178fbd7a49d3b91127c29bc6823152"
+                "reference": "1968042356adcb80a3ba923e35185073f89b057e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/f4764d0c19178fbd7a49d3b91127c29bc6823152",
-                "reference": "f4764d0c19178fbd7a49d3b91127c29bc6823152",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/1968042356adcb80a3ba923e35185073f89b057e",
+                "reference": "1968042356adcb80a3ba923e35185073f89b057e",
                 "shasum": ""
             },
             "require": {
@@ -786,7 +786,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-07-09T13:30:59+00:00"
+            "time": "2018-07-23T08:20:32+00:00"
         }
     ],
     "packages-dev": [
@@ -796,12 +796,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "9d6f6a0216bc03b737674ee9f6421e8e024fbb34"
+                "reference": "565e494409c890054e10d0fb46c00ee032137a7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/9d6f6a0216bc03b737674ee9f6421e8e024fbb34",
-                "reference": "9d6f6a0216bc03b737674ee9f6421e8e024fbb34",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/565e494409c890054e10d0fb46c00ee032137a7d",
+                "reference": "565e494409c890054e10d0fb46c00ee032137a7d",
                 "shasum": ""
             },
             "bin": [
@@ -832,7 +832,7 @@
                 "nginx",
                 "php"
             ],
-            "time": "2018-07-10T17:23:30+00:00"
+            "time": "2018-07-20T16:31:01+00:00"
         }
     ],
     "aliases": [],
