@@ -12,10 +12,11 @@ class Session extends BaseModel
 	public $hall_id;
 	public $time;
 	public $tariff_id;
+	public $_hall_number;
 
 	const TABLE_NAME = 'sessions';
 
-	function __construct($fields)
+	function __construct($fields = [])
 	{
 		parent::__construct($fields);
 	}
@@ -38,6 +39,19 @@ class Session extends BaseModel
 	function get_reservations()
 	{
 		return Reservation::load_by_condition(['session_id' => $this->id]);
+	}
+
+	static function load_with_hall_number(int $id){
+		$query = "SELECT s.*, h.number as hall_number FROM ". self::TABLE_NAME ." s, " . MovieHall::TABLE_NAME
+			. " h WHERE s.hall_id = h.id AND s.id = $id";
+
+		$rs = pg_query(DBCONN, $query);
+
+		$assoc = pg_fetch_assoc($rs);
+
+		$session = new self($assoc);
+		$session->_hall_number = $assoc['hall_number'];
+		return $session;
 	}
 
 }

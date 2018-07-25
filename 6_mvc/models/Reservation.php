@@ -13,7 +13,7 @@ class Reservation extends BaseModel
 	public $status;
 	public $client;
 
-	function __construct($fields)
+	function __construct($fields = [])
 	{
 		parent::__construct($fields);
 	}

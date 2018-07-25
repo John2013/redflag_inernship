@@ -4,15 +4,20 @@ function main_menu($items=null){
 		$items = [
 			[
 				'id'=>0,
-				'title'=>'Список фильмов',
+				'title'=>'список фильмов',
 				'url'=> '/6_mvc/'
-			]
+			],
+			[
+				'id'=>10,
+				'title'=>'админка',
+				'url'=> '/6_mvc/admin'
+			],
 		];
 	}
 	ob_start();
 	?>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">Кинотеатр</a>
+		<a class="navbar-brand" href="/6_mvc">Кинотеатр</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu-nav"
 		        aria-controls="main-menu-nav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -23,7 +28,7 @@ function main_menu($items=null){
 					$active = ($item['id'] == ACTIVE_MENU_ITEM_ID)
 					?>
 					<li class="nav-item<? if($active){ ?> active<? } ?>">
-						<a class="nav-link" href="#"><?= $item['title'] ?><? if($active){
+						<a class="nav-link" href="<?= $item['url'] ?>"><?= $item['title'] ?><? if($active){
 							?> <span class="sr-only">(current)</span><?
 						} ?></a>
 					</li>

@@ -14,7 +14,7 @@ class Movie extends BaseModel
 
 	const TABLE_NAME = 'movies';
 
-	function __construct($fields)
+	function __construct($fields = [])
 	{
 		parent::__construct($fields);
 	}

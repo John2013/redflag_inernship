@@ -30,4 +30,13 @@ class MainController extends BaseController
 		return $this->render("sessions", "сеансы",
 			['movie' => $movie, 'sessions_dates' => $sessions_dates, 'main_menu' => $main_menu]);
 	}
+
+	function actionSession(int $id){
+		$session = Session::load_with_hall_number($id);
+		$movie = $session->get_movie();
+		$main_menu = main_menu();
+
+		return $this->render("session", "сеанс",
+			['movie' => $movie, 'session' => $session, 'main_menu' => $main_menu]);
+	}
 }

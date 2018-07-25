@@ -14,9 +14,11 @@ class BaseModel
 
 	const TABLE_NAME = '';
 
-	function __construct($fields)
+	function __construct($fields = [])
 	{
-		$this->set_by_assoc($fields);
+		if ($fields) {
+			$this->set_by_assoc($fields);
+		}
 	}
 
 	function get_assoc()
@@ -37,7 +39,8 @@ class BaseModel
 			if (substr($key, 0, 1) == '_')
 				continue;
 
-			$this->$key = $assoc_array[$key];
+			if (isset($assoc_array[$key]))
+				$this->$key = $assoc_array[$key];
 		}
 	}
 
@@ -52,38 +55,42 @@ class BaseModel
 		$this->updated_at = time();
 	}
 
-	function create(){
+	function create()
+	{
 		$this->before_create();
 		$result = pg_insert(DBCONN, static::TABLE_NAME, $this->get_assoc());
 
 		$query = "SELECT * FROM " . static::TABLE_NAME . " ORDER BY id DESC LIMIT 1;";
 		$rs = pg_query(DBCONN, $query);
-		$assoc_array = pg_fetch_assoc($rs)[0];
+		$assoc_array = pg_fetch_assoc($rs);
 
 		$this->set_by_assoc($assoc_array);
 		return $result;
 	}
 
-	function update(){
+	function update()
+	{
 		$this->before_update();
 		$condition = ['id' => $this->id];
 		return pg_update(DBCONN, static::TABLE_NAME, $this->get_assoc(), $condition);
 	}
 
-	function save(){
+	function save()
+	{
 		return $this->id
 			? $this->update()
 			: $this->create();
 	}
 
-	static function load($id=null, $page=null, $page_size=null, $isAsc = true){
+	static function load($id = null, $page = null, $page_size = null, $isAsc = true)
+	{
 		if ($id !== null) {
 			$assoc_array = pg_select(DBCONN, static::TABLE_NAME, ['id' => $id])[0];
 
 			return new static($assoc_array);
 		} else {
 			$asc = $isAsc ? "ASC" : "DESC";
-			$limit = $page? "LIMIT " . $page_size . " OFFSET " . $page * $page_size : "";
+			$limit = $page ? "LIMIT " . $page_size . " OFFSET " . $page * $page_size : "";
 
 			$query = "SELECT * FROM " . static::TABLE_NAME . " ORDER BY created_at $asc $limit";
 			$rs = pg_query(DBCONN, $query);
@@ -97,17 +104,28 @@ class BaseModel
 		}
 	}
 
-	static function load_by_condition($condition){
+	static function load_by_condition($condition)
+	{
 		$assoc_rows = pg_select(DBCONN, static::TABLE_NAME, $condition);
-		if(!$assoc_rows)
+		if (!$assoc_rows)
 			return [];
 		/** @var static[] $objects */
 		$objects = [];
-		foreach ($assoc_rows as $row){
+		foreach ($assoc_rows as $row) {
 			$objects[] = new static($row);
 		}
 
 		return $objects;
+	}
+
+	public function className()
+	{
+		return static::class;
+	}
+
+	static function delete($id)
+	{
+		return pg_delete(DBCONN, static::TABLE_NAME, ['id' => $id]);
 	}
 }
 

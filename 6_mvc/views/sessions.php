@@ -11,7 +11,7 @@
 		<p class="sessions__sessions">
 			<? foreach ($sessions as $session){
 				?><a href="/6_mvc/session.php?id=<?= $session->id ?>" class="sessions__session">
-				<?= date('i:s', $session->time) ?>
+				<?= date('H:i', $session->time) ?>
 			</a> <?
 		} ?>
 		</p><?

@@ -13,7 +13,7 @@ class Tariff extends BaseModel
 
 	const TABLE_NAME = 'tariffs';
 
-	function __construct($fields)
+	function __construct($fields = [])
 	{
 		parent::__construct($fields);
 	}
