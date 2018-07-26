@@ -50,7 +50,7 @@ function admin_table($objects, $filter_str = '')
 				} ?>
 				<td>
 
-					<a href="/6_mvc/admin/view.php?view[class_name]=<?= $class_name ?>&view[id]=<?= $object->id ?>"
+					<a href="/6_mvc/admin/detail.php?detail[class_name]=<?= $class_name ?>&detail[id]=<?= $object->id ?>"
 					   title="детально">👁</a>
 					<a href="/6_mvc/admin/change.php?change[class_name]=<?= $class_name ?>&change[id]=<?= $object->id ?>"
 					   title="изменить">🖉</a>

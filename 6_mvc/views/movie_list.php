@@ -1,5 +1,5 @@
 <div class="movie_list">
-	<div class="row">
+	<div class="card-deck">
 		<? /** @var Movie[] $movies */
 		foreach ($movies as $movie){
 			?>

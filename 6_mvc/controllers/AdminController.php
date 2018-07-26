@@ -55,6 +55,17 @@ class AdminController extends BaseController
 			['movies' => $movies, 'main_menu' => $this->main_menu]);
 	}
 
+	function actionDetail()
+	{
+		$model_name = $_REQUEST['detail']['class_name'];
+		$id = (int)$_REQUEST['detail']['id'];
+
+		/** @var HallRow|Movie|MovieHall|Place|Reservation|Session|Tariff $model_name */
+		$model = $model_name::load($id);
+		return $this->render("admin_detail", "детально",
+			['model' => $model, 'main_menu' => $this->main_menu]);
+	}
+
 	function actionAdd()
 	{
 		$model_name = $_REQUEST['add']['class_name'];

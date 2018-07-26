@@ -12,5 +12,5 @@ echo change_form($model);
 if($res){
 	echo alert('Запись изменена', 'success');
 } elseif($res === false){
-	echo alert('Ошибка изменения', 'warning');
+	echo alert('Ошибка изменения', 'danger');
 }
