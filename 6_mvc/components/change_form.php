@@ -9,11 +9,12 @@
  * @param HallRow|Movie|MovieHall|Place|Reservation|Session|Tariff $model
  * @return string
  */
-function add_form($model){
+function change_form($model){
 	ob_start();
 	?>
 	<form method="post">
-		<input type="hidden" name="add[class_name]" value="<?= $model->className() ?>">
+		<input type="hidden" name="change[class_name]" value="<?= $model->className() ?>">
+		<input type="hidden" name="change[id]" value="<?= $model->id ?>">
 		<?
 		foreach ($model as $key => $_){
 			if(
@@ -23,16 +24,17 @@ function add_form($model){
 				continue;
 			?>
 			<div class="form-group">
-				<label for="add_<?= $key ?>"><?= $key ?></label>
+				<label for="change_<?= $key ?>"><?= $key ?></label>
 				<?
 				if(in_array($key, ['text', 'description']))
 				{
 					?>
-					<textarea class="form-control" id="add_<?= $key ?>" name="add[<?= $key ?>]" rows="7"></textarea>
+					<textarea class="form-control" id="change_<?= $key ?>" name="change[<?= $key ?>]"
+					          rows="7"><?= $model->$key ?></textarea>
 					<?
 				} else {
 					?>
-					<input class="form-control" id="add_<?= $key ?>" name="add[<?= $key ?>]">
+					<input class="form-control" id="change_<?= $key ?>" name="change[<?= $key ?>]" value="<?= $model->$key ?>">
 					<?
 				}
 				?>
@@ -40,7 +42,7 @@ function add_form($model){
 			<?
 		}
 		?>
-		<input type="submit" value="добавить" class="btn btn-primary">
+		<input type="submit" value="изменить" class="btn btn-primary">
 	</form>
 	<?
 	return ob_get_clean();

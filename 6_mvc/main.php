@@ -11,6 +11,7 @@ require __DIR__ . '/functions.php';
 require __DIR__ . '/components/main_menu.php';
 require __DIR__ . '/components/admin_table.php';
 require __DIR__ . '/components/add_form.php';
+require __DIR__ . '/components/change_form.php';
 require __DIR__ . '/components/alert.php';
 
 require "config/config.php";

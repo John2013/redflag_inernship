@@ -50,11 +50,11 @@ function admin_table($objects, $filter_str = '')
 				} ?>
 				<td>
 
-					<a href="/6_mvc/admin/view.php?model=<?= $class_name ?>&id=<?= $object->id ?>"
+					<a href="/6_mvc/admin/view.php?view[class_name]=<?= $class_name ?>&view[id]=<?= $object->id ?>"
 					   title="детально">👁</a>
-					<a href="/6_mvc/admin/change.php?model=<?= $class_name ?>&id=<?= $object->id ?>"
+					<a href="/6_mvc/admin/change.php?change[class_name]=<?= $class_name ?>&change[id]=<?= $object->id ?>"
 					   title="изменить">🖉</a>
-					<a href="/6_mvc/admin/delete.php?model=<?= $class_name ?>&id=<?= $object->id ?>"
+					<a href="/6_mvc/admin/delete.php?del[class_name]=<?= $class_name ?>&del[id]=<?= $object->id ?>"
 					   title="удалить">🞩</a>
 				</td>
 			</tr>

@@ -13,4 +13,4 @@ define('ACTIVE_MENU_ITEM_ID', $_SESSION['ACTIVE_MENU_ITEM_ID']);
 
 $controller = new AdminController();
 
-$controller->actionDelete($_REQUEST['model'], $_REQUEST['id']);
+$controller->actionDelete();
