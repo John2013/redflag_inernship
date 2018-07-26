@@ -13,6 +13,8 @@ class Reservation extends BaseModel
 	public $status;
 	public $client;
 
+	const TABLE_NAME = 'reservation';
+
 	function __construct($fields = [])
 	{
 		parent::__construct($fields);

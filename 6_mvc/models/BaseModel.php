@@ -97,9 +97,10 @@ class BaseModel
 			$assoc_array = pg_fetch_all($rs);
 			/** @var static[] $objects */
 			$objects = [];
-			foreach ($assoc_array as $row) {
-				$objects[] = new static($row);
-			}
+			if(!empty($assoc_array))
+				foreach ($assoc_array as $row) {
+					$objects[] = new static($row);
+				}
 			return $objects;
 		}
 	}

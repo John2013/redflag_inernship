@@ -55,6 +55,32 @@ class AdminController extends BaseController
 			['movies' => $movies, 'main_menu' => $this->main_menu]);
 	}
 
+	function actionHalls()
+	{
+		$halls = MovieHall::load();
+		return $this->render("admin_halls", "список кинозалов",
+			['halls' => $halls, 'main_menu' => $this->main_menu]);
+	}
+
+	function actionTariffs()
+	{
+		$tariffs = Tariff::load();
+		return $this->render("admin_tariffs", "список кинозалов",
+			['tariffs' => $tariffs, 'main_menu' => $this->main_menu]);
+	}
+
+	function actionSessions(){
+		$sessions = Session::load();
+		return $this->render("admin_sessions", "список кинозалов",
+			['sessions' => $sessions, 'main_menu' => $this->main_menu]);
+	}
+
+	function actionReservation(){
+		$reservations = Reservation::load();
+		return $this->render("admin_reservation", "список брони",
+			['reservations' => $reservations, 'main_menu' => $this->main_menu]);
+	}
+
 	function actionDetail()
 	{
 		$model_name = $_REQUEST['detail']['class_name'];
@@ -109,7 +135,7 @@ class AdminController extends BaseController
 			['result' => $res, 'main_menu' => $this->main_menu]);
 	}
 
-	function actionSessions(int $movie_id)
+	function actionMovieSessions(int $movie_id)
 	{
 		$movie = Movie::load($movie_id);
 		$sessions = $movie->get_sessions();
@@ -120,7 +146,7 @@ class AdminController extends BaseController
 			$sessions_dates[$date][] = $session;
 		}
 
-		return $this->render("sessions", "сеансы",
+		return $this->render("admin_movie_sessions", "сеансы фильма",
 			['movie' => $movie, 'sessions_dates' => $sessions_dates, 'main_menu' => $main_menu]);
 	}
 
