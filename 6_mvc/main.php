@@ -13,6 +13,8 @@ require __DIR__ . '/components/admin_table.php';
 require __DIR__ . '/components/add_form.php';
 require __DIR__ . '/components/change_form.php';
 require __DIR__ . '/components/alert.php';
+require __DIR__ . '/components/get_option.php';
+require __DIR__ . '/components/get_options.php';
 
 require "config/config.php";
 require "db/dbconn.php";
