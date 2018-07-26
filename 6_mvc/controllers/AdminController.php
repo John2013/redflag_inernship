@@ -45,7 +45,7 @@ class AdminController extends BaseController
 				'url' => '/6_mvc/admin/reservation.php'
 			]
 
-		]);
+		], 'dark');
 	}
 
 	function actionIndex()

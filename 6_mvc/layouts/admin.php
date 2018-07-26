@@ -20,7 +20,7 @@
 
 	<title><?= $title ?></title>
 </head>
-<body>
+<body class="bg-dark text-white">
 <div class="">
 	<?= $main_menu ?>
 </div>

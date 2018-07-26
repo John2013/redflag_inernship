@@ -8,7 +8,7 @@
  * @var HallRow|Movie|MovieHall|Place|Reservation|Session|Tariff $model
  */
 ?>
-	<div class="card">
+	<div class="card text-white bg-dark">
 		<h5 class="card-header"><?= $model->className() ?></h5>
 		<div class="card-body">
 			<?

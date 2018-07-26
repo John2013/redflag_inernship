@@ -1,5 +1,5 @@
 <?php
-function main_menu($items=null){
+function main_menu($items=null, $theme = 'light'){
 	if(!isset($items)){
 		$items = [
 			[
@@ -16,7 +16,7 @@ function main_menu($items=null){
 	}
 	ob_start();
 	?>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-<?= $theme ?> bg-<?= $theme ?>">
 		<a class="navbar-brand" href="/6_mvc">Кинотеатр</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu-nav"
 		        aria-controls="main-menu-nav" aria-expanded="false" aria-label="Toggle navigation">
