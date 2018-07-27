@@ -38,6 +38,10 @@ function get_options(string $col_title)
 			$model = Tariff::class;
 			$key = 'name';
 			break;
+		case "movie_id":
+			$model = Movie::class;
+			$key = 'name';
+			break;
 		default:
 			return false;
 	}

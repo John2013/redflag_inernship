@@ -18,7 +18,7 @@ function change_form($model){
 		<?
 		foreach ($model as $key => $_){
 			if(
-				mb_substr($key, 0, 0) == '_'
+				substr($key, 0, 1) == '_'
 				|| in_array($key, ['created_at', 'updated_at', 'id'])
 			)
 				continue;
@@ -31,6 +31,22 @@ function change_form($model){
 					?>
 					<textarea class="form-control" id="change_<?= $key ?>" name="change[<?= $key ?>]"
 					          rows="7"><?= $model->$key ?></textarea>
+					<?
+				}
+				elseif (substr($key, -3) == '_id') {
+					$options = get_options($key);
+					?>
+					<select class="form-control" name="change[<?= $key ?>]" id="change_<?= $key ?>">
+						<?
+						foreach ($options as $option){
+							?>
+							<option value="<?= $option['id'] ?>"<? if($model->$key == $option['id']){?> selected<?} ?>>
+								<?= $option['title'] ?>
+							</option>
+							<?
+						}
+						?>
+					</select>
 					<?
 				} else {
 					?>

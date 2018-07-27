@@ -41,11 +41,15 @@ function admin_table($objects, $filter_str = '')
 								? mb_substr($object->$key, 0, 50) . "…"
 								: $object->$key;
 
-						elseif ($object->$key == null)
-							$value = '&lt;не задано&gt;';
+						elseif(substr($key, -3) == "_id"){
+							$value = get_option($key, $object->$key);
+						}
 
 						else
-							$value = $object->$key;
+							$value = $object->$key; 
+
+						if ($value == null)
+							$value = '&lt;не задано&gt;';
 						?>
 						<td><?= $value ?></td><?
 					} ?>
