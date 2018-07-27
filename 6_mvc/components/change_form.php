@@ -33,6 +33,11 @@ function change_form($model){
 					          rows="7"><?= $model->$key ?></textarea>
 					<?
 				}
+				elseif (in_array($key, ['time',])){
+					?>
+					<input type="hidden" name="change[<?= $key ?>]" id="change_<?= $key ?>" value="<?= $model->$key ?>" data-type="datetime">
+					<?
+				}
 				elseif (substr($key, -3) == '_id') {
 					$options = get_options($key);
 					?>

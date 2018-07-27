@@ -18,7 +18,7 @@ function add_form($model)
 		<?
 		foreach ($model as $key => $_) {
 			if (
-				mb_substr($key, 0, 0) == '_'
+				substr($key, 0, 1) == '_'
 				|| in_array($key, ['created_at', 'updated_at', 'id'])
 			)
 				continue;
@@ -30,12 +30,18 @@ function add_form($model)
 					?>
 					<textarea class="form-control" id="add_<?= $key ?>" name="add[<?= $key ?>]" rows="7"></textarea>
 					<?
+				} elseif (in_array($key, ['time',])) {
+					$cur_time = time();
+					?>
+					<input type="hidden" name="add[<?= $key ?>]" id="add_<?= $key ?>" <?
+					?>value="<?= $cur_time - $cur_time % 600 ?>" data-type="datetime">
+					<?
 				} elseif (substr($key, -3) == '_id') {
 					$options = get_options($key);
 					?>
 					<select name="add[<?= $key ?>]" id="add_<?= $key ?>">
 						<?
-						foreach ($options as $option){
+						foreach ($options as $option) {
 							?>
 							<option value="<?= $option['id'] ?>"><?= $option['title'] ?></option>
 							<?
