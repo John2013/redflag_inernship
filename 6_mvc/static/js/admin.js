@@ -26,7 +26,7 @@ value="${date.toDatetimeLocal()}">`
 
 	$("input[type=datetime-local].datetime-control").each(function () {
 		$(this).change(function () {
-			let time = Math.round(new Date($(this).val()).getTime()/1000);
+			let time = Math.round(new Date($(this).val()).getTime() / 1000);
 			$(`#${$(this).data('for')}`).val(time);
 		})
 	})
