@@ -15,3 +15,7 @@
 img.movie__img{
 	height: 360px;
 }
+
+.places-buttons .btn{
+	width: 2rem;
+}

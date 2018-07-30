@@ -69,16 +69,32 @@ class AdminController extends BaseController
 			['tariffs' => $tariffs, 'main_menu' => $this->main_menu]);
 	}
 
-	function actionSessions(){
+	function actionSessions()
+	{
 		$sessions = Session::load();
 		return $this->render("admin_sessions", "список кинозалов",
 			['sessions' => $sessions, 'main_menu' => $this->main_menu]);
 	}
 
-	function actionReservation(){
+	function actionReservation()
+	{
 		$reservations = Reservation::load();
 		return $this->render("admin_reservation", "список брони",
 			['reservations' => $reservations, 'main_menu' => $this->main_menu]);
+	}
+
+	function actionPlaces()
+	{
+		if (!isset($_REQUEST['hall_id'])) {
+			$halls = MovieHall::load();
+			return $this->render("admin_places_halls", "список мест",
+				['halls' => $halls, 'main_menu' => $this->main_menu]);
+		} else {
+			$halls = Place::get_by_hall_id($_REQUEST['hall_id']);
+			return $this->render("admin_places", "список мест",
+				['halls' => $halls, 'main_menu' => $this->main_menu]);
+		}
+
 	}
 
 	function actionDetail()

@@ -29,7 +29,7 @@ function get_option(string $col_title, int $id)
 			break;
 		case "session_id":
 			$model = Session::class;
-			$key = 'number';
+			$key = 'id';
 			break;
 		case "hall_id":
 			$model = MovieHall::class;
