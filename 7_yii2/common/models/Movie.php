@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -11,9 +11,12 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property string $title
  * @property string $description
- * @property string $poster_url
+ * @property string $poster
  * @property int $created_at
  * @property int $updated_at
+ *
+ * @method getImageFileUrl(string $prop_name)
+ * @method getThumbFileUrl(string $prop_name, string $thumb_name)
  */
 class Movie extends \yii\db\ActiveRecord
 {
@@ -32,6 +35,17 @@ class Movie extends \yii\db\ActiveRecord
 	{
 		return [
 			TimestampBehavior::class,
+			[
+				'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+				'attribute' => 'poster',
+				'thumbs' => [
+					'thumb' => ['width' => 205, 'height' => 310],
+				],
+				'filePath' => '@webroot/uploads/posters/[[pk]].[[extension]]',
+				'fileUrl' => '/uploads/posters/[[pk]].[[extension]]',
+				'thumbPath' => '@webroot/uploads/posters/[[profile]]_[[pk]].[[extension]]',
+				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
+			],
 		];
 	}
 
@@ -41,11 +55,12 @@ class Movie extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'poster_url', 'created_at', 'updated_at'], 'required'],
+            [['title', 'description', 'poster'], 'required'],
             [['description'], 'string'],
             [['created_at', 'updated_at'], 'default', 'value' => null],
             [['created_at', 'updated_at'], 'integer'],
-            [['title', 'poster_url'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
+	        [['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
         ];
     }
 
@@ -58,7 +73,7 @@ class Movie extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Заголовок',
             'description' => 'Описание',
-            'poster_url' => 'Постер',
+            'poster' => 'Постер',
             'created_at' => 'Создано',
             'updated_at' => 'Изменено',
         ];

@@ -22,6 +22,10 @@ use yii\web\IdentityInterface;
  * @property string $password write-only password
  * @property string $first_name [varchar(255)]
  * @property string $last_name [varchar(255)]
+ * @property string $avatar [varchar(255)]
+ *
+ * @method getImageFileUrl(string $prop_name)
+ * @method getThumbFileUrl(string $prop_name, string $thumb_name)
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -44,6 +48,19 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::class,
+	        [
+		        'class' => '\yiidreamteam\upload\ImageUploadBehavior',
+		        'attribute' => 'avatar',
+		        'thumbs' => [
+			        'thumb90' => ['width' => 90, 'height' => 90],
+			        'thumb45' => ['width' => 45, 'height' => 45],
+			        'thumb25' => ['width' => 25, 'height' => 25],
+		        ],
+		        'filePath' => '@uploads/avatars/[[pk]].[[extension]]',
+		        'fileUrl' => '/uploads/avatars/[[pk]].[[extension]]',
+		        'thumbPath' => '@uploads/avatars/[[profile]]_[[pk]].[[extension]]',
+		        'thumbUrl' => '/uploads/avatars/[[profile]]_[[pk]].[[extension]]',
+	        ],
         ];
     }
 
@@ -55,6 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+	        ['avatar', 'file', 'extensions' => 'jpeg, jpg, png'],
         ];
     }
 
@@ -192,4 +210,30 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+	/**
+	 * Returns first_name and last_name string
+	 * @return string
+	 */
+	public function getName()
+    {
+    	return "$this->first_name $this->last_name";
+    }
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'username' => 'Ник',
+			'status' => 'Статус',
+			'first_name' => 'Имя',
+			'last_name' => 'Фамилия',
+			'created_at' => 'Создано',
+			'updated_at' => 'Изменено',
+			'avatar' => 'Аватар',
+		];
+	}
 }

@@ -43,14 +43,16 @@ return [
 			'rules' => [
 			],
 		],
-		'view' => [
-			'theme' => [
-				'pathMap' => [
-					'@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
-				],
-			],
+		'formatter' => [
+			'class' => 'yii\i18n\Formatter',
+			'dateFormat' => 'php:d.m.Y',
+			'datetimeFormat' => 'php:d.m.Y H:i:s',
+			'timeFormat' => 'php:H:i:s',
+			'defaultTimeZone' => 'Europe/Moscow',
+			'locale' => 'ru-RU'
 		],
 	],
-	'language' => 'ru',
+	'language' => 'ru-RU',
+	'timeZone' => 'Europe/Moscow',
 	'params' => $params,
 ];
