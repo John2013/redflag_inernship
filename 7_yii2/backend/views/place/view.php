@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
                 'id:integer',
                 'row.number:integer',
-                'number:integer',
+	            'number:integer',
+	            'offset',
                 'created_at:datetime',
                 'updated_at:datetime',
             ],

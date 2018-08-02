@@ -55,7 +55,7 @@ class Reservation extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'user_id' => 'Пользованель',
+			'user_id' => 'Пользователь',
 			'place_id' => 'Место',
 			'status_id' => 'Статус',
 			'session_id' => 'Сеанс',

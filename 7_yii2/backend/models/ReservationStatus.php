@@ -51,4 +51,16 @@ class ReservationStatus extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Reservation::class, ['status_id' => 'id']);
     }
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->name;
+		}
+		return $list;
+	}
 }

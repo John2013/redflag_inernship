@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property int $row_id
  * @property int $number
+ * @property float $offset [double precision]
  * @property int $created_at
  * @property int $updated_at
  *
@@ -36,6 +37,8 @@ class Place extends \yii\db\ActiveRecord
 			[['row_id', 'number'], 'required'],
 			[['row_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
 			[['row_id', 'number', 'created_at', 'updated_at'], 'integer'],
+			[['offset'], 'number'],
+			[['row_id', 'number'], 'unique', 'targetAttribute' => ['row_id', 'number']],
 			[['row_id'], 'exist', 'skipOnError' => true, 'targetClass' => Row::class, 'targetAttribute' => ['row_id' => 'id']],
 		];
 	}
@@ -49,6 +52,7 @@ class Place extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'row_id' => 'Ряд',
 			'number' => 'Номер',
+			'offset' => 'Отступ слева',
 			'created_at' => 'Создано',
 			'updated_at' => 'Изменено',
 		];
@@ -78,5 +82,18 @@ class Place extends \yii\db\ActiveRecord
 		return [
 			TimestampBehavior::class,
 		];
+	}
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$rows_list = Row::listAll();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = "{$rows_list[$model->row_id]} место $model->number";
+		}
+		return $list;
 	}
 }

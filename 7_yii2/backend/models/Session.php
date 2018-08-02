@@ -9,13 +9,13 @@ use yii\i18n\Formatter;
 /**
  * This is the model class for table "sessions".
  *
- * @property int $id
- * @property int $movie_id
- * @property int $hall_id
- * @property int $tariff_id
- * @property int $time
- * @property int $created_at
- * @property int $updated_at
+ * @property string $id [integer]
+ * @property string $movie_id [integer]
+ * @property string $hall_id [integer]
+ * @property string $tariff_id [integer]
+ * @property string $created_at [integer]
+ * @property string $updated_at [integer]
+ * @property int $time [timestamp(0)]
  *
  * @property Reservation[] $reservations
  * @property Hall $hall
@@ -39,11 +39,12 @@ class Session extends \yii\db\ActiveRecord
 	{
 		return [
 			[['movie_id', 'hall_id', 'tariff_id', 'time'], 'required'],
-			[['movie_id', 'hall_id', 'tariff_id', 'time', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['movie_id', 'hall_id', 'tariff_id', 'time', 'created_at', 'updated_at'], 'integer'],
-			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::class, 'targetAttribute' => ['hall_id' => 'id']],
-			[['movie_id'], 'exist', 'skipOnError' => true, 'targetClass' => Movie::class, 'targetAttribute' => ['movie_id' => 'id']],
-			[['tariff_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tariff::class, 'targetAttribute' => ['tariff_id' => 'id']],
+			[['movie_id', 'hall_id', 'tariff_id', 'created_at', 'updated_at'], 'default', 'value' => null],
+			[['movie_id', 'hall_id', 'tariff_id', 'created_at', 'updated_at'], 'integer'],
+			[['time'], 'safe'],
+			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::className(), 'targetAttribute' => ['hall_id' => 'id']],
+			[['movie_id'], 'exist', 'skipOnError' => true, 'targetClass' => Movie::className(), 'targetAttribute' => ['movie_id' => 'id']],
+			[['tariff_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tariff::className(), 'targetAttribute' => ['tariff_id' => 'id']],
 		];
 	}
 
@@ -64,7 +65,7 @@ class Session extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery|Reservation[]
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getReservations()
 	{
@@ -72,7 +73,7 @@ class Session extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery|Hall
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getHall()
 	{
@@ -80,7 +81,7 @@ class Session extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery|Movie
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getMovie()
 	{
@@ -88,7 +89,7 @@ class Session extends \yii\db\ActiveRecord
 	}
 
 	/**
-	 * @return \yii\db\ActiveQuery|Tariff
+	 * @return \yii\db\ActiveQuery
 	 */
 	public function getTariff()
 	{
@@ -113,6 +114,20 @@ class Session extends \yii\db\ActiveRecord
 	public function getTime()
 	{
 		$formatter = new Formatter();
-		return $formatter->asDatetime($this->time);
+		return $formatter->asDatetime($this->time, 'd.m.Y H:i:s');
+	}
+
+	/**
+	 * @return array
+	 * @throws \yii\base\InvalidConfigException
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$movies_list = Movie::listAll();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = "{$movies_list[$model->movie_id]} {$model->getTime()}";
+		}
+		return $list;
 	}
 }

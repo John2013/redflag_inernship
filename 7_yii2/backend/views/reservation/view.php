@@ -7,16 +7,16 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Reservation */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Reservations', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reservation-view box box-primary">
     <div class="box-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-flat',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -25,13 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'id',
-                'user_id',
-                'place_id',
-                'status_id',
-                'session_id',
-                'created_at:datetime',
-                'updated_at:datetime',
+	            'id',
+	            'user.username',
+	            'place.row.hall.number:integer:Кинозал',
+	            'place.row.number:integer:Ряд',
+	            'place.number:integer:Место',
+	            'status.name:integer:Статус',
+	            'session.movie.title:text:Фильм',
+	            'session.time:datetime:Время',
+	            'created_at:datetime',
+	            'updated_at:datetime',
             ],
         ]) ?>
     </div>

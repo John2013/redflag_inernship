@@ -50,7 +50,7 @@ return [
 			'timeFormat' => 'php:H:i:s',
 			'defaultTimeZone' => 'Europe/Moscow',
 			'locale' => 'ru-RU',
-			'currencyCode' => 'RUB',
+			'currencyCode' => '₽',
 		],
 	],
 	'language' => 'ru-RU',

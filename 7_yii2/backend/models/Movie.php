@@ -78,4 +78,16 @@ class Movie extends \yii\db\ActiveRecord
             'updated_at' => 'Изменено',
         ];
     }
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->title;
+		}
+		return $list;
+	}
 }

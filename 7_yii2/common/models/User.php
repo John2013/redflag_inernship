@@ -236,4 +236,16 @@ class User extends ActiveRecord implements IdentityInterface
 			'avatar' => 'Аватар',
 		];
 	}
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->username;
+		}
+		return $list;
+	}
 }

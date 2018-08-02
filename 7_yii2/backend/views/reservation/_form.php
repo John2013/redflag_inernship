@@ -12,21 +12,17 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
     <div class="box-body table-responsive">
 
-        <?= $form->field($model, 'user_id')->textInput() ?>
+        <?= $form->field($model, 'user_id')->dropDownList(\common\models\User::listAll()) ?>
 
-        <?= $form->field($model, 'place_id')->textInput() ?>
+        <?= $form->field($model, 'place_id')->dropDownList(\app\models\Place::listAll()) ?>
 
-        <?= $form->field($model, 'status_id')->textInput() ?>
+        <?= $form->field($model, 'status_id')->dropDownList(\app\models\ReservationStatus::listAll()) ?>
 
-        <?= $form->field($model, 'session_id')->textInput() ?>
-
-        <?= $form->field($model, 'created_at')->textInput() ?>
-
-        <?= $form->field($model, 'updated_at')->textInput() ?>
+        <?= $form->field($model, 'session_id')->dropDownList(\app\models\Session::listAll()) ?>
 
     </div>
     <div class="box-footer">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-flat']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

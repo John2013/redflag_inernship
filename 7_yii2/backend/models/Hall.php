@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use common\widgets\Pprint;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -76,5 +77,17 @@ class Hall extends \yii\db\ActiveRecord
 		return [
 			TimestampBehavior::class,
 		];
+	}
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->number;
+		}
+		return $list;
 	}
 }

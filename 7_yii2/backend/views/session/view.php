@@ -5,8 +5,9 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Session */
+/* @var $movie app\models\Movie */
 
-$movie = $model->getMovie();
+$movie = $model->getMovie()->one();
 $this->title = "$movie->title {$model->getTime()}";
 $this->params['breadcrumbs'][] = ['label' => 'Сеансы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,9 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'movie.number',
-                'hall.number',
-                'tariff.name',
+                'movie.title:text:Фильм',
+                'hall.number:integer:Зал',
+                'tariff.name:text:Тариф',
                 'time:datetime',
                 'created_at:datetime',
                 'updated_at:datetime',

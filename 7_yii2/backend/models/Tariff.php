@@ -71,4 +71,16 @@ class Tariff extends \yii\db\ActiveRecord
 			TimestampBehavior::class,
 		];
 	}
+
+	/**
+	 * @return array
+	 */
+	static public function listAll(){
+		$models = self::find()->all();
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->name;
+		}
+		return $list;
+	}
 }
