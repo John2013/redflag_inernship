@@ -13,15 +13,10 @@ class m180801_083401_create_halls_table extends Migration
     public function safeUp()
     {
         $this->createTable('halls', [
-            'id' => $this->primaryKey(),
+	        'id' => $this->primaryKey(),
+	        'number' => $this->integer()->notNull(),
+	        'created_at' => $this->integer(),
+	        'updated_at' => $this->integer(),
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
-    {
-        $this->dropTable('halls');
     }
 }
