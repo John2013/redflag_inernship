@@ -7,9 +7,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * MovieSearch represents the model behind the search form of `common\models\Movie`.
+ * ReservationStatusSearch represents the model behind the search form of `app\models\ReservationStatus`.
  */
-class MovieSearch extends Movie
+class ReservationStatusSearch extends ReservationStatus
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class MovieSearch extends Movie
     {
         return [
             [['id'], 'integer'],
-	        [['title', 'description', 'poster'], 'safe'],
-	        [['created_at', 'updated_at'], 'datetime'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class MovieSearch extends Movie
      */
     public function search($params)
     {
-        $query = Movie::find();
+        $query = ReservationStatus::find();
 
         // add conditions that should always apply here
 
@@ -61,13 +60,9 @@ class MovieSearch extends Movie
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'title', $this->title])
-            ->andFilterWhere(['ilike', 'description', $this->description])
-            ->andFilterWhere(['ilike', 'poster', $this->poster]);
+        $query->andFilterWhere(['ilike', 'name', $this->name]);
 
         return $dataProvider;
     }

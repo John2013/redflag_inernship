@@ -25,6 +25,7 @@ class ProfileController extends \yii\web\Controller
 
     public function actionChange()
     {
+    	/** @var User $model */
 	    $model = Yii::$app->user->identity;
 
 	    if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -38,6 +39,7 @@ class ProfileController extends \yii\web\Controller
 
     public function actionDelete()
     {
+	    /** @var User $model */
 	    $model = Yii::$app->user->identity;
 	    $model->delete();
         return $this->redirect(['index']);

@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Movie;
-use app\models\MovieSearch;
+use app\models\Place;
+use app\models\PlaceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MovieController implements the CRUD actions for Movie model.
+ * PlaceController implements the CRUD actions for Place model.
  */
-class MovieController extends Controller
+class PlaceController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class MovieController extends Controller
     }
 
     /**
-     * Lists all Movie models.
+     * Lists all Place models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MovieSearch();
+        $searchModel = new PlaceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Displays a single Movie model.
+	 * Displays a single Place model.
 	 * @param integer $id
 	 * @return mixed
 	 * @throws NotFoundHttpException
@@ -58,13 +58,13 @@ class MovieController extends Controller
     }
 
     /**
-     * Creates a new Movie model.
+     * Creates a new Place model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Movie();
+        $model = new Place();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Updates an existing Movie model.
+	 * Updates an existing Place model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -96,7 +96,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Deletes an existing Movie model.
+	 * Deletes an existing Place model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -112,15 +112,15 @@ class MovieController extends Controller
     }
 
     /**
-     * Finds the Movie model based on its primary key value.
+     * Finds the Place model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Movie the loaded model
+     * @return Place the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Movie::findOne($id)) !== null) {
+        if (($model = Place::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

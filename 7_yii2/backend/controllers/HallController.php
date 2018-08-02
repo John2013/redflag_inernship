@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Movie;
-use app\models\MovieSearch;
+use app\models\Hall;
+use app\models\HallSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MovieController implements the CRUD actions for Movie model.
+ * HallController implements the CRUD actions for Hall model.
  */
-class MovieController extends Controller
+class HallController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class MovieController extends Controller
     }
 
     /**
-     * Lists all Movie models.
+     * Lists all Hall models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new MovieSearch();
+        $searchModel = new HallSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Displays a single Movie model.
+	 * Displays a single Hall model.
 	 * @param integer $id
 	 * @return mixed
 	 * @throws NotFoundHttpException
@@ -58,13 +58,13 @@ class MovieController extends Controller
     }
 
     /**
-     * Creates a new Movie model.
+     * Creates a new Hall model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Movie();
+        $model = new Hall();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Updates an existing Movie model.
+	 * Updates an existing Hall model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id
 	 * @return mixed
@@ -96,7 +96,7 @@ class MovieController extends Controller
     }
 
 	/**
-	 * Deletes an existing Movie model.
+	 * Deletes an existing Hall model.
 	 * If deletion is successful, the browser will be redirected to the 'index' page.
 	 * @param integer $id
 	 * @return mixed
@@ -112,15 +112,15 @@ class MovieController extends Controller
     }
 
     /**
-     * Finds the Movie model based on its primary key value.
+     * Finds the Hall model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Movie the loaded model
+     * @return Hall the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Movie::findOne($id)) !== null) {
+        if (($model = Hall::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
