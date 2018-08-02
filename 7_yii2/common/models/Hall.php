@@ -11,6 +11,9 @@ use Yii;
  * @property int $number
  * @property int $created_at
  * @property int $updated_at
+ *
+ * @property Row[] $rows
+ * @property Session[] $sessions
  */
 class Hall extends \yii\db\ActiveRecord
 {
@@ -42,9 +45,25 @@ class Hall extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'number' => 'Номер',
-            'created_at' => 'Создано',
-            'updated_at' => 'Изменено',
+            'number' => 'Number',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRows()
+    {
+        return $this->hasMany(Row::className(), ['hall_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSessions()
+    {
+        return $this->hasMany(Session::className(), ['hall_id' => 'id']);
     }
 }
