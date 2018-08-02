@@ -65,6 +65,41 @@
 						'icon' => 'film',
 						'url' => ['movie/index'],
 					],
+					[
+						'label' => 'Кинозалы',
+						'icon' => 'video-camera',
+						'url' => ['hall/index'],
+					],
+					[
+						'label' => 'Ряды',
+						'icon' => 'align-justify',
+						'url' => ['row/index'],
+					],
+					[
+						'label' => 'Места',
+						'icon' => 'braille',
+						'url' => ['place/index'],
+					],
+					[
+						'label' => 'Тарифы',
+						'icon' => 'rouble',
+						'url' => ['tariff/index'],
+					],
+					[
+						'label' => 'Бронь',
+						'icon' => 'shopping-cart',
+						'url' => ['reservation/index'],
+					],
+					[
+						'label' => 'Статусы бронирования',
+						'icon' => 'bars',
+						'url' => ['reservation-status/index'],
+					],
+					[
+						'label' => 'Сеансы',
+						'icon' => 'calendar',
+						'url' => ['session/index'],
+					],
 				],
 			]
 		) ?>

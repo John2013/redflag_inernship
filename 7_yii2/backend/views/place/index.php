@@ -7,13 +7,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\PlaceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Places';
+$this->title = 'Места';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="place-index box box-primary">
     <?php Pjax::begin(); ?>
     <div class="box-header with-border">
-        <?= Html::a('Create Place', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a('Создать место', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -24,11 +24,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
 
-                'id',
-                'row_id',
-                'number',
-                'created_at',
-                'updated_at',
+                'id:integer',
+                'row.number:integer',
+                'number:integer',
+                'created_at:datetime',
+                'updated_at:datetime',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],

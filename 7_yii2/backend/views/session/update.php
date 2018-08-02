@@ -5,10 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Session */
 
-$this->title = 'Update Session: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$movie = $model->getMovie();
+$this->title = "Изменить сеанс: $movie->title {$model->getTime()}";
+$this->params['breadcrumbs'][] = ['label' => 'Сеансы', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => "$movie->title {$model->getTime()}", 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="session-update">
 

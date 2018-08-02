@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "halls".
@@ -45,9 +46,9 @@ class Hall extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'number' => 'Number',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'number' => 'Номер',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
         ];
     }
 
@@ -56,7 +57,7 @@ class Hall extends \yii\db\ActiveRecord
      */
     public function getRows()
     {
-        return $this->hasMany(Row::className(), ['hall_id' => 'id']);
+        return $this->hasMany(Row::class, ['hall_id' => 'id']);
     }
 
     /**
@@ -64,6 +65,16 @@ class Hall extends \yii\db\ActiveRecord
      */
     public function getSessions()
     {
-        return $this->hasMany(Session::className(), ['hall_id' => 'id']);
+        return $this->hasMany(Session::class, ['hall_id' => 'id']);
     }
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::class,
+		];
+	}
 }

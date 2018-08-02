@@ -6,17 +6,17 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Hall */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Halls', 'url' => ['index']];
+$this->title = $model->number;
+$this->params['breadcrumbs'][] = ['label' => 'Кинозалы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hall-view box box-primary">
     <div class="box-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-flat',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'id',
-                'number',
+                'id:integer',
+                'number:integer',
                 'created_at:datetime',
                 'updated_at:datetime',
             ],

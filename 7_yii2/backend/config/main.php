@@ -49,7 +49,8 @@ return [
 			'datetimeFormat' => 'php:d.m.Y H:i:s',
 			'timeFormat' => 'php:H:i:s',
 			'defaultTimeZone' => 'Europe/Moscow',
-			'locale' => 'ru-RU'
+			'locale' => 'ru-RU',
+			'currencyCode' => 'RUB',
 		],
 	],
 	'language' => 'ru-RU',

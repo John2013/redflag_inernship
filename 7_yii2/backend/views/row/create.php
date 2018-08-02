@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Row */
 
-$this->title = 'Create Row';
-$this->params['breadcrumbs'][] = ['label' => 'Rows', 'url' => ['index']];
+$this->title = 'Создать ряд';
+$this->params['breadcrumbs'][] = ['label' => 'Ряды', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row-create">

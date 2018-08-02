@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Tariff;
 
 /**
  * TariffSearch represents the model behind the search form of `app\models\Tariff`.
@@ -17,7 +18,9 @@ class TariffSearch extends Tariff
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'created_at', 'updated_at'], 'integer'],
+            [['name'], 'safe'],
+            [['price'], 'number'],
         ];
     }
 
@@ -59,7 +62,12 @@ class TariffSearch extends Tariff
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'price' => $this->price,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
+
+        $query->andFilterWhere(['ilike', 'name', $this->name]);
 
         return $dataProvider;
     }

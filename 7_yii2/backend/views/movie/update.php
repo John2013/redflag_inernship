@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Movie */
+/* @var $model app\models\Movie */
 
-$this->title = 'Update Movie: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Movies', 'url' => ['index']];
+$this->title = 'Изменить фильм: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Фильмы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="movie-update">
 

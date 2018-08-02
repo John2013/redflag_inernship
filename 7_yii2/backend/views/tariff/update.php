@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tariff */
 
-$this->title = 'Update Tariff: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tariffs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменить тариф: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Тарифы', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="tariff-update">
 

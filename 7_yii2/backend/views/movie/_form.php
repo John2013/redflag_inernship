@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Movie */
+/* @var $model app\models\Movie */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 
 	</div>
 	<div class="box-footer">
-		<?= Html::submitButton('Save', ['class' => 'btn btn-success btn-flat']) ?>
+		<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-flat']) ?>
 	</div>
 	<?php ActiveForm::end(); ?>
 </div>

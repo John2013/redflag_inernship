@@ -7,16 +7,16 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ReservationStatus */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Reservation Statuses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статусы заказа', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reservation-status-view box box-primary">
     <div class="box-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-flat',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены?',
                 'method' => 'post',
             ],
         ]) ?>

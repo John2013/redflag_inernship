@@ -6,17 +6,18 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Session */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Sessions', 'url' => ['index']];
+$movie = $model->getMovie();
+$this->title = "$movie->title {$model->getTime()}";
+$this->params['breadcrumbs'][] = ['label' => 'Сеансы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="session-view box box-primary">
     <div class="box-header">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger btn-flat',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -26,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'movie_id',
-                'hall_id',
-                'tariff_id',
+                'movie.number',
+                'hall.number',
+                'tariff.name',
                 'time:datetime',
                 'created_at:datetime',
                 'updated_at:datetime',

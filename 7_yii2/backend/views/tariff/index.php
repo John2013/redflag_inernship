@@ -7,13 +7,13 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\TariffSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tariffs';
+$this->title = 'Тарифы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tariff-index box box-primary">
     <?php Pjax::begin(); ?>
     <div class="box-header with-border">
-        <?= Html::a('Create Tariff', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a('Создать тариф', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </div>
     <div class="box-body table-responsive no-padding">
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,6 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'id',
+                'name',
+                'price',
+                'created_at:datetime',
+                'updated_at:datetime',
 
                 ['class' => 'yii\grid\ActionColumn'],
             ],
