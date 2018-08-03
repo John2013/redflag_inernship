@@ -17,55 +17,55 @@ use yii\behaviors\TimestampBehavior;
  */
 class Hall extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'halls';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'halls';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['number'], 'required'],
-            [['number', 'created_at', 'updated_at'], 'default', 'value' => null],
-            [['number', 'created_at', 'updated_at'], 'integer'],
-            [['number'], 'unique'],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['number'], 'required'],
+			[['number', 'created_at', 'updated_at'], 'default', 'value' => null],
+			[['number', 'created_at', 'updated_at'], 'integer'],
+			[['number'], 'unique'],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'number' => 'Номер',
-            'created_at' => 'Создано',
-            'updated_at' => 'Изменено',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'number' => 'Номер',
+			'created_at' => 'Создано',
+			'updated_at' => 'Изменено',
+		];
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRows()
-    {
-        return $this->hasMany(Row::class, ['hall_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getRows()
+	{
+		return $this->hasMany(Row::class, ['hall_id' => 'id']);
+	}
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSessions()
-    {
-        return $this->hasMany(Session::class, ['hall_id' => 'id']);
-    }
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getSessions()
+	{
+		return $this->hasMany(Session::class, ['hall_id' => 'id']);
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -80,10 +80,11 @@ class Hall extends \yii\db\ActiveRecord
 	/**
 	 * @return array
 	 */
-	static public function listAll(){
+	static public function listAll()
+	{
 		$models = self::find()->all();
 		$list = [];
-		foreach ($models as $model){
+		foreach ($models as $model) {
 			$list[$model->id] = $model->number;
 		}
 		return $list;
@@ -92,7 +93,8 @@ class Hall extends \yii\db\ActiveRecord
 	/**
 	 * @return bool
 	 */
-	public function addRow(){
+	public function addRow()
+	{
 		$max_row_number = Row::getMaxNumber($this->id);
 		$new_row = new Row(['number' => $max_row_number + 1, 'hall_id' => $this->id]);
 		return $new_row->save();
@@ -103,9 +105,13 @@ class Hall extends \yii\db\ActiveRecord
 	 * @throws \Throwable
 	 * @throws \yii\db\StaleObjectException
 	 */
-	public function deleteRow(){
+	public function deleteRow()
+	{
 		$max_row_number = Row::getMaxNumber($this->id);
 		$row = Row::findOne(['hall_id' => $this->id, 'number' => $max_row_number]);
-		return $row->delete();
+		if (!empty($row))
+			return $row->delete();
+		else
+			return false;
 	}
 }
