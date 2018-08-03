@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	            'place.row.hall.number:integer:Кинозал',
 	            'place.row.number:integer:Ряд',
 	            'place.number:integer:Место',
-	            'status.name:integer:Статус',
+	            'status.name:text:Статус',
 	            'session.movie.title:text:Фильм',
 	            'session.time:datetime:Время',
 	            'created_at:datetime',

@@ -7,6 +7,7 @@ use kartik\datetime\DateTimePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Session */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="session-form box box-primary">
@@ -22,7 +23,7 @@ use kartik\datetime\DateTimePicker;
         <?= $form->field($model, 'time')->widget(DateTimePicker::class, [
 	        'pluginOptions' => [
 		        'autoclose' => true,
-		        'format' => 'mm.dd.yyyy hh:ii:ss'
+		        'format' => 'mm.dd.yyyy hh:ii'
 	        ]
         ]) ?>
 

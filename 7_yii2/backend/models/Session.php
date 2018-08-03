@@ -2,9 +2,7 @@
 
 namespace app\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\i18n\Formatter;
 
 /**
  * This is the model class for table "sessions".
@@ -42,9 +40,9 @@ class Session extends \yii\db\ActiveRecord
 			[['movie_id', 'hall_id', 'tariff_id', 'created_at', 'updated_at'], 'default', 'value' => null],
 			[['movie_id', 'hall_id', 'tariff_id', 'created_at', 'updated_at'], 'integer'],
 			[['time'], 'safe'],
-			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::className(), 'targetAttribute' => ['hall_id' => 'id']],
-			[['movie_id'], 'exist', 'skipOnError' => true, 'targetClass' => Movie::className(), 'targetAttribute' => ['movie_id' => 'id']],
-			[['tariff_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tariff::className(), 'targetAttribute' => ['tariff_id' => 'id']],
+			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::class, 'targetAttribute' => ['hall_id' => 'id']],
+			[['movie_id'], 'exist', 'skipOnError' => true, 'targetClass' => Movie::class, 'targetAttribute' => ['movie_id' => 'id']],
+			[['tariff_id'], 'exist', 'skipOnError' => true, 'targetClass' => Tariff::class, 'targetAttribute' => ['tariff_id' => 'id']],
 		];
 	}
 
@@ -109,17 +107,14 @@ class Session extends \yii\db\ActiveRecord
 
 	/**
 	 * @return string
-	 * @throws \yii\base\InvalidConfigException
 	 */
 	public function getTime()
 	{
-		$formatter = new Formatter();
-		return $formatter->asDatetime($this->time, 'd.m.Y H:i:s');
+		return date('d.m.Y H:i', strtotime($this->time));
 	}
 
 	/**
 	 * @return array
-	 * @throws \yii\base\InvalidConfigException
 	 */
 	static public function listAll(){
 		$models = self::find()->all();
