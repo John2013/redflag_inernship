@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use common\widgets\Pprint;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -89,5 +87,25 @@ class Hall extends \yii\db\ActiveRecord
 			$list[$model->id] = $model->number;
 		}
 		return $list;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function addRow(){
+		$max_row_number = Row::getMaxNumber($this->id);
+		$new_row = new Row(['number' => $max_row_number + 1, 'hall_id' => $this->id]);
+		return $new_row->save();
+	}
+
+	/**
+	 * @return false|int
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
+	 */
+	public function deleteRow(){
+		$max_row_number = Row::getMaxNumber($this->id);
+		$row = Row::findOne(['hall_id' => $this->id, 'number' => $max_row_number]);
+		return $row->delete();
 	}
 }

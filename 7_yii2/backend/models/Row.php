@@ -33,11 +33,10 @@ class Row extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['row_id', 'number'], 'required'],
-			[['row_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['row_id', 'number', 'created_at', 'updated_at'], 'integer'],
-			[['row_id', 'number'], 'unique', 'targetAttribute' => ['row_id', 'number']],
-			[['row_id'], 'exist', 'skipOnError' => true, 'targetClass' => Row::class, 'targetAttribute' => ['row_id' => 'id']],
+			[['hall_id', 'number'], 'required'],
+			[['hall_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
+			[['hall_id', 'number', 'created_at', 'updated_at'], 'integer'],
+			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::class, 'targetAttribute' => ['hall_id' => 'id']],
 		];
 	}
 
@@ -84,13 +83,27 @@ class Row extends \yii\db\ActiveRecord
 	/**
 	 * @return array
 	 */
-	static public function listAll(){
+	static public function listAll()
+	{
 		$models = self::find()->all();
 		$halls_list = Hall::listAll();
 		$list = [];
-		foreach ($models as $model){
+		foreach ($models as $model) {
 			$list[$model->id] = "зал {$halls_list[$model->hall_id]} ряд $model->number";
 		}
 		return $list;
+	}
+
+	/**
+	 * @param int $hall_id
+	 * @return int
+	 */
+	static public function getMaxNumber(int $hall_id)
+	{
+		return (int)array_reduce(self::find()->where(['hall_id' => $hall_id])->all(), function ($maxNumber, $row) {
+			return ($row->number > $maxNumber)
+				? $row->number
+				: $maxNumber;
+		}, 0);
 	}
 }
