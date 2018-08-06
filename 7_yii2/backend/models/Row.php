@@ -19,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Row extends \yii\db\ActiveRecord
 {
+	private $dont_after_save = false;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -36,6 +38,7 @@ class Row extends \yii\db\ActiveRecord
 			[['hall_id', 'number'], 'required'],
 			[['hall_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
 			[['hall_id', 'number', 'created_at', 'updated_at'], 'integer'],
+			[['number'], 'integer', 'min' => 1],
 			[['hall_id'], 'exist', 'skipOnError' => true, 'targetClass' => Hall::class, 'targetAttribute' => ['hall_id' => 'id']],
 		];
 	}
@@ -105,5 +108,91 @@ class Row extends \yii\db\ActiveRecord
 				? $row->number
 				: $maxNumber;
 		}, 0);
+	}
+
+	public function setPlacesCount(int $count)
+	{
+		$places = $this->getPlaces()->orderBy(['number' => SORT_DESC])->all();
+		$maxNumber = array_reduce($places, function ($maxNumber, $place) {
+			return ($place->number > $maxNumber)
+				? $place->number
+				: $maxNumber;
+		}, 0);
+		if (count($places) == $count) {
+			return null;
+		} elseif (count($places) < $count) {
+			for ($number = $maxNumber + 1; $number <= $count; $number++) {
+				$newPlace = new Place(['row_id' => $this->id, 'number' => $number]);
+				$newPlace->save();
+			}
+		} else {
+			foreach ($places as $place) {
+				if ($place->number <= $count) {
+					break;
+				}
+				$place->delete();
+			}
+		}
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterSave($insert, $changedAttributes)
+	{
+		parent::afterSave($insert, $changedAttributes);
+
+		if ($this->dont_after_save) {
+			$this->dont_after_save = false;
+			return null;
+		}
+
+		$this->fixNumber();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterDelete()
+	{
+		parent::afterDelete();
+
+		$next_model = self::find()
+			->where(['hall_id' => $this->hall_id])
+			->andWhere(['>', 'number', $this->number])
+			->orderBy(['number' => SORT_ASC])
+			->limit(1)
+			->one();
+		if (isset($next_model))
+			$next_model->fixNumber();
+	}
+
+	public function fixNumber()
+	{
+		if ($this->number > 1) {
+			$prev_model = self::find()
+				->where(['hall_id' => $this->hall_id])
+				->andWhere(['<', 'number', $this->number])
+				->orderBy(['number' => SORT_DESC])
+				->limit(1)
+				->one();
+			if ($prev_model->number == $this->number - 1)
+				return null;
+
+			$this->number = $prev_model->number + 1;
+			$this->dont_after_save = true;
+			$this->save();
+
+
+			$next_model = self::find()
+				->where(['hall_id' => $this->hall_id])
+				->andWhere(['>', 'number', $this->number])
+				->orderBy(['number' => SORT_ASC])
+				->limit(1)
+				->one();
+			if (isset($next_model)) {
+				$next_model->fixNumber();
+			}
+		}
 	}
 }

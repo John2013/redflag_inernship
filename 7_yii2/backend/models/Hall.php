@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Hall extends \yii\db\ActiveRecord
 {
+	private $dont_after_save = false;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -33,7 +35,8 @@ class Hall extends \yii\db\ActiveRecord
 		return [
 			[['number'], 'required'],
 			[['number', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['number', 'created_at', 'updated_at'], 'integer'],
+			[['created_at', 'updated_at'], 'integer'],
+			[['number'], 'integer', 'min' => 1],
 			[['number'], 'unique'],
 		];
 	}
@@ -113,5 +116,63 @@ class Hall extends \yii\db\ActiveRecord
 			return $row->delete();
 		else
 			return false;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterSave($insert, $changedAttributes)
+	{
+		parent::afterSave($insert, $changedAttributes);
+
+		if ($this->dont_after_save) {
+			$this->dont_after_save = false;
+			return null;
+		}
+		$this->fixNumber();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterDelete()
+	{
+		parent::afterDelete();
+
+		$next_model = self::find()
+			->where(['>', 'number', $this->number])
+			->orderBy(['number' => SORT_ASC])
+			->limit(1)
+			->one();
+		if (isset($next_model))
+			$next_model->fixNumber();
+	}
+
+	public function fixNumber()
+	{
+		if ($this->number > 1) {
+			$prev_model = self::find()
+				->where(['<', 'number', $this->number])
+				->orderBy(['number' => SORT_DESC])
+				->limit(1)
+				->one();
+			if ($prev_model->number == $this->number - 1)
+				return null;
+
+			$this->number = $prev_model->number + 1;
+			$this->dont_after_save = true;
+			$this->save();
+
+
+			$next_model = self::find()
+				->where(['>', 'number', $this->number])
+				->orderBy(['number' => SORT_ASC])
+				->limit(1)
+				->one();
+			if (isset($next_model)) {
+				$next_model->fixNumber();
+			}
+		}
 	}
 }

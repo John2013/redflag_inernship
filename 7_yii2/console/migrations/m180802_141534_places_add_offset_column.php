@@ -12,7 +12,7 @@ class m180802_141534_places_add_offset_column extends Migration
 	 */
 	public function safeUp()
 	{
-		$this->addColumn('places', 'offset', $this->float()->defaultValue(0));
+		$this->addColumn('places', 'offset', $this->float()->notNull()->defaultValue(0));
 	}
 
 	/**

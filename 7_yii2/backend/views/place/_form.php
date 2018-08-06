@@ -6,6 +6,9 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Place */
 /* @var $form yii\widgets\ActiveForm */
+if($model->isNewRecord){
+	$model->offset = 0;
+}
 ?>
 
 <div class="place-form box box-primary">

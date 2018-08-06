@@ -20,6 +20,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Place extends \yii\db\ActiveRecord
 {
+	private $dont_after_save = false;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -34,9 +36,11 @@ class Place extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['row_id', 'number'], 'required'],
+			[['row_id', 'number', 'offset'], 'required'],
 			[['row_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['row_id', 'number', 'created_at', 'updated_at'], 'integer'],
+			[['row_id', 'created_at', 'updated_at'], 'integer'],
+			[['number'], 'integer', 'min' => 1],
+			[['offset'], 'default', 'value' => 0],
 			[['offset'], 'number'],
 			[['row_id', 'number'], 'unique', 'targetAttribute' => ['row_id', 'number']],
 			[['row_id'], 'exist', 'skipOnError' => true, 'targetClass' => Row::class, 'targetAttribute' => ['row_id' => 'id']],
@@ -87,13 +91,75 @@ class Place extends \yii\db\ActiveRecord
 	/**
 	 * @return array
 	 */
-	static public function listAll(){
+	static public function listAll()
+	{
 		$models = self::find()->all();
 		$rows_list = Row::listAll();
 		$list = [];
-		foreach ($models as $model){
+		foreach ($models as $model) {
 			$list[$model->id] = "{$rows_list[$model->row_id]} место $model->number";
 		}
 		return $list;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterSave($insert, $changedAttributes)
+	{
+		parent::afterSave($insert, $changedAttributes);
+
+		if ($this->dont_after_save) {
+			$this->dont_after_save = false;
+			return null;
+		}
+
+		$this->fixNumber();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function afterDelete()
+	{
+		parent::afterDelete();
+
+		$next_model = self::find()
+			->where(['row_id' => $this->row_id])
+			->andWhere(['>', 'number', $this->number])
+			->orderBy(['number' => SORT_ASC])
+			->limit(1)
+			->one();
+		if (isset($next_model))
+			$next_model->fixNumber();
+	}
+
+	public function fixNumber()
+	{
+		if ($this->number > 1) {
+			$prev_model = self::find()
+				->where(['row_id' => $this->row_id])
+				->andWhere(['<', 'number', $this->number])
+				->orderBy(['number' => SORT_DESC])
+				->limit(1)
+				->one();
+			if ($prev_model->number == $this->number - 1)
+				return null;
+
+			$this->number = $prev_model->number + 1;
+			$this->dont_after_save = true;
+			$this->save();
+
+
+			$next_model = self::find()
+				->where(['row_id' => $this->row_id])
+				->andWhere(['>', 'number', $this->number])
+				->orderBy(['number' => SORT_ASC])
+				->limit(1)
+				->one();
+			if (isset($next_model)) {
+				$next_model->fixNumber();
+			}
+		}
 	}
 }
