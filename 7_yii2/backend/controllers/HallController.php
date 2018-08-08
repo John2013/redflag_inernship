@@ -143,34 +143,25 @@ class HallController extends Controller
 	{
 		$hall = $this->findModel($id);
 		/** @var Row[] $rows */
-		$rows = $hall->getRows()->orderBy(['number' => SORT_ASC])->all();
-		/** @var Place[][] $places */
-		$places = [];
-		$set_count_forms = [];
 
 		if (isset($action)) {
-			if ($action == 'add-row') {
-				$hall->addRow();
+			switch ($action) {
+				case 'add-row':
+					$hall->addRow();
+					break;
+
+				case 'delete-row':
+					$hall->deleteRow();
 			}
-			if ($action == 'delete-row') {
-				$hall->deleteRow();
-			}
+
 			$this->redirect(['places', 'id' => $id]);
 		}
 
-		// TODO : создать функцию, возвращающую формы в модели
-		foreach ($rows as $row) {
-			$places[$row->number] = [];
-			$row_places = $row->getPlaces()->orderBy(['number' => SORT_ASC])->all();
-			foreach ($row_places as $place) {
-				$places[$row->number][$place->number] = $place;
-			}
-			$set_count_forms[$row->number] =
-				new SetPlacesCountForm(['row_id' => $row->id, 'count' => count($row_places)]);
-		}
+		$rows = $hall->getRows()->orderBy(['number' => SORT_ASC])->all();
+
 		if (isset($rows)) {
 			/** @var SetPlacesCountForm $form */
-			$form = $set_count_forms[$rows[0]->number];
+			$form = new SetPlacesCountForm();
 			if (
 				$form->load(Yii::$app->request->post())
 				&& $form->validate()) {
@@ -182,8 +173,8 @@ class HallController extends Controller
 		return $this->render('places', [
 			'hall' => $hall,
 			'rows' => $rows,
-			'places' => $places,
-			'set_count_forms' => $set_count_forms
+			'places' => $hall->getPlaces($rows),
+			'set_count_forms' => $hall->getSetCountForms($rows)
 		]);
 	}
 

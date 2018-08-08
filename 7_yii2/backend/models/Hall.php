@@ -121,4 +121,39 @@ class Hall extends NumberedModel
 	{
 		return parent::_fixNumber();
 	}
+
+	/**
+	 * @param null $rows
+	 * @return SetPlacesCountForm[]
+	 */
+	public function getSetCountForms($rows = null)
+	{
+		$rows = $rows ?: $this->getRows()->orderBy(['number' => SORT_ASC])->all();
+		$set_count_forms = [];
+
+		foreach ($rows as $row)
+			$set_count_forms[$row->number] =
+				new SetPlacesCountForm(['row_id' => $row->id, 'count' => $row->getPlaces()->count()]);
+
+		return $set_count_forms;
+	}
+
+	/**
+	 * @param null|Row[] $rows
+	 * @return Place[][]
+	 */
+	public function getPlaces($rows = null)
+	{
+		$rows = $rows ?: $this->getRows()->orderBy(['number' => SORT_ASC])->all();
+		$places = [];
+
+		foreach ($rows as $row) {
+			$places[$row->number] = [];
+			$row_places = $row->getPlaces()->orderBy(['number' => SORT_ASC])->all();
+			foreach ($row_places as $place) {
+				$places[$row->number][$place->number] = $place;
+			}
+		}
+		return $places;
+	}
 }
