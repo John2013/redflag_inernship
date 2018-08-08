@@ -14,6 +14,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Row[] $rows
  * @property Session[] $sessions
+ *
  */
 class Hall extends \yii\db\ActiveRecord
 {
@@ -24,7 +25,7 @@ class Hall extends \yii\db\ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'halls';
+		return 'hall';
 	}
 
 	/**
@@ -149,6 +150,9 @@ class Hall extends \yii\db\ActiveRecord
 			$next_model->fixNumber();
 	}
 
+	/**
+	 * @return null|void
+	 */
 	public function fixNumber()
 	{
 		if ($this->number > 1) {

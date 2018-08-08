@@ -73,6 +73,14 @@ class Place extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getHall()
+	{
+		return $this->hasOne(Hall::class, ['id' => 'hall_id'])->viaTable('row', ['id' => 'row_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getReservations()
 	{
 		return $this->hasMany(Reservation::class, ['place_id' => 'id']);

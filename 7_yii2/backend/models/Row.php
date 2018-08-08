@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use common\widgets\Pprint;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -26,7 +27,7 @@ class Row extends \yii\db\ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'rows';
+		return 'row';
 	}
 
 	/**
@@ -122,9 +123,10 @@ class Row extends \yii\db\ActiveRecord
 			return null;
 		} elseif (count($places) < $count) {
 			for ($number = $maxNumber + 1; $number <= $count; $number++) {
-				$newPlace = new Place(['row_id' => $this->id, 'number' => $number]);
+				$newPlace = new Place(['row_id' => $this->id, 'number' => $number, 'offset' => 0]);
 				$newPlace->save();
 			}
+
 		} else {
 			foreach ($places as $place) {
 				if ($place->number <= $count) {
