@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -11,13 +10,14 @@ use yii\data\ActiveDataProvider;
  */
 class RowSearch extends Row
 {
+	public $hall_number;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'hall_id', 'number', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'hall_id', 'number', 'hall_number', 'created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -39,7 +39,7 @@ class RowSearch extends Row
      */
     public function search($params)
     {
-        $query = Row::find();
+        $query = Row::find()->joinWith('hall');
 
         // add conditions that should always apply here
 
@@ -47,6 +47,25 @@ class RowSearch extends Row
             'query' => $query,
             'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
+
+	    $dataProvider->setSort([
+		    'attributes' => [
+			    'hall_number' => [
+				    'asc' => [
+					    'hall.number' => SORT_ASC,
+				    ],
+				    'desc' => [
+					    'hall.number' => SORT_DESC,
+				    ],
+				    'label' => 'Номер зала',
+				    'default' => SORT_ASC
+			    ],
+			    'id',
+			    'number',
+			    'created_at',
+			    'updated_at',
+		    ]
+	    ]);
 
         $this->load($params);
 
@@ -64,6 +83,10 @@ class RowSearch extends Row
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
+
+	    $query->andFilterWhere([
+		    'hall.number'=>$this->hall_number,
+	    ]);
 
         return $dataProvider;
     }

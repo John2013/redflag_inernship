@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use app\models\Place;
 use app\models\Row;
 use app\models\SetPlacesCountForm;
 use Yii;

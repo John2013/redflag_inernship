@@ -25,7 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'id',
-                'hall.number:integer:Номер кинозала',
+	            [
+		            'label' => 'Номер зала',
+		            'attribute' => 'hall_number',
+		            'value' => function ($model) {
+			            return $model->hall->number;
+		            }
+	            ],
                 'number',
                 'created_at:datetime',
                 'updated_at:datetime',
