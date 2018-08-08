@@ -12,7 +12,7 @@ class m180801_083854_alter_halls_table extends Migration
      */
     public function safeUp()
     {
-    	$this->createIndex('halls_number_uindex', 'halls', ['number'], true);
+    	$this->createIndex('halls_number_uindex', 'hall', ['number'], true);
     }
 
     /**
@@ -20,7 +20,7 @@ class m180801_083854_alter_halls_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropIndex('halls_number_uindex', 'halls');
+        $this->dropIndex('halls_number_uindex', 'hall');
     }
 
     /*

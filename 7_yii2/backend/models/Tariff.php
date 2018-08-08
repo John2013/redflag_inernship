@@ -6,7 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "tariffs".
+ * This is the model class for table "tariff".
  *
  * @property int $id
  * @property string $name
@@ -23,7 +23,7 @@ class Tariff extends \yii\db\ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'tariffs';
+		return 'tariff';
 	}
 
 	/**

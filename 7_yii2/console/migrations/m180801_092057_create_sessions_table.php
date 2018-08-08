@@ -32,7 +32,7 @@ class m180801_092057_create_sessions_table extends Migration
 		$this->addForeignKey(
 			'hall_id_halls_id_fk',
 			'sessions', ['hall_id'],
-			'halls', ['id'],
+			'hall', ['id'],
 			'CASCADE'
 		);
 

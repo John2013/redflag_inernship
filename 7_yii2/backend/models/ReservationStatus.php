@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "reservation_statuses".
+ * This is the model class for table "reservation_status".
  *
  * @property int $id
  * @property string $name
@@ -19,7 +19,7 @@ class ReservationStatus extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'reservation_statuses';
+        return 'reservation_status';
     }
 
     /**

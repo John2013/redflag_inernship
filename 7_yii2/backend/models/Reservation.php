@@ -7,7 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "reservations".
+ * This is the model class for table "reservation".
  *
  * @property int $id
  * @property int $user_id
@@ -29,7 +29,7 @@ class Reservation extends \yii\db\ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'reservations';
+		return 'reservation';
 	}
 
 	/**

@@ -5,7 +5,7 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "sessions".
+ * This is the model class for table "session".
  *
  * @property string $id [integer]
  * @property string $movie_id [integer]
@@ -27,7 +27,7 @@ class Session extends \yii\db\ActiveRecord
 	 */
 	public static function tableName()
 	{
-		return 'sessions';
+		return 'session';
 	}
 
 	/**

@@ -12,7 +12,7 @@ class m180801_084904_create_rows_table extends Migration
 	 */
 	public function safeUp()
 	{
-		$this->createTable('rows', [
+		$this->createTable('row', [
 			'id' => $this->primaryKey(),
 			'hall_id' => $this->integer()->notNull(),
 			'number' => $this->integer()->notNull(),
@@ -22,14 +22,14 @@ class m180801_084904_create_rows_table extends Migration
 
 		$this->addForeignKey(
 			'hall_id_to_halls_id_fk',
-			'rows',
+			'row',
 			['hall_id'],
 			'halls',
 			['id'],
 			'CASCADE'
 		);
 
-		$this->createIndex('number_hall_id_ui', 'rows', ['hall_id', 'number']);
+		$this->createIndex('number_hall_id_ui', 'row', ['hall_id', 'number']);
 	}
 
 	/**
@@ -37,6 +37,6 @@ class m180801_084904_create_rows_table extends Migration
 	 */
 	public function safeDown()
 	{
-		$this->dropTable('rows');
+		$this->dropTable('row');
 	}
 }

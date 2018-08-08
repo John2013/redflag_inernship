@@ -5,7 +5,7 @@ namespace app\models;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "halls".
+ * This is the model class for table "hall".
  *
  * @property int $id
  * @property int $number

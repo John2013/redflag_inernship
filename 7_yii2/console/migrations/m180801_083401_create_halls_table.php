@@ -12,7 +12,7 @@ class m180801_083401_create_halls_table extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('halls', [
+        $this->createTable('hall', [
 	        'id' => $this->primaryKey(),
 	        'number' => $this->integer()->notNull(),
 	        'created_at' => $this->integer(),

@@ -23,7 +23,7 @@ class m180801_085949_create_places_table extends Migration
 		$this->addForeignKey(
 			'row_id_to_rows_id_fk',
 			'places', ['row_id'],
-			'rows', ['id'],
+			'row', ['id'],
 			'CASCADE');
 
 		$this->createIndex('row_id_number_uindex', 'places', ['row_id', 'number'], true);

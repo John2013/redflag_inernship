@@ -2,12 +2,10 @@
 
 namespace app\models;
 
-use common\widgets\Pprint;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "rows".
+ * This is the model class for table "row".
  *
  * @property int $id
  * @property int $hall_id
