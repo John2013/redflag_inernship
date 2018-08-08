@@ -16,10 +16,8 @@ use yii\behaviors\TimestampBehavior;
  * @property Place[] $places
  * @property Hall $hall
  */
-class Row extends \yii\db\ActiveRecord
+class Row extends NumberedModel
 {
-	private $dont_after_save = false;
-
 	/**
 	 * {@inheritdoc}
 	 */
@@ -135,64 +133,8 @@ class Row extends \yii\db\ActiveRecord
 		}
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function afterSave($insert, $changedAttributes)
-	{
-		parent::afterSave($insert, $changedAttributes);
-
-		if ($this->dont_after_save) {
-			$this->dont_after_save = false;
-			return null;
-		}
-
-		$this->fixNumber();
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public function afterDelete()
-	{
-		parent::afterDelete();
-
-		$next_model = self::find()
-			->where(['hall_id' => $this->hall_id])
-			->andWhere(['>', 'number', $this->number])
-			->orderBy(['number' => SORT_ASC])
-			->limit(1)
-			->one();
-		if (isset($next_model))
-			$next_model->fixNumber();
-	}
-
 	public function fixNumber()
 	{
-		if ($this->number > 1) {
-			$prev_model = self::find()
-				->where(['hall_id' => $this->hall_id])
-				->andWhere(['<', 'number', $this->number])
-				->orderBy(['number' => SORT_DESC])
-				->limit(1)
-				->one();
-			if ($prev_model->number == $this->number - 1)
-				return null;
-
-			$this->number = $prev_model->number + 1;
-			$this->dont_after_save = true;
-			$this->save();
-
-
-			$next_model = self::find()
-				->where(['hall_id' => $this->hall_id])
-				->andWhere(['>', 'number', $this->number])
-				->orderBy(['number' => SORT_ASC])
-				->limit(1)
-				->one();
-			if (isset($next_model)) {
-				$next_model->fixNumber();
-			}
-		}
+		return parent::_fixNumber('hall_id');
 	}
 }
