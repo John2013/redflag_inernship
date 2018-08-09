@@ -25,13 +25,62 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
 
                 'id',
-                'user.username',
-	            'place.row.hall.number:integer:Кинозал',
-	            'place.row.number:integer:Ряд',
-	            'place.number:integer:Место',
-                'status.name:text:Статус',
-	            'session.movie.title:text:Фильм',
-	            'session.time:datetime:Время',
+	            [
+		            'label' => 'Пользователь',
+		            'attribute' => 'user_nickname',
+		            'value' => function ($model) {
+			            return $model->user->username;
+		            }
+	            ],
+//	            'place.row.hall.number:integer:Кинозал',
+	            [
+		            'label' => 'Зал',
+		            'attribute' => 'hall_number',
+		            'value' => function ($model) {
+			            return $model->place->row->hall->number;
+		            }
+	            ],
+//	            'place.row.number:integer:Ряд',
+	            [
+		            'label' => 'Ряд',
+		            'attribute' => 'row_number',
+		            'value' => function ($model) {
+			            return $model->place->row->number;
+		            }
+	            ],
+//	            'place.number:integer:Место',
+	            [
+		            'label' => 'Место',
+		            'attribute' => 'place_number',
+		            'value' => function ($model) {
+			            return $model->place->row->number;
+		            }
+	            ],
+//                'status.name:text:Статус',
+	            [
+		            'label' => 'Статус',
+		            'attribute' => 'status_name',
+		            'value' => function ($model) {
+			            return $model->status->name;
+		            }
+	            ],
+//	            'session.movie.title:text:Фильм',
+	            [
+		            'label' => 'Фильм',
+		            'attribute' => 'movie_title',
+		            'value' => function ($model) {
+			            return $model->movie->title;
+		            }
+	            ],
+//	            'session.time:datetime:Время',
+	            [
+		            'label' => 'Время',
+		            'format' => 'datetime',
+		            'attribute' => 'session_time',
+		            'value' => function ($model) {
+			            return $model->session->time;
+		            }
+	            ],
                 'created_at:datetime',
                 'updated_at:datetime',
 

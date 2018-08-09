@@ -3,7 +3,6 @@
 namespace app\models;
 
 use common\models\User;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -75,6 +74,26 @@ class Reservation extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getRow()
+	{
+		return $this
+			->hasOne(Row::class, ['id' => 'row_id'])
+			->via('place');
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getHall()
+	{
+		return $this
+			->getRow()
+			->joinWith('hall');
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getStatus()
 	{
 		return $this->hasOne(ReservationStatus::class, ['id' => 'status_id']);
@@ -86,6 +105,16 @@ class Reservation extends \yii\db\ActiveRecord
 	public function getSession()
 	{
 		return $this->hasOne(Session::class, ['id' => 'session_id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getMovie()
+	{
+		return $this
+			->hasOne(Movie::class, ['id' => 'movie_id'])
+			->viaTable('session', ['id' => 'session_id']);
 	}
 
 	/**
