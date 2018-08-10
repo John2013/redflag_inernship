@@ -1,10 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Tariff */
+/* @var $model backend\models\Tariff */
 
 $this->title = 'Создать тариф';
 $this->params['breadcrumbs'][] = ['label' => 'Тарифы', 'url' => ['index']];

@@ -1,9 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Movie */
+/* @var $model backend\models\Movie */
 
 $this->title = 'Изменить фильм: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Фильмы', 'url' => ['index']];

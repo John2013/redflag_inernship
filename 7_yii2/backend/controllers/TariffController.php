@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Tariff;
-use app\models\TariffSearch;
+use backend\models\Tariff;
+use backend\models\TariffSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

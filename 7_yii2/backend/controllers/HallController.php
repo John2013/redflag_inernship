@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
-use app\models\Row;
-use app\models\SetPlacesCountForm;
+use backend\models\Row;
+use backend\models\SetPlacesCountForm;
 use Yii;
-use app\models\Hall;
-use app\models\HallSearch;
+use backend\models\Hall;
+use backend\models\HallSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

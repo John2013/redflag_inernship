@@ -1,10 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Session */
+/* @var $model backend\models\Session */
 
 $this->title = 'Создать сеанс';
 $this->params['breadcrumbs'][] = ['label' => 'Сеансы', 'url' => ['index']];

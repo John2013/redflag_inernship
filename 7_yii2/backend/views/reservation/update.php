@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Reservation */
+/* @var $model backend\models\Reservation */
 
 $this->title = 'Изменить заказ: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['index']];

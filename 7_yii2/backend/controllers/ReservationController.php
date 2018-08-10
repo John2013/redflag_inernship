@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use app\models\Reservation;
-use app\models\ReservationSearch;
+use backend\models\Reservation;
+use backend\models\ReservationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

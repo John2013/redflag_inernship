@@ -11,10 +11,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this \yii\web\View */
-/* @var $hall \app\models\Hall */
-/* @var $rows \app\models\Row[] */
-/* @var $places \app\models\Place[][] */
-/* @var $set_count_forms \app\models\SetPlacesCountForm[] */
+/* @var $hall \backend\models\Hall */
+/* @var $rows \backend\models\Row[] */
+/* @var $places \backend\models\Place[][] */
+/* @var $set_count_forms \backend\models\SetPlacesCountForm[] */
 //echo \common\widgets\Pprint::widget(['data' => $hall]);
 //echo \common\widgets\Pprint::widget(['data' => $rows]);
 //echo \common\widgets\Pprint::widget(['data' => $places]);

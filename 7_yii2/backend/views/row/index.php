@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\RowSearch */
+/* @var $searchModel backend\models\RowSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Ряды';

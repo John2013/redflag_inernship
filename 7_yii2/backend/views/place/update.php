@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Place */
+/* @var $model backend\models\Place */
 
 $this->title = 'Изменить место: ' . $model->number;
 $this->params['breadcrumbs'][] = ['label' => 'Места', 'url' => ['index']];

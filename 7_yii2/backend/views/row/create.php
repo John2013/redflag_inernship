@@ -1,10 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Row */
+/* @var $model backend\models\Row */
 
 $this->title = 'Создать ряд';
 $this->params['breadcrumbs'][] = ['label' => 'Ряды', 'url' => ['index']];

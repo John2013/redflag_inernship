@@ -1,9 +1,8 @@
 <?php
 
-use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Hall */
+/* @var $model backend\models\Hall */
 
 $this->title = 'Изменить кинозал: ' . $model->number;
 $this->params['breadcrumbs'][] = ['label' => 'Кинозалы', 'url' => ['index']];

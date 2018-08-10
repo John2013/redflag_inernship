@@ -1,12 +1,12 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * PlaceSearch represents the model behind the search form of `app\models\Place`.
+ * PlaceSearch represents the model behind the search form of `backend\models\Place`.
  */
 class PlaceSearch extends Place
 {

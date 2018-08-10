@@ -1,9 +1,7 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
-use common\widgets\Pprint;
-use Yii;
 use yii\base\Model;
 
 /**

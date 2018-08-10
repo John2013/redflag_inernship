@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Session */
+/* @var $model backend\models\Session */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
@@ -14,11 +14,11 @@ use kartik\datetime\DateTimePicker;
     <?php $form = ActiveForm::begin(); ?>
     <div class="box-body table-responsive">
 
-        <?= $form->field($model, 'movie_id')->dropDownList(\app\models\Movie::listAll()) ?>
+        <?= $form->field($model, 'movie_id')->dropDownList(\backend\models\Movie::listAll()) ?>
 
-        <?= $form->field($model, 'hall_id')->dropDownList(\app\models\Hall::listAll()) ?>
+        <?= $form->field($model, 'hall_id')->dropDownList(\backend\models\Hall::listAll()) ?>
 
-        <?= $form->field($model, 'tariff_id')->dropDownList(\app\models\Tariff::listAll()) ?>
+        <?= $form->field($model, 'tariff_id')->dropDownList(\backend\models\Tariff::listAll()) ?>
 
         <?= $form->field($model, 'time')->widget(DateTimePicker::class, [
 	        'pluginOptions' => [

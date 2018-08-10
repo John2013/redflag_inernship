@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\SessionSearch */
+/* @var $searchModel backend\models\SessionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Сеансы';

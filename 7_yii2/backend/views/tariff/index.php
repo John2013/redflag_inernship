@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\TariffSearch */
+/* @var $searchModel backend\models\TariffSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Тарифы';

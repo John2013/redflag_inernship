@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\PlaceSearch */
+/* @var $searchModel backend\models\PlaceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Места';

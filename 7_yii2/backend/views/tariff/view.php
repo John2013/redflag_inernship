@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Tariff */
+/* @var $model backend\models\Tariff */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Тарифы', 'url' => ['index']];

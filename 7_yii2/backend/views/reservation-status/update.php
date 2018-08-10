@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\ReservationStatus */
+/* @var $model backend\models\ReservationStatus */
 
 $this->title = 'Изменить статус заказа: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Статусы заказа', 'url' => ['index']];

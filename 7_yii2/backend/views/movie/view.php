@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Movie */
+/* @var $model backend\models\Movie */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Фильмы', 'url' => ['index']];
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					'label' => 'poster',
 					'format' => 'image',
 					'value' => function ($model) {
-						/** @var app\models\Movie $model */
+						/** @var backend\models\Movie $model */
 						return $model->getImageFileUrl('poster');
 					}
 				],

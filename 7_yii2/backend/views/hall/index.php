@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\HallSearch */
+/* @var $searchModel backend\models\HallSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Кинозалы';

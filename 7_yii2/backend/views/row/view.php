@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Row */
+/* @var $model backend\models\Row */
 
 $hall = $model->getHall()->one();
 $this->title = "{$hall->number}-{$model->number}";

@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Row */
+/* @var $model backend\models\Row */
 
 $hall = $model->getHall();
 $this->title = "Изменить ряд: $hall->number-$model->number";

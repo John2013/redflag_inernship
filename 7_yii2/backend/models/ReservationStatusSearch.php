@@ -1,13 +1,12 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ReservationStatusSearch represents the model behind the search form of `app\models\ReservationStatus`.
+ * ReservationStatusSearch represents the model behind the search form of `backend\models\ReservationStatus`.
  */
 class ReservationStatusSearch extends ReservationStatus
 {

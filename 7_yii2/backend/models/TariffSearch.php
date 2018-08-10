@@ -1,14 +1,12 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Tariff;
 
 /**
- * TariffSearch represents the model behind the search form of `app\models\Tariff`.
+ * TariffSearch represents the model behind the search form of `backend\models\Tariff`.
  */
 class TariffSearch extends Tariff
 {

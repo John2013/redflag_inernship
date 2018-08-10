@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -17,6 +16,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @method getImageFileUrl(string $prop_name)
  * @method getThumbFileUrl(string $prop_name, string $thumb_name)
+ * @todo Добавить жанры, возрастной рейтинг, длительность фильма и опции фильма (2D, 3D, IMAX 3D)
  */
 class Movie extends \yii\db\ActiveRecord
 {
@@ -89,5 +89,10 @@ class Movie extends \yii\db\ActiveRecord
 			$list[$model->id] = $model->title;
 		}
 		return $list;
+	}
+
+	public function __toString()
+	{
+		return $this->title;
 	}
 }

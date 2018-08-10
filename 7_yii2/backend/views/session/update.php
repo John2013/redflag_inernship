@@ -1,10 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Session */
-/* @var $movie app\models\Movie */
+/* @var $model backend\models\Session */
+/* @var $movie backend\models\Movie */
 
 $movie = $model->getMovie()->one();
 $this->title = "Изменить сеанс: $movie->title {$model->getTime()}";

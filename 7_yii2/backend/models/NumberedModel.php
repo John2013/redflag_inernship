@@ -8,7 +8,7 @@
  * @noinspection ALL
  */
 
-namespace app\models;
+namespace backend\models;
 
 class NumberedModel extends \yii\db\ActiveRecord
 {

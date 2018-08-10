@@ -1,10 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ReservationStatus */
+/* @var $model backend\models\ReservationStatus */
 
 $this->title = 'Создать статус заказа';
 $this->params['breadcrumbs'][] = ['label' => 'Статусы заказа', 'url' => ['index']];

@@ -1,11 +1,11 @@
 <?php
 
-use app\models\Hall;
+use backend\models\Hall;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Row */
+/* @var $model backend\models\Row */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

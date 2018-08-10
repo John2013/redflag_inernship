@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Place */
+/* @var $model backend\models\Place */
 /* @var $form yii\widgets\ActiveForm */
 if($model->isNewRecord){
 	$model->offset = 0;
@@ -15,7 +15,7 @@ if($model->isNewRecord){
 	<?php $form = ActiveForm::begin(); ?>
 	<div class="box-body table-responsive">
 
-		<?= $form->field($model, 'row_id')->dropDownList(\app\models\Row::listAll()) ?>
+		<?= $form->field($model, 'row_id')->dropDownList(\backend\models\Row::listAll()) ?>
 
 		<?= $form->field($model, 'number')->input('number') ?>
 

@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
-use Yii;
 
 /**
  * This is the model class for table "reservation_status".
