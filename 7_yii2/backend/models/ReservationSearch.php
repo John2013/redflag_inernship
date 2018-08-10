@@ -26,7 +26,8 @@ class ReservationSearch extends Reservation
         return [
             [['id', 'user_id', 'place_id', 'status_id', 'session_id', 'created_at', 'updated_at',
 	            'row_number', 'hall_number', 'place_number'], 'integer'],
-	        [['user_nickname', 'status_name', 'movie_title', 'session_time'], 'string']
+	        [['user_nickname', 'status_name', 'movie_title', /*'session_time'*/], 'string'],
+	        [['session_time'], 'datetime']
         ];
     }
 

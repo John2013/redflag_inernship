@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -11,13 +10,17 @@ use yii\data\ActiveDataProvider;
  */
 class SessionSearch extends Session
 {
+	public $movie_title;
+	public $hall_number;
+	public $tariff_name;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'movie_id', 'hall_id', 'tariff_id', 'time', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'movie_id', 'hall_id', 'tariff_id', 'time', 'created_at', 'updated_at', 'hall_number'], 'integer'],
+	        [['movie_title', 'tariff_name'], 'string'],
         ];
     }
 
@@ -39,7 +42,7 @@ class SessionSearch extends Session
      */
     public function search($params)
     {
-        $query = Session::find();
+        $query = Session::find()->joinWith(['movie', 'hall', 'tariff']);
 
         // add conditions that should always apply here
 
@@ -47,6 +50,45 @@ class SessionSearch extends Session
             'query' => $query,
             'sort' => ['defaultOrder' => ['id' => SORT_DESC]]
         ]);
+
+	    $dataProvider->setSort([
+		    'attributes' => [
+			    'hall_number' => [
+				    'asc' => [
+					    'hall.number' => SORT_ASC,
+				    ],
+				    'desc' => [
+					    'hall.number' => SORT_DESC,
+				    ],
+				    'label' => 'Зал',
+				    'default' => SORT_ASC
+			    ],
+			    'movie_title' => [
+				    'asc' => [
+					    'movie.title' => SORT_ASC,
+				    ],
+				    'desc' => [
+					    'movie.title' => SORT_DESC,
+				    ],
+				    'label' => 'Фильм',
+				    'default' => SORT_ASC
+			    ],
+			    'tariff_name' => [
+				    'asc' => [
+					    'tariff.name' => SORT_ASC,
+				    ],
+				    'desc' => [
+					    'tariff.name' => SORT_DESC,
+				    ],
+				    'label' => 'Тариф',
+				    'default' => SORT_ASC
+			    ],
+			    'id',
+			    'time',
+			    'created_at',
+			    'updated_at',
+		    ]
+	    ]);
 
         $this->load($params);
 
@@ -59,13 +101,13 @@ class SessionSearch extends Session
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'movie_id' => $this->movie_id,
-            'hall_id' => $this->hall_id,
-            'tariff_id' => $this->tariff_id,
             'time' => $this->time,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ]);
+	        'hall.number' => $this->hall_number
+        ])
+	        ->andFilterWhere(['ilike', 'movie.title', $this->movie_title])
+	        ->andFilterWhere(['ilike', 'tariff.name', $this->tariff_name]);
 
         return $dataProvider;
     }
