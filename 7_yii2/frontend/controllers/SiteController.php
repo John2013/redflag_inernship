@@ -1,8 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\Session;
 use Yii;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -25,7 +26,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
@@ -41,7 +42,7 @@ class SiteController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -72,7 +73,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+    	$sessions = Session::find()
+		    ->select(['id', 'movie_id', 'time'])
+		    ->where(['>=', 'session.time', date("Y-m-d H:i:s")])
+		    ->andWhere(['<=', 'session.time', date("Y-m-d H:i:s", time() + 14 * 24 * 3600)])
+	        ->with('movie')
+		    ->all();
+
+	    $movies = [];
+	    foreach ($sessions as $session){
+		    $movies[] = $session->movie;
+	    }
+	    $movies = array_unique($movies);
+
+        return $this->render('index', ['movies' => $movies]);
     }
 
     /**
@@ -143,11 +157,12 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
+	/**
+	 * Signs user up.
+	 *
+	 * @return mixed
+	 * @throws \yii\base\Exception
+	 */
     public function actionSignup()
     {
         $model = new SignupForm();
@@ -198,7 +213,7 @@ class SiteController extends Controller
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
