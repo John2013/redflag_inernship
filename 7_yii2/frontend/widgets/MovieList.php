@@ -33,10 +33,8 @@ class MovieList extends Widget
 <div class='movie'>
 	<span class='movie__title'>$movie->title</span>
 	<img class='movie__poster' alt='' src='{$movie->getThumbFileUrl('poster','thumb')}'>
-	<span class='movie__genres'>
-		Триллер Фантастика Приключения Экшн<br>
-		113 мин
-	</span>
+	<span class='movie__genres'>Триллер Фантастика Приключения Экшн</span>
+	<span class='movie__time'>113 мин</span>
 </div>";
 			$movies .= $movie_text;
 		}
