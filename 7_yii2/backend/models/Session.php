@@ -116,13 +116,19 @@ class Session extends \yii\db\ActiveRecord
 	/**
 	 * @return array
 	 */
-	static public function listAll(){
+	static public function listAll()
+	{
 		$models = self::find()->all();
 		$movies_list = Movie::listAll();
 		$list = [];
-		foreach ($models as $model){
+		foreach ($models as $model) {
 			$list[$model->id] = "{$movies_list[$model->movie_id]} {$model->getTime()}";
 		}
 		return $list;
+	}
+
+	static function deleteNonActual()
+	{
+		self::deleteAll(['<', 'time', date('Y-m-d H:i:s')]);
 	}
 }

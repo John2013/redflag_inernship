@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php Pjax::begin(); ?>
 	<div class="box-header with-border">
 		<?= Html::a('Создать сеанс', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+		<?= Html::a('Удалить устаревшие', ['delete-non-actual'], ['class' => 'btn btn-danger btn-flat']) ?>
 	</div>
 	<div class="box-body table-responsive no-padding">
 		<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
