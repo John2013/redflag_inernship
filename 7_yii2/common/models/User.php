@@ -17,6 +17,7 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property bool $is_admin [boolean]
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -73,6 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
 	        ['avatar', 'file', 'extensions' => 'jpeg, jpg, png'],
+	        ['is_admin', 'boolean']
         ];
     }
 
@@ -229,6 +231,7 @@ class User extends ActiveRecord implements IdentityInterface
 			'id' => 'ID',
 			'username' => 'Ник',
 			'status' => 'Статус',
+			'is_admin' => 'Админ',
 			'first_name' => 'Имя',
 			'last_name' => 'Фамилия',
 			'created_at' => 'Создано',

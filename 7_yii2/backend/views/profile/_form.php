@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 		<?= $form->field($model, 'email')->input('email') ?>
 		<?= $form->field($model, 'first_name')->textInput() ?>
 		<?= $form->field($model, 'last_name')->textInput() ?>
+		<?= $form->field($model, 'is_admin')->checkbox() ?>
 		<?= $form->field($model, 'avatar')->fileInput() ?>
 
 	</div>

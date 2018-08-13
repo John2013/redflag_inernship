@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //				'password_reset_token',
 				'email:email',
 				'status',
+				'is_admin:boolean',
 				'created_at:datetime',
 				'updated_at:datetime',
 				'first_name',
