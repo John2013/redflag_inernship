@@ -41,9 +41,9 @@ class Movie extends \yii\db\ActiveRecord
 				'thumbs' => [
 					'thumb' => ['width' => 205, 'height' => 310],
 				],
-				'filePath' => '@webroot/uploads/posters/[[pk]].[[extension]]',
+				'filePath' => '@uploads/posters/[[pk]].[[extension]]',
 				'fileUrl' => '/uploads/posters/[[pk]].[[extension]]',
-				'thumbPath' => '@webroot/uploads/posters/[[profile]]_[[pk]].[[extension]]',
+				'thumbPath' => '@uploads/posters/[[profile]]_[[pk]].[[extension]]',
 				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
 			],
 		];
