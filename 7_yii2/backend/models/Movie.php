@@ -14,6 +14,9 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property int $updated_at
  *
+ * @property Genre[] $genres
+ * @property Session[] $sessions
+ *
  * @method getImageFileUrl(string $prop_name)
  * @method getThumbFileUrl(string $prop_name, string $thumb_name)
  * @todo Добавить жанры, возрастной рейтинг, длительность фильма и опции фильма (2D, 3D, IMAX 3D)
@@ -94,5 +97,23 @@ class Movie extends \yii\db\ActiveRecord
 	public function __toString()
 	{
 		return $this->title;
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getGenres()
+	{
+		return $this
+			->hasMany(Genre::class, ['id' => 'genre_id'])
+			->viaTable('genres_to_movies', ['movie_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getSessions()
+	{
+		return $this->hasMany(Session::class, ['movie_id' => 'id']);
 	}
 }
