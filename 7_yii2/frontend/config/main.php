@@ -42,7 +42,6 @@ return [
             'rules' => [
             ],
         ],
-
     ],
 	'language' => 'ru',
     'params' => $params,

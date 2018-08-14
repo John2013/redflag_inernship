@@ -11,6 +11,10 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
+
+Yii::$app->name = 'Кинотеатр';
+/** @var \common\models\User $user */
+$user = Yii::$app->user->identity;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -36,18 +40,20 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Фильмы', 'url' => ['/site/index']],
+        ['label' => 'Расписание', 'url' => ['/site/about']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Авторизация', 'url' => ['/site/login']];
     } else {
+	    if($user->is_admin){
+		    $menuItems[] = ['label' => 'Админка', 'url' => ['/admin']];
+	    }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Выйти (' . Yii::$app->user->identity->getName() . ')',
+                'Выйти (' . $user->getName() . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
