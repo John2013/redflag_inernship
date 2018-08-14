@@ -41,7 +41,7 @@ $user = Yii::$app->user->identity;
     ]);
     $menuItems = [
         ['label' => 'Фильмы', 'url' => ['/site/index']],
-        ['label' => 'Расписание', 'url' => ['/site/about']],
+        ['label' => 'Расписание', 'url' => ['/site/sessions']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];

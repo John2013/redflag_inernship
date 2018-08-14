@@ -120,26 +120,39 @@ a.desc:after {
 	outline: none;
 }
 
-.movies {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
 .movie {
 	display: inline-flex;
 	flex-direction: column;
-	max-width: 340px;
 	cursor: pointer;
 }
 
-.movie__title {
+.movie__title-wrapper {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: flex-end;
 	height: 50px;
-	align-self: flex-end;
+	align-self: center;
 	text-transform: uppercase;
 	padding-bottom: 5px;
+	overflow: hidden;
+}
+
+.movie__title{
+	max-height: 40px;
+}
+
+.movie__poster{
+	height: 300px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position-x: center;
 }
 
 .movie__genres {
 	padding-top: 10px;
+	text-align: center;
+}
+
+.movie__time {
+	text-align: center;
 }

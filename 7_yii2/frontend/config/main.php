@@ -40,6 +40,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+	            '/' => 'site/index',
+	            'sessions' => 'site/sessions',
+	            'sessions/<id:\d+>' => 'site/sessions',
+	            'movie/<id:\d+>' => 'site/movie',
+	            'signup' => 'site/signup',
+	            'login' => 'site/login',
             ],
         ],
     ],
