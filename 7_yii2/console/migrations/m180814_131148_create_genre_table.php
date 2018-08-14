@@ -28,14 +28,16 @@ class m180814_131148_create_genre_table extends Migration
 		    'genres_to_movies',
 		    'movie_id',
 		    'movie',
-		    'id'
+		    'id',
+		    'CASCADE'
 	    );
 	    $this->addForeignKey(
 		    'genres_to_movies_genres_fk',
 		    'genres_to_movies',
 		    'genre_id',
 		    'genre',
-		    'id'
+		    'id',
+		    'CASCADE'
 	    );
     }
 

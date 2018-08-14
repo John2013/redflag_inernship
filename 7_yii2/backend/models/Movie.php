@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  *
  * @property Genre[] $genres
+ * @property MovieOption[] $options
  * @property Session[] $sessions
  *
  * @method getImageFileUrl(string $prop_name)
@@ -23,13 +24,13 @@ use yii\behaviors\TimestampBehavior;
  */
 class Movie extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'movie';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'movie';
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -52,43 +53,44 @@ class Movie extends \yii\db\ActiveRecord
 		];
 	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['title', 'description', 'poster'], 'required'],
-            [['description'], 'string'],
-            [['created_at', 'updated_at'], 'default', 'value' => null],
-            [['created_at', 'updated_at'], 'integer'],
-            [['title'], 'string', 'max' => 255],
-	        [['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['title', 'description', 'poster'], 'required'],
+			[['description'], 'string'],
+			[['created_at', 'updated_at'], 'default', 'value' => null],
+			[['created_at', 'updated_at'], 'integer'],
+			[['title'], 'string', 'max' => 255],
+			[['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'title' => 'Заголовок',
-            'description' => 'Описание',
-            'poster' => 'Постер',
-            'created_at' => 'Создано',
-            'updated_at' => 'Изменено',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'title' => 'Заголовок',
+			'description' => 'Описание',
+			'poster' => 'Постер',
+			'created_at' => 'Создано',
+			'updated_at' => 'Изменено',
+		];
+	}
 
 	/**
 	 * @return array
 	 */
-	static public function listAll(){
+	static public function listAll()
+	{
 		$models = self::find()->all();
 		$list = [];
-		foreach ($models as $model){
+		foreach ($models as $model) {
 			$list[$model->id] = $model->title;
 		}
 		return $list;
@@ -107,6 +109,16 @@ class Movie extends \yii\db\ActiveRecord
 		return $this
 			->hasMany(Genre::class, ['id' => 'genre_id'])
 			->viaTable('genres_to_movies', ['movie_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getOptions()
+	{
+		return $this
+			->hasMany(MovieOption::class, ['id' => 'option_id'])
+			->viaTable('options_to_movies', ['movie_id' => 'id']);
 	}
 
 	/**
