@@ -16,6 +16,8 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Genre[] $genres
  * @property MovieOption[] $options
+ * @property GenresToMovies[] $genresToMovies
+ * @property OptionsToMovies[] $optionsToMovies
  * @property Session[] $sessions
  *
  * @method getImageFileUrl(string $prop_name)
@@ -53,20 +55,13 @@ class Movie extends \yii\db\ActiveRecord
 				'thumbPath' => '@uploads/posters/[[profile]]_[[pk]].[[extension]]',
 				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
 			],
-			[
-				'class' => \voskobovich\linker\LinkerBehavior::class,
-				'relations' => [
-					'genre_ids' => 'genres',
-					'option_ids' => 'options',
-				],
-			],
-			[
-				'class' => \voskobovich\linker\LinkerBehavior::class,
-				'relations' => [
-					'genre_ids' => 'genres',
-					'option_ids' => 'options',
-				],
-			],
+//			[
+//				'class' => \voskobovich\linker\LinkerBehavior::class,
+//				'relations' => [
+//					'genre_ids' => 'genres',
+//					'option_ids' => 'options',
+//				],
+//			],
 		];
 	}
 
@@ -144,8 +139,52 @@ class Movie extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getGenresToMovies()
+	{
+		return $this->hasMany(GenresToMovies::class, ['movie_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getOptionsToMovies()
+	{
+		return $this->hasMany(OptionsToMovies::class, ['movie_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getSessions()
 	{
 		return $this->hasMany(Session::class, ['movie_id' => 'id']);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+
+			GenresToMovies::deleteAll(['movie_id' => $this->id]);
+			OptionsToMovies::deleteAll(['movie_id' => $this->id]);
+
+			if (is_array($this->genre_ids)) {
+				foreach ($this->genre_ids as $genre_id) {
+					$genre = new GenresToMovies(['movie_id' => $this->id, 'genre_id' => $genre_id]);
+					$genre->save();
+				}
+			}
+
+			if (is_array($this->option_ids))
+				foreach ($this->option_ids as $option_id) {
+					$genre = new OptionsToMovies(['movie_id' => $this->id, 'option_id' => $option_id]);
+					$genre->save();
+				}
+
+			return true;
+		}
+		return false;
 	}
 }
