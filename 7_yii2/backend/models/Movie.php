@@ -7,12 +7,13 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "movie".
  *
- * @property int $id
- * @property string $title
+ * @property string $id [integer]
+ * @property string $title [varchar(255)]
  * @property string $description
- * @property string $poster
- * @property int $created_at
- * @property int $updated_at
+ * @property string $created_at [integer]
+ * @property string $updated_at [integer]
+ * @property string $poster [varchar(255)]
+ * @property string $duration [integer]
  *
  * @property Genre[] $genres
  * @property MovieOption[] $options
@@ -22,7 +23,6 @@ use yii\behaviors\TimestampBehavior;
  *
  * @method getImageFileUrl(string $prop_name)
  * @method getThumbFileUrl(string $prop_name, string $thumb_name)
- * @todo Добавить жанры, возрастной рейтинг, длительность фильма и опции фильма (2D, 3D, IMAX 3D)
  */
 class Movie extends \yii\db\ActiveRecord
 {
@@ -71,10 +71,12 @@ class Movie extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'description'], 'required'],
+			[['title', 'description', 'duration'], 'required'],
 			[['description'], 'string'],
 			[['created_at', 'updated_at'], 'default', 'value' => null],
-			[['created_at', 'updated_at'], 'integer'],
+			[['created_at', 'updated_at'], 'integer',],
+			[['duration'], 'default', 'value' => 120],
+			[['duration'], 'integer', 'min' => 0],
 			[['title'], 'string', 'max' => 255],
 			[['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
 			[['genre_ids', 'option_ids'], 'each', 'rule' => ['integer']],
@@ -90,6 +92,7 @@ class Movie extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'title' => 'Заголовок',
 			'description' => 'Описание',
+			'duration' => 'Длительность (мин)',
 			'poster' => 'Постер',
 			'genre_ids' => 'Жанры',
 			'option_ids' => 'Опции',

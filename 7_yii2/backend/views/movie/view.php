@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						return implode(', ', $model->options);
 					}
 				],
+				'duration',
 				'created_at:datetime',
 				'updated_at:datetime',
 			],

@@ -9,12 +9,14 @@ use backend\models\MovieOption;
 /* @var $this yii\web\View */
 /* @var $model backend\models\Movie */
 /* @var $form yii\widgets\ActiveForm */
-if(!$model->isNewRecord){
+if (!$model->isNewRecord) {
 	$genres = $model->getGenres()->select('id')->asArray()->all();
 	$options = $model->getOptions()->select('id')->asArray()->all();
 
 	$model->genre_ids = ArrayHelper::getColumn($genres, 'id');
 	$model->option_ids = ArrayHelper::getColumn($options, 'id');
+} else {
+	$model->duration = 120;
 }
 ?>
 
@@ -32,6 +34,8 @@ if(!$model->isNewRecord){
 		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
 		<?= $form->field($model, 'poster')->fileInput() ?>
+
+		<?= $form->field($model, 'duration')->input('number', ['min' => 0]) ?>
 
 		<?= $form->field($model, 'genre_ids')->dropDownList(Genre::listAll(), ['multiple' => true]) ?>
 
