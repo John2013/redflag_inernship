@@ -60,6 +60,8 @@ class Genre extends \yii\db\ActiveRecord
     	foreach ($models as $model){
 		    $list[$model->id] = $model->name;
 	    }
+
+	    return $list;
     }
 
 	public function __toString()

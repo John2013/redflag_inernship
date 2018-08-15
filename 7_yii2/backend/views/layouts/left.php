@@ -44,6 +44,16 @@ $user = Yii::$app->user->identity;
 						'url' => ['movie/index'],
 					],
 					[
+						'label' => 'Жанры',
+						'icon' => 'sitemap',
+						'url' => ['genre/index'],
+					],
+					[
+						'label' => 'Опции фильмов',
+						'icon' => 'cube',
+						'url' => ['movie-option/index'],
+					],
+					[
 						'label' => 'Кинозалы',
 						'icon' => 'video-camera',
 						'url' => ['hall/index'],

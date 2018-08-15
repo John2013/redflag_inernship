@@ -24,6 +24,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Movie extends \yii\db\ActiveRecord
 {
+	public $genre_ids;
+	public $option_ids;
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -50,6 +53,13 @@ class Movie extends \yii\db\ActiveRecord
 				'thumbPath' => '@uploads/posters/[[profile]]_[[pk]].[[extension]]',
 				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
 			],
+			[
+				'class' => \voskobovich\behaviors\ManyToManyBehavior::class,
+				'relations' => [
+					'genre_ids' => 'genres',
+					'option_ids' => 'options',
+				],
+			],
 		];
 	}
 
@@ -59,12 +69,13 @@ class Movie extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'description', 'poster'], 'required'],
+			[['title', 'description'], 'required'],
 			[['description'], 'string'],
 			[['created_at', 'updated_at'], 'default', 'value' => null],
 			[['created_at', 'updated_at'], 'integer'],
 			[['title'], 'string', 'max' => 255],
 			[['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
+			[['genre_ids', 'option_ids'], 'each', 'rule' => ['integer']],
 		];
 	}
 
@@ -78,6 +89,8 @@ class Movie extends \yii\db\ActiveRecord
 			'title' => 'Заголовок',
 			'description' => 'Описание',
 			'poster' => 'Постер',
+			'genre_ids' => 'Жанры',
+			'option_ids' => 'Опции',
 			'created_at' => 'Создано',
 			'updated_at' => 'Изменено',
 		];

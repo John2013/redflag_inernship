@@ -36,7 +36,20 @@ $this->params['breadcrumbs'][] = $this->title;
 						return $model->getImageFileUrl('poster');
 					}
 				],
-				'poster:url',
+				[
+					'label' => 'Жанры',
+					'value' => function ($model) {
+						/** @var backend\models\Movie $model */
+						return implode(', ', $model->genres);
+					}
+				],
+				[
+					'label' => 'Опции',
+					'value' => function ($model) {
+						/** @var backend\models\Movie $model */
+						return implode(', ', $model->options);
+					}
+				],
 				'created_at:datetime',
 				'updated_at:datetime',
 			],

@@ -39,7 +39,7 @@ class MovieOption extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'name' => 'Name',
+			'name' => 'Название',
 		];
 	}
 
@@ -51,5 +51,21 @@ class MovieOption extends \yii\db\ActiveRecord
 		return $this
 			->hasMany(Movie::class, ['id' => 'movie_id'])
 			->viaTable('options_to_movies', ['option_id' => 'id']);
+	}
+
+	static public function listAll(){
+		$models = self::find()->all();
+
+		$list = [];
+		foreach ($models as $model){
+			$list[$model->id] = $model->name;
+		}
+
+		return $list;
+	}
+
+	public function __toString()
+	{
+		return $this->name;
 	}
 }
