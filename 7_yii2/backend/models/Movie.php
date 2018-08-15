@@ -54,7 +54,14 @@ class Movie extends \yii\db\ActiveRecord
 				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
 			],
 			[
-				'class' => \voskobovich\behaviors\ManyToManyBehavior::class,
+				'class' => \voskobovich\linker\LinkerBehavior::class,
+				'relations' => [
+					'genre_ids' => 'genres',
+					'option_ids' => 'options',
+				],
+			],
+			[
+				'class' => \voskobovich\linker\LinkerBehavior::class,
 				'relations' => [
 					'genre_ids' => 'genres',
 					'option_ids' => 'options',

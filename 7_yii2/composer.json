@@ -21,7 +21,7 @@
         "dmstr/yii2-adminlte-asset": "^2.6",
         "yii-dream-team/yii2-upload-behavior": "^1.2",
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
-        "voskobovich/yii2-many-many-behavior": "^3.2"
+        "voskobovich/yii2-linker-behavior": "4.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

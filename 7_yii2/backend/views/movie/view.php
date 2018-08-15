@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					'format' => 'image',
 					'value' => function ($model) {
 						/** @var backend\models\Movie $model */
-						return $model->getImageFileUrl('poster');
+						return $model->getThumbFileUrl('poster', 'thumb');
 					}
 				],
 				[
