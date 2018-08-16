@@ -1,5 +1,6 @@
 <?php
 
+use lesha724\youtubewidget\Youtube;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -51,6 +52,11 @@ $this->params['breadcrumbs'][] = $this->title;
 					}
 				],
 				'duration',
+				[
+					'label' => 'Трайлер',
+					'format' => 'raw',
+					'value' => function ($model){return Youtube::widget(['video'=> $model->trailer]);}
+				],
 				'created_at:datetime',
 				'updated_at:datetime',
 			],

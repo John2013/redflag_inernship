@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2ef8e04021c22965c76f8093a4d4f4d",
+    "content-hash": "2ca115200e9b636bc4996e134ba5e503",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -642,16 +642,16 @@
         },
         {
             "name": "kartik-v/yii2-krajee-base",
-            "version": "v1.8.9",
+            "version": "v1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0"
+                "reference": "43553e2ee7206d7feb8976ad1861a9be5e50d83e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0cafe6376780cedcd00f52c9d82b172d5851f6b0",
-                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/43553e2ee7206d7feb8976ad1861a9be5e50d83e",
+                "reference": "43553e2ee7206d7feb8976ad1861a9be5e50d83e",
                 "shasum": ""
             },
             "require": {
@@ -660,12 +660,12 @@
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.8.x-dev"
+                    "dev-master": "1.9.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "kartik\\base\\": ""
+                    "kartik\\base\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -689,7 +689,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-29T06:18:14+00:00"
+            "time": "2018-08-16T08:17:30+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -739,6 +739,47 @@
                 "yii2"
             ],
             "time": "2017-06-08T05:53:28+00:00"
+        },
+        {
+            "name": "lesha724/yii2-youtube-widget",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lesha724/yii2-youtube-widget.git",
+                "reference": "a731e80deab7eb8f1ffa06e3f134153f1b7d0144"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lesha724/yii2-youtube-widget/zipball/a731e80deab7eb8f1ffa06e3f134153f1b7d0144",
+                "reference": "a731e80deab7eb8f1ffa06e3f134153f1b7d0144",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lesha724\\youtubewidget\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "lesha724",
+                    "email": "neff.alexey@gmail.com"
+                }
+            ],
+            "description": "yii2-youtube-widget",
+            "keywords": [
+                "extension",
+                "yii2",
+                "youtube"
+            ],
+            "time": "2017-03-03T13:18:40+00:00"
         },
         {
             "name": "masterexploder/phpthumb",

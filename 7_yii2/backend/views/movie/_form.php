@@ -41,6 +41,8 @@ if (!$model->isNewRecord) {
 
 		<?= $form->field($model, 'option_ids')->dropDownList(MovieOption::listAll(), ['multiple' => true]) ?>
 
+		<?= $form->field($model, 'trailer')->textInput() ?>
+
 	</div>
 	<div class="box-footer">
 		<?= Html::submitButton('Сохранить', ['class' => 'btn btn-success btn-flat']) ?>

@@ -14,6 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $updated_at [integer]
  * @property string $poster [varchar(255)]
  * @property string $duration [integer]
+ * @property string $trailer [varchar(255)]
  *
  * @property Genre[] $genres
  * @property MovieOption[] $options
@@ -71,8 +72,9 @@ class Movie extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'description', 'duration'], 'required'],
+			[['title', 'description', 'duration', 'trailer'], 'required'],
 			[['description'], 'string'],
+			[['trailer'], 'string', 'max' => 255],
 			[['created_at', 'updated_at'], 'default', 'value' => null],
 			[['created_at', 'updated_at'], 'integer',],
 			[['duration'], 'default', 'value' => 120],
@@ -96,6 +98,7 @@ class Movie extends \yii\db\ActiveRecord
 			'poster' => 'Постер',
 			'genre_ids' => 'Жанры',
 			'option_ids' => 'Опции',
+			'trailer' => 'Трейлер',
 			'created_at' => 'Создано',
 			'updated_at' => 'Изменено',
 		];
