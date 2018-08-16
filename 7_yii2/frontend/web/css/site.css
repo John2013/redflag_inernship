@@ -124,6 +124,7 @@ a.desc:after {
 	display: inline-flex;
 	flex-direction: column;
 	cursor: pointer;
+	transition: all .3s ease;
 }
 
 .movie__title-wrapper {
@@ -139,6 +140,7 @@ a.desc:after {
 
 .movie__title{
 	max-height: 40px;
+	text-align: center;
 }
 
 .movie__poster{
@@ -146,6 +148,28 @@ a.desc:after {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position-x: center;
+	position: relative;
+}
+
+.movie__options{
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap-reverse;
+	justify-content: center;
+	bottom: -9px;
+	width: 100%;
+	margin: 0 -3px;
+}
+
+.movie__option{
+	border: 1px solid #666666;
+
+	border-radius: 2px;
+	padding: 0 5px;
+	background-color: #fff;
+	margin: 3px 3px 0;
+	white-space: nowrap;
+	color: #000000;
 }
 
 .movie__genres {

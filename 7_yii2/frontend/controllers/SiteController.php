@@ -75,9 +75,10 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$sessions = Session::find()
-			->select(['id', 'movie_id', 'time'])
+			->select("movie_id, MIN(time) as time")
 		    ->where(['>=', 'session.time', date("Y-m-d H:i:s")])
 //		    ->andWhere(['<=', 'session.time', date("Y-m-d H:i:s", time() + 14 * 24 * 3600)])
+			->groupBy('movie_id')
 			->with('movie')
 			->with('movie.genres')
 			->with('movie.options')
