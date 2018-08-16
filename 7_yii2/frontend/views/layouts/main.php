@@ -70,6 +70,7 @@ $user = Yii::$app->user->identity;
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        <h1><?= $this->title ?></h1>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

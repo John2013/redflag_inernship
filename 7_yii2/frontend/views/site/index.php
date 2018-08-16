@@ -8,7 +8,7 @@ use yii\bootstrap\Tabs;
  * @var $moviesSoon \backend\models\Movie[]
  */
 
-$this->title = 'Кинотеатр - Фильмы';
+$this->title = 'Фильмы';
 ?>
 <?//= \app\widgets\MovieList::widget(['movies' => $movies]) ?>
 <div class="row">

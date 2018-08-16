@@ -5,7 +5,7 @@ function href(url) {
 function movieOnClick(e){
 	const target = $(e.currentTarget);
 	const movieId = target.data('id');
-	const url = `/sessions/${movieId}`;
+	const url = `/movie/${movieId}`;
 	href(url);
 }
 

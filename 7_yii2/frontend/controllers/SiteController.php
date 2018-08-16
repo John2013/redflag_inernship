@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use backend\models\Movie;
 use backend\models\Session;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -76,7 +77,7 @@ class SiteController extends Controller
 	{
 		$sessions = Session::find()
 			->select("movie_id, MIN(time) as time")
-		    ->where(['>=', 'session.time', date("Y-m-d H:i:s")])
+			->where(['>=', 'session.time', date("Y-m-d H:i:s")])
 //		    ->andWhere(['<=', 'session.time', date("Y-m-d H:i:s", time() + 14 * 24 * 3600)])
 			->groupBy('movie_id')
 			->with('movie')
@@ -98,16 +99,16 @@ class SiteController extends Controller
 			return ($sessionTime > time() + 14 * 24 * 3600);
 		});
 
-		$moviesNow = array_map(function ($session){
+		$moviesNow = array_map(function ($session) {
 			/** @var $session Session */
 			return $session->movie;
 		}, $sessionsNow);
-		$moviesSoon = array_map(function ($session){
+		$moviesSoon = array_map(function ($session) {
 			/** @var $session Session */
 			return $session->movie;
 		}, $sessionsSoon);
 
-		return $this->render('index', ['moviesNow' => $moviesNow, 'moviesSoon'=> $moviesSoon]);
+		return $this->render('index', ['moviesNow' => $moviesNow, 'moviesSoon' => $moviesSoon]);
 	}
 
 	/**
@@ -247,5 +248,29 @@ class SiteController extends Controller
 		return $this->render('resetPassword', [
 			'model' => $model,
 		]);
+	}
+
+	public function actionSessions()
+	{
+		$sessions = Session::find()
+			->with('movie')
+			->where(['>=', 'time', date('Y-m-d H:i:s')])
+			->all();
+		return $this->render('sessions', ['sessions' => $sessions]);
+	}
+
+	public function actionMovie($id)
+	{
+		$movie = Movie::findOne($id);
+		return $this->render('movie', ['movie' => $movie]);
+	}
+
+	public function actionMovieSessions($movie_id)
+	{
+		$sessions = Session::find()
+			->where(['>=', 'time', date('Y-m-d H:i:s')])
+			->andWhere(['movie_id' => $movie_id])
+			->all();
+		return $this->render('movie-sessions', ['sessions' => $sessions]);
 	}
 }

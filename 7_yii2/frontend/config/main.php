@@ -42,8 +42,9 @@ return [
             'rules' => [
 	            '/' => 'site/index',
 	            'sessions' => 'site/sessions',
-	            'sessions/<id:\d+>' => 'site/sessions',
+	            'movie' => 'site/index',
 	            'movie/<id:\d+>' => 'site/movie',
+	            'movie/<movie_id:\d+>/sessions' => 'site/movie-sessions',
 	            'signup' => 'site/signup',
 	            'login' => 'site/login',
             ],
