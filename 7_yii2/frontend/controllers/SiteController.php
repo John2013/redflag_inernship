@@ -79,6 +79,8 @@ class SiteController extends Controller
 		    ->where(['>=', 'session.time', date("Y-m-d H:i:s")])
 //		    ->andWhere(['<=', 'session.time', date("Y-m-d H:i:s", time() + 14 * 24 * 3600)])
 			->with('movie')
+			->with('movie.genres')
+			->with('movie.options')
 			->all();
 
 		$sessionsNow = array_filter($sessions, function ($session) {
