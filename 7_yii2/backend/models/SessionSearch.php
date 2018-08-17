@@ -13,6 +13,7 @@ class SessionSearch extends Session
 	public $movie_title;
 	public $hall_number;
 	public $tariff_name;
+	public $format_name;
     /**
      * @inheritdoc
      */
@@ -20,7 +21,7 @@ class SessionSearch extends Session
     {
         return [
             [['id', 'movie_id', 'hall_id', 'tariff_id', 'time', 'created_at', 'updated_at', 'hall_number'], 'integer'],
-	        [['movie_title', 'tariff_name'], 'string'],
+	        [['movie_title', 'tariff_name', 'format_name'], 'string'],
         ];
     }
 
@@ -42,7 +43,7 @@ class SessionSearch extends Session
      */
     public function search($params)
     {
-        $query = Session::find()->joinWith(['movie', 'hall', 'tariff']);
+        $query = Session::find()->joinWith(['movie', 'hall', 'tariff', 'format']);
 
         // add conditions that should always apply here
 
@@ -83,6 +84,16 @@ class SessionSearch extends Session
 				    'label' => 'Тариф',
 				    'default' => SORT_ASC
 			    ],
+			    'format_name' => [
+				    'asc' => [
+					    'format.name' => SORT_ASC,
+				    ],
+				    'desc' => [
+					    'format.name' => SORT_DESC,
+				    ],
+				    'label' => 'Формат',
+				    'default' => SORT_ASC
+			    ],
 			    'id',
 			    'time',
 			    'created_at',
@@ -107,7 +118,8 @@ class SessionSearch extends Session
 	        'hall.number' => $this->hall_number
         ])
 	        ->andFilterWhere(['ilike', 'movie.title', $this->movie_title])
-	        ->andFilterWhere(['ilike', 'tariff.name', $this->tariff_name]);
+	        ->andFilterWhere(['ilike', 'tariff.name', $this->tariff_name])
+	        ->andFilterWhere(['ilike', 'format.name', $this->format_name]);
 
         return $dataProvider;
     }

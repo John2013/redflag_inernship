@@ -52,8 +52,16 @@ return [
 			'locale' => 'ru-RU',
 			'currencyCode' => '₽',
 		],
+		'i18n' => [
+			'translations' => [
+				'app*' => [
+					'class' => yii\i18n\PhpMessageSource::class,
+					'basePath' => '@app/messages',
+				],
+			],
+		],
 	],
-	'language' => 'ru-RU',
+	'language' => 'ru',
 	'timeZone' => 'Europe/Moscow',
 	'params' => $params,
 ];

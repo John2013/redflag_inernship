@@ -271,6 +271,12 @@ class SiteController extends Controller
 			->where(['>=', 'time', date('Y-m-d H:i:s')])
 			->andWhere(['movie_id' => $movie_id])
 			->all();
+
+		$sessionsByDates = [];
+		foreach ($sessions as $session){
+			$sessionsByDates[date('Y-m-d', $session->time)][] = $session;
+		}
+
 		return $this->render('movie-sessions', ['sessions' => $sessions]);
 	}
 }

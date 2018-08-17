@@ -48,6 +48,13 @@ $this->params['breadcrumbs'][] = $this->title;
 						return $model->tariff->name;
 					}
 				],
+				[
+					'attribute' => 'format_name',
+					'label' => 'Формат',
+					'value' => function ($model) {
+						return $model->format->name;
+					}
+				],
 				'time:datetime',
 				'created_at:datetime',
 				'updated_at:datetime',

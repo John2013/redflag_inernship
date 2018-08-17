@@ -26,6 +26,8 @@ use kartik\datetime\DateTimePicker;
 		        'format' => 'mm.dd.yyyy hh:ii'
 	        ]
         ]) ?>
+	    
+	    <?= $form->field($model, 'format_id')->dropDownList(\backend\models\Format::listAll()) ?>
 
     </div>
     <div class="box-footer">
