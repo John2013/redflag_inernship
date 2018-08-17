@@ -10,5 +10,5 @@ function movieOnClick(e){
 }
 
 $(document).ready(function () {
-	$('.movie').click(movieOnClick)
+	$('.movies-item').click(movieOnClick)
 });

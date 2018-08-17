@@ -1,5 +1,7 @@
 <?php
 
+use lesha724\youtubewidget\Youtube;
+
 /**
  * Created by PhpStorm.
  * User: evgeny
@@ -12,4 +14,37 @@
 $this->title = $movie->title;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= \common\widgets\Pprint::widget(['data' => $movie]) ?>
+<div class="movie">
+	<div class="movie__trailer">
+		<?= Youtube::widget(['video' => $movie->trailer]) ?>
+	</div>
+	<div class="movie__buttons">
+		<?= \yii\helpers\Html::a(
+			'Сеансы',
+			['site/movie-sessions', 'movie_id' => $movie->id],
+			['class' => 'btn btn-primary']) ?>
+	</div>
+	<div class="movie__description">
+		<table class="movie__description-table">
+			<tr>
+				<th>Жанры:</th>
+				<td><?= implode(', ', $movie->genres) ?></td>
+			</tr>
+			<tr>
+				<th>Форматы:</th>
+				<td><?= implode(', ', $movie->options) ?></td>
+			</tr>
+			<tr>
+				<th>Описание:</th>
+				<td><?= $movie->description ?></td>
+			</tr>
+			<tr>
+				<th>Длительность:</th>
+				<td><?= $movie->duration ?> мин</td>
+			</tr>
+		</table>
+
+
+	</div>
+
+</div>
