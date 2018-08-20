@@ -20,6 +20,7 @@ use yii\behaviors\TimestampBehavior;
  * @property Hall $hall
  * @property Movie $movie
  * @property Tariff $tariff
+ * @property Format $format
  */
 class Session extends \yii\db\ActiveRecord
 {

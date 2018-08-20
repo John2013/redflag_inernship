@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\MovieSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Movies';
+$this->title = 'Фильмы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="movie-index box box-primary">

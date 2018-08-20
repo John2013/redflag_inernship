@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 			</tr>
 			<tr>
 				<th>Форматы:</th>
-				<td><?= implode(', ', $movie->options) ?></td>
+				<td><?= implode(', ',$movie->getFormatList()) ?></td>
 			</tr>
 			<tr>
 				<th>Описание:</th>
@@ -41,6 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
 			<tr>
 				<th>Длительность:</th>
 				<td><?= $movie->duration ?> мин</td>
+			</tr>
+			<tr>
+				<th>Возрастное ограничение:</th>
+				<td><?= $movie->age_limit ?>+</td>
 			</tr>
 		</table>
 

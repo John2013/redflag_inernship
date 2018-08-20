@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use backend\models\Movie;
 use backend\models\Session;
+use common\widgets\Pprint;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -82,7 +83,7 @@ class SiteController extends Controller
 			->groupBy('movie_id')
 			->with('movie')
 			->with('movie.genres')
-			->with('movie.options')
+			->with('format')
 			->all();
 
 		$sessionsNow = array_filter($sessions, function ($session) {
@@ -265,18 +266,36 @@ class SiteController extends Controller
 		return $this->render('movie', ['movie' => $movie]);
 	}
 
-	public function actionMovieSessions($movie_id)
+	/**
+	 * @param Session[] $sessions
+	 * @return Session[][][]
+	 */
+	private function getSessionsByFormatsAndDates($sessions){
+		$sessionsByFormats = [];
+		foreach($sessions as $session){
+			$date = strtotime(substr($session->time, 0, 10));
+			$sessionsByFormats[$date][$session->format->name][] = $session;
+		}
+		return $sessionsByFormats;
+	}
+
+	public function actionMovieSessions(int $movie_id)
 	{
-		$sessions = Session::find()
+		$movie = Movie::findOne($movie_id);
+
+		$sessions = $movie->getSessions()
 			->where(['>=', 'time', date('Y-m-d H:i:s')])
-			->andWhere(['movie_id' => $movie_id])
+			->with('tariff')
 			->all();
 
-		$sessionsByDates = [];
-		foreach ($sessions as $session){
-			$sessionsByDates[date('Y-m-d', $session->time)][] = $session;
-		}
+		$sessions = $this->getSessionsByFormatsAndDates($sessions);
 
-		return $this->render('movie-sessions', ['sessions' => $sessions]);
+		return $this->render(
+			'movie-sessions',
+			[
+				'sessionsByDate' => $sessions,
+				'movie' => $movie
+			]
+		);
 	}
 }

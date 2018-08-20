@@ -2,7 +2,9 @@
 
 namespace backend\models;
 
+use common\widgets\Pprint;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "movie".
@@ -17,10 +19,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $trailer [varchar(255)]
  *
  * @property Genre[] $genres
- * @property MovieOption[] $options
  * @property GenresToMovies[] $genresToMovies
- * @property OptionsToMovies[] $optionsToMovies
  * @property Session[] $sessions
+ * @property string $age_limit [integer]
  *
  * @method getImageFileUrl(string $prop_name)
  * @method getThumbFileUrl(string $prop_name, string $thumb_name)
@@ -72,16 +73,17 @@ class Movie extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'description', 'duration', 'trailer'], 'required'],
+			[['title', 'description', 'duration', 'trailer', 'age_limit'], 'required'],
 			[['description'], 'string'],
 			[['trailer'], 'string', 'max' => 255],
 			[['created_at', 'updated_at'], 'default', 'value' => null],
 			[['created_at', 'updated_at'], 'integer',],
 			[['duration'], 'default', 'value' => 120],
-			[['duration'], 'integer', 'min' => 0],
+			[['age_limit'], 'default', 'value' => 18],
+			[['duration', 'age_limit'], 'integer', 'min' => 0],
 			[['title'], 'string', 'max' => 255],
 			[['poster'], 'file', 'extensions' => 'jpeg, jpg, png'],
-			[['genre_ids', 'option_ids'], 'each', 'rule' => ['integer']],
+			[['genre_ids'], 'each', 'rule' => ['integer']],
 		];
 	}
 
@@ -97,8 +99,8 @@ class Movie extends \yii\db\ActiveRecord
 			'duration' => 'Длительность (мин)',
 			'poster' => 'Постер',
 			'genre_ids' => 'Жанры',
-			'option_ids' => 'Опции',
 			'trailer' => 'Трейлер',
+			'age_limit' => 'Возрастное ограничение',
 			'created_at' => 'Создано',
 			'updated_at' => 'Изменено',
 		];
@@ -135,27 +137,9 @@ class Movie extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getOptions()
-	{
-		return $this
-			->hasMany(MovieOption::class, ['id' => 'option_id'])
-			->viaTable('options_to_movies', ['movie_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
 	public function getGenresToMovies()
 	{
 		return $this->hasMany(GenresToMovies::class, ['movie_id' => 'id']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getOptionsToMovies()
-	{
-		return $this->hasMany(OptionsToMovies::class, ['movie_id' => 'id']);
 	}
 
 	/**
@@ -178,24 +162,12 @@ class Movie extends \yii\db\ActiveRecord
 
 	}
 
-	private function updateOptions()
-	{
-		OptionsToMovies::deleteAll(['movie_id' => $this->id]);
-
-		if (is_array($this->option_ids))
-			foreach ($this->option_ids as $option_id) {
-				$options = new OptionsToMovies(['movie_id' => $this->id, 'option_id' => $option_id]);
-				$options->save();
-			}
-	}
-
 	/**
 	 * Обновить данные от связей многие ко многим
 	 */
 	private function updateM2M()
 	{
 		$this->updateGenres();
-		$this->updateOptions();
 	}
 
 	/**
@@ -206,5 +178,28 @@ class Movie extends \yii\db\ActiveRecord
 		parent::afterSave($insert, $changedAttributes);
 
 		$this->updateM2M();
+	}
+
+	/**
+	 * Возвращает список названий форматов сеансов фильмов
+	 *
+	 * @param bool $add_age_limit Добавить возрастное ограничение последним элементом
+	 * @return string[]
+	 */
+	public function getFormatList($add_age_limit = false){
+		$formatsArr = $this
+			->getSessions()
+			->select(['format.name'])
+			->where(['>=', 'session.time', date('Y-m-d H:i:s')])
+			->leftJoin('format', 'session.format_id = format.id')
+			->groupBy('format.name')
+			->asArray()
+			->all();
+
+		$formatsList = ArrayHelper::getColumn($formatsArr, 'name');
+		if($add_age_limit)
+			$formatsList[] = $this->age_limit . '+';
+
+		return $formatsList;
 	}
 }

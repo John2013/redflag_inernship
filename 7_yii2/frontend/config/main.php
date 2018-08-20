@@ -45,6 +45,9 @@ return [
 	            'movie' => 'site/index',
 	            'movie/<id:\d+>' => 'site/movie',
 	            'movie/<movie_id:\d+>/sessions' => 'site/movie-sessions',
+	            'sessions/<id:\d+>' => 'site/session',
+
+
 	            'signup' => 'site/signup',
 	            'login' => 'site/login',
             ],

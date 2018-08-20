@@ -39,8 +39,6 @@ if (!$model->isNewRecord) {
 
 		<?= $form->field($model, 'genre_ids')->dropDownList(Genre::listAll(), ['multiple' => true]) ?>
 
-		<?= $form->field($model, 'option_ids')->dropDownList(MovieOption::listAll(), ['multiple' => true]) ?>
-
 		<?= $form->field($model, 'trailer')->textInput() ?>
 
 	</div>

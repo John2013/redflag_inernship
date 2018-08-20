@@ -44,13 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
 						return implode(', ', $model->genres);
 					}
 				],
-				[
-					'label' => 'Опции',
-					'value' => function ($model) {
-						/** @var backend\models\Movie $model */
-						return implode(', ', $model->options);
-					}
-				],
 				'duration',
 				[
 					'label' => 'Трайлер',
