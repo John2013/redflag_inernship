@@ -8,6 +8,7 @@ namespace backend\models;
  *
  * @property int $id
  * @property string $name
+ * @property string $title [varchar(255)]
  *
  * @property Reservation[] $reservations
  */
@@ -27,8 +28,10 @@ class ReservationStatus extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+        	[['name', 'title'], 'required'],
+	        [['name', 'title'], 'string', 'max' => 255],
+	        [['title'], 'unique'],
+	        [['name'], 'unique'],
         ];
     }
 
@@ -40,6 +43,7 @@ class ReservationStatus extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название',
+	        'title' => 'Заголовок',
         ];
     }
 

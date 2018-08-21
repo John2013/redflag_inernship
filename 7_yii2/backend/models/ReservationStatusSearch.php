@@ -17,7 +17,7 @@ class ReservationStatusSearch extends ReservationStatus
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'title'], 'safe'],
         ];
     }
 
@@ -61,7 +61,9 @@ class ReservationStatusSearch extends ReservationStatus
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['ilike', 'name', $this->name]);
+        $query
+	        ->andFilterWhere(['ilike', 'name', $this->name])
+	        ->andFilterWhere(['ilike', 'title', $this->title]);
 
         return $dataProvider;
     }

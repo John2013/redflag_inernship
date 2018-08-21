@@ -13,6 +13,7 @@ use yii\widgets\ActiveForm;
     <div class="box-body table-responsive">
 
 	    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     </div>
     <div class="box-footer">

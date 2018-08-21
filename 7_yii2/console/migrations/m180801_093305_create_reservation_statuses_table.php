@@ -14,10 +14,9 @@ class m180801_093305_create_reservation_statuses_table extends Migration
 	{
 		$this->createTable('reservation_statuses', [
 			'id' => $this->primaryKey(),
-			'name' => $this->string()->notNull()
+			'name' => $this->string()->notNull()->unique(),
+			'title' => $this->string()->notNull()->unique()
 		]);
-
-		$this->createIndex('statuses_name_uindex', 'reservation_statuses', ['name']);
 	}
 
 	/**

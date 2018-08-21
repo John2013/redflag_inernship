@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'model' => $model,
             'attributes' => [
                 'id',
-                'name',
+	            'name',
+	            'title',
             ],
         ]) ?>
     </div>
