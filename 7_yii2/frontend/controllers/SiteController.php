@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use backend\models\Movie;
 use backend\models\Session;
-use common\widgets\Pprint;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
@@ -254,10 +253,38 @@ class SiteController extends Controller
 	public function actionSessions()
 	{
 		$sessions = Session::find()
-			->with('movie')
+			->with('movie', 'format')
 			->where(['>=', 'time', date('Y-m-d H:i:s')])
+			->orderBy(['time' => SORT_ASC])
 			->all();
-		return $this->render('sessions', ['sessions' => $sessions]);
+
+		/**
+		 * @var Session[movie_id][format_name][] $sessionsToday
+		 * @var Session[movie_id][format_name][] $sessionsTomorrow
+		 * @var Session[date][movie_id][format_name][] $sessionsAfter
+		 */
+		$sessionsToday = [];
+		$sessionsTomorrow = [];
+		$sessionsAfter = [];
+		foreach ($sessions as $session){
+			$date = strtotime(substr($session->time, 0, 10));
+			if ($date == strtotime(date("Y-m-d"))){
+				$sessionsToday[$session->movie_id][$session->format->name][] = $session;
+			} elseif ($date == strtotime(date("Y-m-d")) + 86400){
+				$sessionsTomorrow[$session->movie_id][$session->format->name][] = $session;
+			} else {
+				$sessionsAfter[$date][$session->movie_id][$session->format->name][] = $session;
+			}
+		}
+
+		return $this->render(
+			'sessions',
+			[
+				'sessionsToday' => $sessionsToday,
+				'sessionsTomorrow' => $sessionsTomorrow,
+				'sessionsAfter' => $sessionsAfter,
+			]
+		);
 	}
 
 	public function actionMovie($id)
@@ -286,6 +313,7 @@ class SiteController extends Controller
 		$sessions = $movie->getSessions()
 			->where(['>=', 'time', date('Y-m-d H:i:s')])
 			->with('tariff')
+			->orderBy(['time' => SORT_ASC])
 			->all();
 
 		$sessions = $this->getSessionsByFormatsAndDates($sessions);
