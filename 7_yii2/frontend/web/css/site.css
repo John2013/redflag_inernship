@@ -198,3 +198,43 @@ a.desc:after {
 	vertical-align: top;
 	padding-right: 1rem;
 }
+
+.session__rows-outer{
+	display: flex;
+	justify-content: center;
+}
+
+.session__rows{
+	font-size: 32px;
+	cursor: default;
+}
+
+.session__row{
+	display: flex;
+}
+
+.session__row-number{
+	margin-right: 3rem;
+}
+
+.session__place{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	overflow: hidden;
+	cursor: pointer;
+	background-color: #0290ff;
+	color: white;
+	font-size: 19px;
+	text-align: center;
+	border-radius: 2px;
+}
+
+.session__place.checked{
+	background-color: #bdbdbd;
+	cursor: default;
+}
+
+.session__place.checked-self{
+	background-color: #f15500;
+}

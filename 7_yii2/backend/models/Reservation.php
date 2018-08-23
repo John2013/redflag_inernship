@@ -15,6 +15,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property int $updated_at
  *
+ * @property int[] $place_ids
+ *
  * @property PlaceToReservation[] $placeToReservation
  * @property Place[] $places
  * @property ReservationStatus $status

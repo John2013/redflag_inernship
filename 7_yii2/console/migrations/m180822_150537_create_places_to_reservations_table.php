@@ -26,13 +26,15 @@ class m180822_150537_create_places_to_reservations_table extends Migration
 		$this->addForeignKey(
 			'place_id_to_place_fk',
 			'place_to_reservation', 'place_id',
-			'place', 'id'
+			'place', 'id',
+			'CASCADE'
 		);
 
 		$this->addForeignKey(
 			'reservation_id_to_reservation_fk',
 			'place_to_reservation', 'reservation_id',
-			'reservation', 'id'
+			'reservation', 'id',
+			'CASCADE'
 		);
 	}
 

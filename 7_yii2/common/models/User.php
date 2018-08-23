@@ -1,6 +1,7 @@
 <?php
 namespace common\models;
 
+use backend\models\Reservation;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -24,6 +25,8 @@ use yii\web\IdentityInterface;
  * @property string $first_name [varchar(255)]
  * @property string $last_name [varchar(255)]
  * @property string $avatar [varchar(255)]
+ *
+ * @property Reservation[] $reservations
  *
  * @method getImageFileUrl(string $prop_name)
  * @method getThumbFileUrl(string $prop_name, string $thumb_name)
@@ -221,6 +224,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
     	return "$this->first_name $this->last_name";
     }
+
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getReservations()
+	{
+		return $this->hasMany(Reservation::class, ['user_id' => 'id']);
+	}
 
 	/**
 	 * {@inheritdoc}

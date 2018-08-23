@@ -330,11 +330,11 @@ class SiteController extends Controller
 	function actionSession($id){
 		$session = Session::find()
 			->where(['id' => $id])
-			->with(['rows', 'rows.plases', 'reservations', 'reservations.status'])
-			->one($id);
+			->with(['hall.rows', 'hall.rows.places', 'reservations', 'reservations.status'])
+			->one();
 
 		$reservations = $session->reservations;
 
-		$this->render('session', ['session' => $session, 'reservations' => $reservations]);
+		return $this->render('session', ['session' => $session, 'reservations' => $reservations]);
 	}
 }
