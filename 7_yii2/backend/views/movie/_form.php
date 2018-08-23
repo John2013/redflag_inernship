@@ -1,20 +1,13 @@
 <?php
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use backend\models\Genre;
-use backend\models\MovieOption;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Movie */
 /* @var $form yii\widgets\ActiveForm */
 if (!$model->isNewRecord) {
-	$genres = $model->getGenres()->select('id')->asArray()->all();
-	$options = $model->getOptions()->select('id')->asArray()->all();
-
-	$model->genre_ids = ArrayHelper::getColumn($genres, 'id');
-	$model->option_ids = ArrayHelper::getColumn($options, 'id');
 } else {
 	$model->duration = 120;
 }

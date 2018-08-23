@@ -45,10 +45,29 @@ $this->params['breadcrumbs'][] = $this->title;
 					}
 				],
 				'duration',
+				'age_limit',
+				[
+					'label' => 'Форматы',
+					'value' => function ($model) {
+						/** @var $model \backend\models\Movie */
+						$formatsArray = $model
+							->getFormats()
+							->select(['name'])
+							->groupBy('name')
+							->orderBy(['name' => SORT_ASC])
+							->asArray()
+							->all();
+
+						$formats = \yii\helpers\ArrayHelper::getColumn($formatsArray, 'name');
+						return implode(', ', $formats);
+					}
+				],
 				[
 					'label' => 'Трайлер',
 					'format' => 'raw',
-					'value' => function ($model){return Youtube::widget(['video'=> $model->trailer]);}
+					'value' => function ($model) {
+						return Youtube::widget(['video' => $model->trailer]);
+					}
 				],
 				'created_at:datetime',
 				'updated_at:datetime',

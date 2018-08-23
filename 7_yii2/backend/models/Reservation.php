@@ -10,13 +10,13 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property int $user_id
- * @property int $place_id
  * @property int $status_id
  * @property int $session_id
  * @property int $created_at
  * @property int $updated_at
  *
- * @property Place $place
+ * @property PlaceToReservation[] $placeToReservation
+ * @property Place[] $places
  * @property ReservationStatus $status
  * @property Session $session
  * @property User $user
@@ -37,13 +37,14 @@ class Reservation extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['user_id', 'place_id', 'status_id', 'session_id'], 'required'],
-			[['user_id', 'place_id', 'status_id', 'session_id', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['user_id', 'place_id', 'status_id', 'session_id', 'created_at', 'updated_at'], 'integer'],
-			[['place_id'], 'exist', 'skipOnError' => true, 'targetClass' => Place::class, 'targetAttribute' => ['place_id' => 'id']],
+			[['user_id', 'status_id', 'session_id'], 'required'],
+			[['user_id', 'status_id', 'session_id', 'created_at', 'updated_at'], 'default', 'value' => null],
+			[['user_id', 'status_id', 'session_id', 'created_at', 'updated_at'], 'integer'],
+			[['user_id', 'session_id'], 'unique', 'targetAttribute' => ['user_id', 'session_id']],
 			[['status_id'], 'exist', 'skipOnError' => true, 'targetClass' => ReservationStatus::class, 'targetAttribute' => ['status_id' => 'id']],
 			[['session_id'], 'exist', 'skipOnError' => true, 'targetClass' => Session::class, 'targetAttribute' => ['session_id' => 'id']],
 			[['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+			[['place_ids'], 'each', 'rule' => ['integer']]
 		];
 	}
 
@@ -55,40 +56,30 @@ class Reservation extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'user_id' => 'Пользователь',
-			'place_id' => 'Место',
 			'status_id' => 'Статус',
 			'session_id' => 'Сеанс',
 			'created_at' => 'Создано',
 			'updated_at' => 'Изменено',
+			'place_ids' => 'Места',
 		];
 	}
 
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getPlace()
+	public function getPlaceToReservation()
 	{
-		return $this->hasOne(Place::class, ['id' => 'place_id']);
+		return $this->hasMany(PlaceToReservation::class, ['reservation_id' => 'id']);
 	}
 
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
-	public function getRow()
+	public function getPlaces()
 	{
 		return $this
-			->hasOne(Row::class, ['id' => 'row_id'])
-			->via('place');
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getHall()
-	{
-		return $this
-			->getRow()
-			->joinWith('hall');
+			->hasMany(Place::class, ['id' => 'place_id'])
+			->viaTable('place_to_reservation', ['reservation_id' => 'id']);
 	}
 
 	/**
@@ -132,6 +123,14 @@ class Reservation extends \yii\db\ActiveRecord
 	{
 		return [
 			TimestampBehavior::class,
+			[
+				'class' => \voskobovich\linker\LinkerBehavior::class,
+				'relations' => [
+					'place_ids' => [
+						'places'
+					],
+				],
+			]
 		];
 	}
 }

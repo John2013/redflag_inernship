@@ -14,7 +14,9 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'user_id')->dropDownList(\common\models\User::listAll()) ?>
 
-        <?= $form->field($model, 'place_id')->dropDownList(\backend\models\Place::listAll()) ?>
+        <?= $form
+	        ->field($model, 'place_ids')
+	        ->dropDownList(\backend\models\Place::listAll(), ['multiple'=>true]) ?>
 
         <?= $form->field($model, 'status_id')->dropDownList(\backend\models\ReservationStatus::listAll()) ?>
 

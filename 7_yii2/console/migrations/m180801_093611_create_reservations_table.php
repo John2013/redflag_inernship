@@ -49,7 +49,8 @@ class m180801_093611_create_reservations_table extends Migration
 
 		$this->createIndex(
 			'user_place_session_uindex',
-			'reservations', ['user_id', 'place_id', 'session_id']
+			'reservations', ['user_id', 'place_id', 'session_id'],
+			true
 		);
 	}
 

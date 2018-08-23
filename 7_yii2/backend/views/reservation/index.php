@@ -32,28 +32,11 @@ $this->params['breadcrumbs'][] = $this->title;
 			            return $model->user->username;
 		            }
 	            ],
-//	            'place.row.hall.number:integer:Кинозал',
-	            [
-		            'label' => 'Зал',
-		            'attribute' => 'hall_number',
-		            'value' => function ($model) {
-			            return $model->place->row->hall->number;
-		            }
-	            ],
-//	            'place.row.number:integer:Ряд',
-	            [
-		            'label' => 'Ряд',
-		            'attribute' => 'row_number',
-		            'value' => function ($model) {
-			            return $model->place->row->number;
-		            }
-	            ],
 //	            'place.number:integer:Место',
 	            [
-		            'label' => 'Место',
-		            'attribute' => 'place_number',
+		            'label' => 'Места',
 		            'value' => function ($model) {
-			            return $model->place->row->number;
+			            return implode(', ', $model->places);
 		            }
 	            ],
 //                'status.name:text:Статус',

@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  *
  * @property Row $row
+ * @property PlaceToReservation[] $placeToReservations
  * @property Reservation[] $reservations
  */
 class Place extends NumberedModel
@@ -34,11 +35,9 @@ class Place extends NumberedModel
 	public function rules()
 	{
 		return [
-			[['row_id', 'number', 'offset'], 'required'],
+			[['row_id', 'number'], 'required'],
 			[['row_id', 'number', 'created_at', 'updated_at'], 'default', 'value' => null],
-			[['row_id', 'created_at', 'updated_at'], 'integer'],
-			[['number'], 'integer', 'min' => 1],
-			[['offset'], 'default', 'value' => 0],
+			[['row_id', 'number', 'created_at', 'updated_at'], 'integer'],
 			[['offset'], 'number'],
 			[['row_id', 'number'], 'unique', 'targetAttribute' => ['row_id', 'number']],
 			[['row_id'], 'exist', 'skipOnError' => true, 'targetClass' => Row::class, 'targetAttribute' => ['row_id' => 'id']],
@@ -79,9 +78,17 @@ class Place extends NumberedModel
 	/**
 	 * @return \yii\db\ActiveQuery
 	 */
+	public function getPlaceToReservations()
+	{
+		return $this->hasMany(PlaceToReservation::class, ['place_id' => 'id']);
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getReservations()
 	{
-		return $this->hasMany(Reservation::class, ['place_id' => 'id']);
+		return $this->hasMany(Reservation::class, ['id' => 'reservation_id'])->viaTable('place_to_reservation', ['place_id' => 'id']);
 	}
 
 	/**
@@ -111,5 +118,10 @@ class Place extends NumberedModel
 	public function fixNumber()
 	{
 		return parent::_fixNumber('row_id');
+	}
+
+	public function __toString()
+	{
+		return "Зал " . $this->row->hall->number . " ряд " . $this->row->number . " место " . $this ->number;
 	}
 }

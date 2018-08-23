@@ -36,6 +36,23 @@ $this->params['breadcrumbs'][] = $this->title;
 //						return $model->getThumbFileUrl('poster', 'thumb');
 //					}
 //				],
+				'age_limit',
+				[
+					'label' => 'Форматы',
+					'value' => function ($model) {
+						/** @var $model \backend\models\Movie */
+						$formatsArray = $model
+							->getFormats()
+							->select(['name'])
+							->groupBy('name')
+							->orderBy(['name' => SORT_ASC])
+							->asArray()
+							->all();
+
+						$formats = \yii\helpers\ArrayHelper::getColumn($formatsArray, 'name');
+						return implode(', ', $formats);
+					}
+				],
 				'created_at:datetime',
 				'updated_at:datetime',
 

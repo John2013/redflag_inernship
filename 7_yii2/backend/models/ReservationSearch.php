@@ -11,9 +11,6 @@ use yii\data\ActiveDataProvider;
 class ReservationSearch extends Reservation
 {
 	public $user_nickname;
-	public $hall_number;
-	public $row_number;
-	public $place_number;
 	public $status_name;
 	public $movie_title;
 	public $session_time;
@@ -24,8 +21,7 @@ class ReservationSearch extends Reservation
     public function rules()
     {
         return [
-            [['id', 'user_id', 'place_id', 'status_id', 'session_id', 'created_at', 'updated_at',
-	            'row_number', 'hall_number', 'place_number'], 'integer'],
+            [['id', 'user_id', 'status_id', 'session_id', 'created_at', 'updated_at'], 'integer'],
 	        [['user_nickname', 'status_name', 'movie_title', /*'session_time'*/], 'string'],
 	        [['session_time'], 'datetime']
         ];
@@ -49,7 +45,7 @@ class ReservationSearch extends Reservation
      */
     public function search($params)
     {
-        $query = Reservation::find()->joinWith(['user', 'hall', 'status', 'movie']);
+        $query = Reservation::find()->joinWith(['user', 'status', 'movie']);
 
         // add conditions that should always apply here
 
@@ -59,36 +55,6 @@ class ReservationSearch extends Reservation
         ]);
         $dataProvider->setSort([
 	    'attributes' => [
-		    'place_number' => [
-			    'asc' => [
-				    'place.number' => SORT_ASC,
-			    ],
-			    'desc' => [
-				    'place.number' => SORT_DESC,
-			    ],
-			    'label' => 'Место',
-			    'default' => SORT_ASC
-		    ],
-		    'row_number' => [
-			    'asc' => [
-				    'row.number' => SORT_ASC,
-			    ],
-			    'desc' => [
-				    'row.number' => SORT_DESC,
-			    ],
-			    'label' => 'Ряд',
-			    'default' => SORT_ASC
-		    ],
-		    'hall_number' => [
-			    'asc' => [
-				    'hall.number' => SORT_ASC,
-			    ],
-			    'desc' => [
-				    'hall.number' => SORT_DESC,
-			    ],
-			    'label' => 'Зал',
-			    'default' => SORT_ASC
-		    ],
 		    'user_nickname' => [
 			    'asc' => [
 				    'user.username' => SORT_ASC,
@@ -149,9 +115,6 @@ class ReservationSearch extends Reservation
         $query
 	        ->andFilterWhere([
             'reservation.id' => $this->id,
-	        'place.number' => $this->place_number,
-	        'hall.number' => $this->hall_number,
-	        'row.number' => $this->row_number,
 	        'session.time' => $this->session_time,
             'reservation.created_at' => $this->created_at,
             'reservation.updated_at' => $this->updated_at,

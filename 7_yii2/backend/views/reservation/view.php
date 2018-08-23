@@ -27,9 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'attributes' => [
 	            'id',
 	            'user.username',
-	            'place.row.hall.number:integer:Кинозал',
-	            'place.row.number:integer:Ряд',
-	            'place.number:integer:Место',
+	            [
+		            'label' => 'Места',
+		            'value' => function ($model) {
+			            return implode(', ', $model->places);
+		            }
+	            ],
 	            'status.name:text:Статус',
 	            'session.movie.title:text:Фильм',
 	            'session.time:datetime:Время',

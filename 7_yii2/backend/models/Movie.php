@@ -2,7 +2,6 @@
 
 namespace backend\models;
 
-use common\widgets\Pprint;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 
@@ -28,9 +27,6 @@ use yii\helpers\ArrayHelper;
  */
 class Movie extends \yii\db\ActiveRecord
 {
-	public $genre_ids;
-	public $option_ids;
-
 	/**
 	 * {@inheritdoc}
 	 */
@@ -57,13 +53,12 @@ class Movie extends \yii\db\ActiveRecord
 				'thumbPath' => '@uploads/posters/[[profile]]_[[pk]].[[extension]]',
 				'thumbUrl' => '/uploads/posters/[[profile]]_[[pk]].[[extension]]',
 			],
-//			[
-//				'class' => \voskobovich\linker\LinkerBehavior::class,
-//				'relations' => [
-//					'genre_ids' => 'genres',
-//					'option_ids' => 'options',
-//				],
-//			],
+			[
+				'class' => \voskobovich\linker\LinkerBehavior::class,
+				'relations' => [
+					'genre_ids' => 'genres',
+				],
+			],
 		];
 	}
 
@@ -150,35 +145,43 @@ class Movie extends \yii\db\ActiveRecord
 		return $this->hasMany(Session::class, ['movie_id' => 'id']);
 	}
 
-	private function updateGenres()
-	{
-		GenresToMovies::deleteAll(['movie_id' => $this->id]);
-
-		if (is_array($this->genre_ids))
-			foreach ($this->genre_ids as $genre_id) {
-				$genre = new GenresToMovies(['movie_id' => $this->id, 'genre_id' => $genre_id]);
-				$genre->save();
-			}
-
-	}
-
 	/**
-	 * Обновить данные от связей многие ко многим
+	 * @return \yii\db\ActiveQuery
 	 */
-	private function updateM2M()
+	public function getFormats()
 	{
-		$this->updateGenres();
+		return $this->hasMany(Format::class, ['id' => 'format_id'])->via('sessions');
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function afterSave($insert, $changedAttributes)
-	{
-		parent::afterSave($insert, $changedAttributes);
+//	private function updateGenres()
+//	{
+//		GenresToMovies::deleteAll(['movie_id' => $this->id]);
+//
+//		if (is_array($this->genre_ids))
+//			foreach ($this->genre_ids as $genre_id) {
+//				$genre = new GenresToMovies(['movie_id' => $this->id, 'genre_id' => $genre_id]);
+//				$genre->save();
+//			}
+//
+//	}
+//
+//	/**
+//	 * Обновить данные от связей многие ко многим
+//	 */
+//	private function updateM2M()
+//	{
+//		$this->updateGenres();
+//	}
 
-		$this->updateM2M();
-	}
+//	/**
+//	 * {@inheritdoc}
+//	 */
+//	public function afterSave($insert, $changedAttributes)
+//	{
+//		parent::afterSave($insert, $changedAttributes);
+//
+//		$this->updateM2M();
+//	}
 
 	/**
 	 * Возвращает список названий форматов сеансов фильмов
