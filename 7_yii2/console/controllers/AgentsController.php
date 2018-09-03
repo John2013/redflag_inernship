@@ -16,9 +16,7 @@ class AgentsController extends \yii\console\Controller
 {
 	function actionClearOldSessions(){
 
-		\Yii::info('clear-old-sessions start', '\console\controllers\AgentsController');
 		Session::deleteNonActual();
-		\Yii::info('clear-old-sessions end', '\console\controllers\AgentsController');
 
 		return ExitCode::OK;
 	}

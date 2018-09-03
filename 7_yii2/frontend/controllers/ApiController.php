@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use backend\models\Place;
 use backend\models\Reservation;
-use backend\models\Session;
 use common\models\User;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -25,7 +24,7 @@ class ApiController extends \yii\web\Controller
 		elseif ($reservation->user_id != $user->id)
 			$errors[] = 'reservation created by other user';
 
-		if(!empty($errors))
+		if (!empty($errors))
 			return Json::encode(['errors' => $errors, 'success' => false]);
 
 		$reservation->place_ids = $place_ids;
@@ -75,41 +74,47 @@ class ApiController extends \yii\web\Controller
 		elseif ($reservation->user_id != $user->id)
 			$errors[] = 'reservation created by other user';
 
-		if(!empty($errors))
+		if (!empty($errors))
 			return Json::encode(['errors' => $errors, 'success' => false]);
 
 		$success = $reservation->delete();
 		return Json::encode(['success' => $success]);
 	}
 
-	public function actionGetPlaces(string $auth_key, int $session_id)
+//	public function actionGetPlaces(string $auth_key, int $session_id)
+//	{
+//		$user = User::findOne(['auth_key' => $auth_key]);
+//		$session = Session::findOne($session_id);
+//		if (!isset($user))
+//			return Json::encode(['errors' => ['user is unauthorized']]);
+//
+//		if (!isset($session))
+//			return Json::encode(['errors' => ['this session is not exists']]);
+////
+////		$reservation_ids = ArrayHelper::getColumn(
+////			$session
+////				->getReservations()
+////				->select(['id'])
+////				->where(['!=', 'user_id', $user->id])
+////				->asArray()
+////				->all(),
+////			'id'
+////		);
+////
+////		$places = Place::find()->where($condition)
+////
+////		/** @var User $user */
+////		$user = \Yii::$app->user->identity;
+////
+////		$reservation = $user->getReservations()->orderBy(['created_at' => SORT_DESC])->limit(0)->one();
+//
+//
+//	}
+
+	public function actionPlaceIsFree(int $place_id, int $session_id)
 	{
-		$user = User::findOne(['auth_key' => $auth_key]);
-		$session = Session::findOne($session_id);
-		if (!isset($user))
-			return Json::encode(['errors' => ['user is unauthorized']]);
-
-		if (!isset($session))
-			return Json::encode(['errors' => ['this session is not exists']]);
-//
-//		$reservation_ids = ArrayHelper::getColumn(
-//			$session
-//				->getReservations()
-//				->select(['id'])
-//				->where(['!=', 'user_id', $user->id])
-//				->asArray()
-//				->all(),
-//			'id'
-//		);
-//
-//		$places = Place::find()->where($condition)
-//
-//		/** @var User $user */
-//		$user = \Yii::$app->user->identity;
-//
-//		$reservation = $user->getReservations()->orderBy(['created_at' => SORT_DESC])->limit(0)->one();
-
-
+		$place = Place::findOne($place_id);
+		return (int)$place->isFree($session_id);
 	}
 
 }

@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $format_id [integer]
  *
  * @property Reservation[] $reservations
+ * @property Place[] $reservedPlaces
  * @property Hall $hall
  * @property Movie $movie
  * @property Tariff $tariff
@@ -114,6 +115,15 @@ class Session extends \yii\db\ActiveRecord
 		return [
 			TimestampBehavior::class,
 		];
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getReservedPlaces(){
+		return $this
+			->getReservations()
+			->joinWith('places');
 	}
 
 

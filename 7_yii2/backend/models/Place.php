@@ -124,4 +124,15 @@ class Place extends NumberedModel
 	{
 		return "Зал " . $this->row->hall->number . " ряд " . $this->row->number . " место " . $this ->number;
 	}
+	
+	public function isFree(int $session_id){
+		$isReserved = (bool) Reservation::find()
+			->select(['id'])
+			->joinWith('places')
+			->where(['session_id' => $session_id])
+			->andWhere(['place.id'=>$this->id])
+			->count();
+
+		return $isReserved;
+	}
 }

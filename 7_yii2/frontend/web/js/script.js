@@ -10,5 +10,13 @@ function movieOnClick(e){
 }
 
 $(document).ready(function () {
-	$('.movies-item').click(movieOnClick)
+	$('.movies-item').click(movieOnClick);
+
+	const session_element = $('#session');
+	if(session_element.is('div.session')){
+		const session_id = +session_element.data('id');
+		console.log(session_id)
+
+
+	}
 });
